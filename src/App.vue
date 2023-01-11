@@ -1,15 +1,20 @@
 <template>
   <NavBar />
-  <GroupRoster />
+  <div class="container">
+    <GroupSidebar />
+    <GroupRoster />
+  </div>
 </template>
 
 <script>
 import NavBar from "./components/NavBar.vue";
+import GroupSidebar from "./components/GroupSidebar.vue";
 import GroupRoster from "./components/GroupRoster.vue";
 
 export default {
   components: {
     NavBar,
+    GroupSidebar,
     GroupRoster,
   },
 };
@@ -32,11 +37,11 @@ html {
   height: 100%;
 }
 
-body {
+.container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   min-height: 100%;
-
   background-color: #f2f2f2;
   // color: var(--color-text-body);
   line-height: 1.5;

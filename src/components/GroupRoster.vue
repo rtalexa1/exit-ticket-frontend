@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <ul>
       <li v-for="student in students" :key="student.id">{{ student }}</li>
     </ul>
@@ -26,3 +26,9 @@ export default {
   },
 };
 </script>
+
+<!-- <style scoped lang="scss">
+.container {
+  margin-top: 4em;
+}
+</style> -->
