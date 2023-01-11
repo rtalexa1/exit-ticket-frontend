@@ -39,8 +39,9 @@ html {
 
 .container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
+  padding-top: 4em;
   min-height: 100%;
   background-color: #f2f2f2;
   // color: var(--color-text-body);
