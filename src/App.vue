@@ -1,13 +1,16 @@
 <template>
   <NavBar />
+  <GroupRoster />
 </template>
 
 <script>
 import NavBar from "./components/NavBar.vue";
+import GroupRoster from "./components/GroupRoster.vue";
 
 export default {
   components: {
     NavBar,
+    GroupRoster,
   },
 };
 </script>
