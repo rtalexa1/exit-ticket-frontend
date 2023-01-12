@@ -15,6 +15,7 @@ export default {
 .nav-bar {
   position: fixed;
   display: flex;
+  border-bottom: solid 2px;
   width: 100%;
   height: 4em;
   background-color: #253c55;
