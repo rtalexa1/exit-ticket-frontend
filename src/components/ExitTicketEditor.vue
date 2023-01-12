@@ -27,6 +27,7 @@
           <button style="margin: 2px">Add a TEKS-based question</button>
           <button style="margin: 2px">Add a reflection question</button>
         </div>
+        <button v-if="readyToSave" type="submit">Save</button>
       </form>
     </div>
     <div v-else-if="!editing && exitTickets.length < 1" class="empty-display">
@@ -44,8 +45,13 @@
 </template>
 
 <script>
+import ReflectionQuestionCreator from "./ReflectionQuestionCreator.vue";
+
 export default {
   name: "ExitTicketEditor",
+  components: {
+    ReflectionQuestionCreator,
+  },
   data() {
     return {
       editing: false,
@@ -53,11 +59,16 @@ export default {
       titleEntered: false,
       gradeLevelSelected: false,
       subjectAreaSelected: false,
+      readyToSave: false,
     };
   },
   methods: {
     onSubmit(e) {
       e.preventDefault;
+      this.editing = false;
+      this.titleEntered = false;
+      this.gradeLevelSelected = false;
+      this.subjectAreaSelected = false;
     },
   },
 };
@@ -98,5 +109,9 @@ input,
 select {
   margin: 2px;
   width: 24.5em;
+}
+
+.empty-display {
+  text-align: center;
 }
 </style>

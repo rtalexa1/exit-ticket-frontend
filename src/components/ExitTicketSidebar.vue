@@ -1,6 +1,8 @@
 <template>
   <div class="sidebar" :class="{ toggled: toggle }">
-    <font-awesome-icon icon="fa-solid fa-bars" @click="onClick" />
+    <div class="icon">
+      <font-awesome-icon icon="fa-solid fa-bars" @click="onClick" />
+    </div>
     <div v-show="toggle" class="sidebar-content">
       <h4>Exit Tickets</h4>
       <ul>
@@ -30,6 +32,10 @@ export default {
 </script>
 
 <style>
+.icon {
+  cursor: pointer;
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;
