@@ -2,19 +2,20 @@
   <div class="sidebar" :class="{ toggled: toggle }">
     <font-awesome-icon icon="fa-solid fa-bars" @click="onClick" />
     <div v-show="toggle" class="sidebar-content">
-      <h4>Classes</h4>
+      <h4>Exit Tickets</h4>
       <ul>
-        <li>Class 1</li>
-        <li>Class 2</li>
-        <li>Class 3</li>
+        <li>Exit Ticket 1</li>
+        <li>Exit Ticket 2</li>
+        <li>Exit Ticket 3</li>
       </ul>
+      <button>Create a new exit ticket</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "GroupSidebar",
+  name: "ExitTicketSidebar",
   data() {
     return {
       toggle: true,
@@ -23,7 +24,6 @@ export default {
   methods: {
     onClick() {
       this.toggle = !this.toggle;
-      console.log(this.toggle);
     },
   },
 };
@@ -34,15 +34,15 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-width: 0 2px 2px 2px;
+  border-width: 0 2px 0 2px;
   border-style: solid;
-  height: 30em;
+  height: 35em;
   padding: 5em 1em 1em 1em;
   background-color: #fcfcfc;
 }
 
 .toggled {
-  width: 10em;
+  width: 12em;
 }
 
 .untoggled {

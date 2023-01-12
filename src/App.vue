@@ -1,23 +1,28 @@
 <template>
   <NavBar />
   <div class="container">
-    <GroupSidebar />
-    <GroupRoster />
+    <ExitTicketSidebar />
+    <div class="exit-ticket-container">
+      <!-- On first render, users will see a (mostly) blank area with a prompt. -->
+      <!-- They will be asked to choose an existing ticket from the sidebar, or to create a new one.  -->
+      <!-- Should both views be located in the ExitTicketEditor, or should it be two separate components? -->
+      <ExitTicketEditor />
+    </div>
   </div>
   <Footer />
 </template>
 
 <script>
 import NavBar from "./components/NavBar.vue";
-import GroupSidebar from "./components/GroupSidebar.vue";
-import GroupRoster from "./components/GroupRoster.vue";
+import ExitTicketSidebar from "./components/ExitTicketSidebar.vue";
+import ExitTicketEditor from "./components/ExitTicketEditor.vue";
 import Footer from "./components/Footer.vue";
 
 export default {
   components: {
     NavBar,
-    GroupSidebar,
-    GroupRoster,
+    ExitTicketSidebar,
+    ExitTicketEditor,
     Footer,
   },
 };
@@ -49,7 +54,7 @@ ul {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  min-height: 100%;
+  min-height: 100%vh;
   background-color: #f2f2f2;
   // color: var(--color-text-body);
   line-height: 1.5;
