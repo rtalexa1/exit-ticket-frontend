@@ -4,18 +4,21 @@
     <GroupSidebar />
     <GroupRoster />
   </div>
+  <Footer />
 </template>
 
 <script>
 import NavBar from "./components/NavBar.vue";
 import GroupSidebar from "./components/GroupSidebar.vue";
 import GroupRoster from "./components/GroupRoster.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
   components: {
     NavBar,
     GroupSidebar,
     GroupRoster,
+    Footer,
   },
 };
 </script>

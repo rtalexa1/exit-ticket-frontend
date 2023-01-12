@@ -38,6 +38,7 @@ export default {
   border-style: solid;
   height: 30em;
   padding: 5em 1em 1em 1em;
+  background-color: #fcfcfc;
 }
 
 .toggled {
