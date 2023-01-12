@@ -23,10 +23,8 @@
           <option value="writing">Writing</option>
           <option value="science">Science</option>
         </select>
-        <div v-if="subjectAreaSelected">
-          <button style="margin: 2px">Add a TEKS-based question</button>
-          <button style="margin: 2px">Add a reflection question</button>
-        </div>
+        <!-- Could pass readyToSave as a prop here and then emit back when we're done with the questions -->
+        <QuestionsCreator v-if="subjectAreaSelected" />
         <button v-if="readyToSave" type="submit">Save</button>
       </form>
     </div>
@@ -45,12 +43,12 @@
 </template>
 
 <script>
-import ReflectionQuestionCreator from "./ReflectionQuestionCreator.vue";
+import QuestionsCreator from "./QuestionsCreator.vue";
 
 export default {
   name: "ExitTicketEditor",
   components: {
-    ReflectionQuestionCreator,
+    QuestionsCreator,
   },
   data() {
     return {
