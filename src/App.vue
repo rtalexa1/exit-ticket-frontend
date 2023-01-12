@@ -37,6 +37,11 @@ html {
   height: 100%;
 }
 
+ul {
+  list-style: none;
+  display: contents;
+}
+
 .container {
   display: flex;
   flex-direction: row;

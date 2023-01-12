@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar" :class="{ toggled: toggle }">
     <font-awesome-icon icon="fa-solid fa-bars" @click="onClick" />
-    <div v-show="toggle">
+    <div v-show="toggle" class="sidebar-content">
       <h4>Classes</h4>
       <ul>
         <li>Class 1</li>
@@ -17,7 +17,7 @@ export default {
   name: "GroupSidebar",
   data() {
     return {
-      toggle: false,
+      toggle: true,
     };
   },
   methods: {
@@ -33,7 +33,6 @@ export default {
 .sidebar {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
   border-width: 0 2px 2px 2px;
   border-style: solid;
@@ -47,5 +46,11 @@ export default {
 
 .untoggled {
   width: 0.5em;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
