@@ -54,10 +54,17 @@ ul {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  min-height: 100%vh;
+  width: 100%;
+  min-height: 100%;
   background-color: #f2f2f2;
   // color: var(--color-text-body);
   line-height: 1.5;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.exit-ticket-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 </style>
