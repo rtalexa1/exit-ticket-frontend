@@ -1,4 +1,5 @@
 <template>
+  <p>Add up to five questions to your exit ticket</p>
   <div class="questions-creator-container">
     <!-- Pass in standardsBasedQuestions once we can access them -->
     <Question reflection-questions="reflectionQuestions" />
@@ -14,6 +15,7 @@ import Question from "./Question.vue";
 
 export default {
   name: "ReflectionQuestionCreator",
+  props: ["gradeLevel", "subjectArea"],
   data() {
     return {
       reflectionQuestions: [],

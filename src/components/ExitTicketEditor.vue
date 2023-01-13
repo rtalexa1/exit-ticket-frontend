@@ -9,20 +9,24 @@
           id="title"
           placeholder="Give your exit ticket a title"
         />
-        <select>
+        <select v-model="gradeLevel">
           <option selected disabled>Select a grade level</option>
           <option value="third-grade">Third grade</option>
           <option value="fourth-grade">Fourth grade</option>
           <option value="fifth-grade">Fifth grade</option>
         </select>
-        <select>
+        <select v-model="subjectArea" @input="openQuestionsCreator = true">
           <option selected disabled>Select a subject area</option>
           <option value="math">Math</option>
           <option value="reading">Reading</option>
           <option value="writing">Writing</option>
           <option value="science">Science</option>
         </select>
-        <QuestionsCreator v-if="subjectAreaSelected" />
+        <QuestionsCreator
+          v-if="openQuestionsCreator"
+          grade-level="gradeLevel"
+          subject-area="subjectArea"
+        />
         <button v-if="readyToSave" type="submit">Save</button>
       </form>
     </div>
@@ -51,18 +55,27 @@ export default {
   data() {
     return {
       editing: false,
-      exitTickets: [],
       readyToSave: false,
       openQuestionsCreator: false,
+      gradeLevel: "",
+      subjectArea: "",
+      title: "",
     };
   },
   methods: {
     onSubmit(e) {
       e.preventDefault;
+
+      const newExitTicket = {
+        // userId: this.user_id -- How do we get this?
+        title: this.title,
+      };
+
       this.editing = false;
-      this.titleEntered = false;
-      this.gradeLevelSelected = false;
-      this.subjectAreaSelected = false;
+      this.userId = "";
+      this.gradeLevel = "";
+      this.subjectArea = "";
+      this.title = "";
     },
   },
 };

@@ -10,7 +10,7 @@
   </div>
   <!-- <select>
     <option selected disabled>
-      Choose a question or create write your own
+      Choose a question
     </option>
     <option v-for="question in questions" :key="question.id">
       {{ question.text }}
