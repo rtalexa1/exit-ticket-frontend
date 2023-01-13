@@ -14,27 +14,34 @@
 import Question from "./Question.vue";
 
 export default {
-  name: "ReflectionQuestionCreator",
+  name: "QuestionsCreator",
   props: ["gradeLevel", "subjectArea"],
   data() {
     return {
-      reflectionQuestions: [],
+      questions: [],
+      reflectionQuestions: [
+        "How do you feel about what you learned today?",
+        "Was there anything that clicked for you today?",
+        "Is there anything that is still fuzzy for you?",
+        "Do you think you could teach this topic to someone else?",
+        "How confident are you about your understanding of today's topic?",
+      ],
     };
   },
   components: {
     Question,
   },
-  methods: {
-    async fetchReflectionQuestions() {
-      const res = await fetch("http://localhost:3000/reflection_questions");
-      const data = await res.json();
-      return data;
-    },
-  },
-  async created() {
-    const data = await this.fetchReflectionQuestions();
-    this.reflectionQuestions.push(...data);
-  },
+  // methods: {
+  //   async fetchReflectionQuestions() {
+  //     const res = await fetch("http://localhost:3000/reflection_questions");
+  //     const data = await res.json();
+  //     return data;
+  //   },
+  // },
+  // async created() {
+  //   const data = await this.fetchReflectionQuestions();
+  //   this.reflectionQuestions.push(...data);
+  // },
 };
 </script>
 

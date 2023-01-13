@@ -6,7 +6,7 @@
         <input
           type="text"
           name="title"
-          id="title"
+          v-model="title"
           placeholder="Give your exit ticket a title"
         />
         <select v-model="gradeLevel">
@@ -54,12 +54,13 @@ export default {
   },
   data() {
     return {
+      title: "",
+      gradeLevel: "",
+      subjectArea: "",
       editing: false,
       readyToSave: false,
       openQuestionsCreator: false,
-      gradeLevel: "",
-      subjectArea: "",
-      title: "",
+      exitTickets: [],
     };
   },
   methods: {
@@ -69,7 +70,11 @@ export default {
       const newExitTicket = {
         // userId: this.user_id -- How do we get this?
         title: this.title,
+        gradeLevel: this.gradeLevel,
+        subjectArea: this.subjectArea,
       };
+
+      console.log(newExitTicket);
 
       this.editing = false;
       this.userId = "";
