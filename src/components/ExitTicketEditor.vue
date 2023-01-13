@@ -4,19 +4,18 @@
       <h1>Create a Ticket</h1>
       <form @submit="onSubmit" class="ticket-creator-form">
         <input
-          @blur="titleEntered = true"
           type="text"
           name="title"
           id="title"
           placeholder="Give your exit ticket a title"
         />
-        <select v-if="titleEntered" @input="gradeLevelSelected = true">
+        <select>
           <option selected disabled>Select a grade level</option>
           <option value="third-grade">Third grade</option>
           <option value="fourth-grade">Fourth grade</option>
           <option value="fifth-grade">Fifth grade</option>
         </select>
-        <select v-if="gradeLevelSelected" @input="subjectAreaSelected = true">
+        <select>
           <option selected disabled>Select a subject area</option>
           <option value="math">Math</option>
           <option value="reading">Reading</option>
@@ -53,9 +52,6 @@ export default {
     return {
       editing: false,
       exitTickets: [],
-      titleEntered: false,
-      gradeLevelSelected: false,
-      subjectAreaSelected: false,
       readyToSave: false,
       openQuestionsCreator: false,
     };
