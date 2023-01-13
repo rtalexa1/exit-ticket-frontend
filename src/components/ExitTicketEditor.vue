@@ -23,10 +23,6 @@
           <option value="writing">Writing</option>
           <option value="science">Science</option>
         </select>
-        <!-- Could pass readyToSave as a prop here and then emit back when we're done with the questions -->
-        <button @click="openQuestionsCreator = true" v-if="subjectAreaSelected">
-          Add question
-        </button>
         <QuestionsCreator v-if="subjectAreaSelected" />
         <button v-if="readyToSave" type="submit">Save</button>
       </form>

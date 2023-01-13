@@ -1,42 +1,37 @@
 <template>
-  <div class="container">
-    <button style="margin: 2px">Add a TEKS-based question</button>
-    <button style="margin: 2px">Add a reflection question</button>
-    <select>
-      <option selected disabled>
-        Choose a question or create write your own
-      </option>
-      <option v-for="question in questions" :key="question.id">
-        {{ question.text }}
-      </option>
-    </select>
+  <div class="questions-creator-container">
+    <!-- Pass in standardsBasedQuestions once we can access them -->
+    <Question reflection-questions="reflectionQuestions" />
+    <Question reflection-questions="reflectionQuestions" />
+    <Question reflection-questions="reflectionQuestions" />
+    <Question reflection-questions="reflectionQuestions" />
+    <Question reflection-questions="reflectionQuestions" />
   </div>
 </template>
 
 <script>
+import Question from "./Question.vue";
+
 export default {
   name: "ReflectionQuestionCreator",
   data() {
     return {
-      questions: [],
-      questionOneCreated: false,
-      questionTwoCreated: false,
-      questionThreeCreated: false,
-      questionFourCreated: false,
-      questionFiveCreated: false,
+      reflectionQuestions: [],
     };
   },
+  components: {
+    Question,
+  },
   methods: {
-    async fetchQuestions() {
+    async fetchReflectionQuestions() {
       const res = await fetch("http://localhost:3000/reflection_questions");
       const data = await res.json();
       return data;
     },
   },
   async created() {
-    const data = await this.fetchQuestions();
-    this.questions.push(...data);
-    console.log(this.questions);
+    const data = await this.fetchReflectionQuestions();
+    this.reflectionQuestions.push(...data);
   },
 };
 </script>
@@ -48,7 +43,7 @@ select {
   width: 24.5em;
 }
 
-.container {
+.questions-creator-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
