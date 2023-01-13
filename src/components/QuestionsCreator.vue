@@ -19,6 +19,11 @@ export default {
   data() {
     return {
       questions: [],
+      questionOneCreated: false,
+      questionTwoCreated: false,
+      questionThreeCreated: false,
+      questionFourCreated: false,
+      questionFiveCreated: false,
     };
   },
   methods: {
