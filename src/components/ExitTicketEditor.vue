@@ -4,9 +4,19 @@
       <h1>Create a Ticket</h1>
       <form @submit="onSubmit" class="ticket-creator-form">
         <label for="title">Give your exit ticket a title</label>
-        <input id="title" type="text" name="title" v-model="title" />
+        <input
+          id="title"
+          type="text"
+          name="title"
+          v-model="title"
+          @input="titleEntered = true"
+        />
         <label for="grade-level">Select your grade level</label>
-        <select id="grade-level" v-model="gradeLevel">
+        <select
+          id="grade-level"
+          v-model="gradeLevel"
+          @input="gradeLevelSelected = true"
+        >
           <option selected disabled>Select a grade level</option>
           <option value="third-grade">Third grade</option>
           <option value="fourth-grade">Fourth grade</option>
@@ -16,7 +26,7 @@
         <select
           id="subject-area"
           v-model="subjectArea"
-          @input="enableButton = true"
+          @input="subjectAreaSelected = true"
         >
           <option selected disabled>Select a subject area</option>
           <option value="math">Math</option>
@@ -24,7 +34,13 @@
           <option value="writing">Writing</option>
           <option value="science">Science</option>
         </select>
-        <button :disabled="enableButton === false" type="submit">
+        <!-- Button is disabled until all t -->
+        <button
+          :disabled="
+            !titleEntered || !subjectAreaSelected || !gradeLevelSelected
+          "
+          type="submit"
+        >
           Add questions
         </button>
       </form>
@@ -44,7 +60,7 @@
         Click on a ticket to view it, or click the button to create a new
         ticket.
       </p>
-      <button>Create ticket</button>
+      <button @click="editing = !editing">Create ticket</button>
     </div>
   </div>
 </template>
@@ -63,6 +79,9 @@ export default {
       gradeLevel: "",
       subjectArea: "",
       editing: false,
+      titleEntered: false,
+      gradeLevelSelected: false,
+      subjectAreaSelected: false,
       enableButton: false,
       exitTicketCreated: false,
       readyToSave: false,
@@ -83,7 +102,7 @@ export default {
       };
 
       fetch("http://localhost:3000/users/1/exit_tickets", {
-        method: "POST", // or 'PUT'
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
