@@ -5,7 +5,11 @@ export default createStore({
     currentTicket: "",
     exitTickets: [],
   },
-  getters: {},
+  getters: {
+    anyExitTickets(state) {
+      return state.exitTickets.length > 0;
+    },
+  },
   mutations: {
     setCurrentTicket(state, exitTicket) {
       state.currentTicket = exitTicket;

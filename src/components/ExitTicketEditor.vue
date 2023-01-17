@@ -51,7 +51,10 @@
       />
       <!-- <button v-if="readyToSave" type="submit">Save</button> -->
     </div>
-    <div v-else-if="!editing && exitTickets.length < 1" class="empty-display">
+    <div
+      v-else-if="!editing && !$store.getters.anyExitTickets"
+      class="empty-display"
+    >
       <p>You do not have any exit tickets. Click the button to create one.</p>
       <button @click="editing = !editing">Create ticket</button>
     </div>
@@ -85,7 +88,6 @@ export default {
       enableButton: false,
       exitTicketCreated: false,
       readyToSave: false,
-      exitTickets: [],
     };
   },
   methods: {
