@@ -25,6 +25,19 @@ export default {
     ExitTicketEditor,
     Footer,
   },
+  methods: {
+    // Would it be better to create this method as an action somehow, since we
+    // are ultimately committing the data to the store?
+    async fetchExitTickets() {
+      const res = await fetch("http://localhost:3000/users/1/exit_tickets/");
+      const data = await res.json();
+      return data;
+    },
+  },
+  async created() {
+    const exitTickets = await this.fetchExitTickets();
+    this.$store.commit("setExitTickets", exitTickets);
+  },
 };
 </script>
 

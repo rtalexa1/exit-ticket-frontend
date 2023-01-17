@@ -124,9 +124,6 @@ export default {
       this.title = "";
     },
   },
-  // async created() {
-  //   const res = await
-  // }
 };
 </script>
 
