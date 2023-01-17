@@ -3,19 +3,21 @@
     <div v-if="editing" class="ticket-creator-container">
       <h1>Create a Ticket</h1>
       <form @submit="onSubmit" class="ticket-creator-form">
-        <input
-          type="text"
-          name="title"
-          v-model="title"
-          placeholder="Give your exit ticket a title"
-        />
-        <select v-model="gradeLevel">
+        <label for="title">Give your exit ticket a title</label>
+        <input id="title" type="text" name="title" v-model="title" />
+        <label for="grade-level">Select your grade level</label>
+        <select id="grade-level" v-model="gradeLevel">
           <option selected disabled>Select a grade level</option>
           <option value="third-grade">Third grade</option>
           <option value="fourth-grade">Fourth grade</option>
           <option value="fifth-grade">Fifth grade</option>
         </select>
-        <select v-model="subjectArea" @input="openQuestionsCreator = true">
+        <label for="subject-area">Select your subject area</label>
+        <select
+          id="subject-area"
+          v-model="subjectArea"
+          @input="openQuestionsCreator = true"
+        >
           <option selected disabled>Select a subject area</option>
           <option value="math">Math</option>
           <option value="reading">Reading</option>
@@ -115,6 +117,10 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
+
+label {
+  text-align: center;
 }
 
 input,
