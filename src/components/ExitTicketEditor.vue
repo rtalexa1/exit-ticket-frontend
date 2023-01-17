@@ -16,7 +16,7 @@
         <select
           id="subject-area"
           v-model="subjectArea"
-          @input="openQuestionsCreator = true"
+          @input="enableButton = true"
         >
           <option selected disabled>Select a subject area</option>
           <option value="math">Math</option>
@@ -24,13 +24,16 @@
           <option value="writing">Writing</option>
           <option value="science">Science</option>
         </select>
-        <QuestionsCreator
-          v-if="openQuestionsCreator"
-          grade-level="gradeLevel"
-          subject-area="subjectArea"
-        />
-        <button v-if="readyToSave" type="submit">Save</button>
+        <button :disabled="enableButton === false" type="submit">
+          Add questions
+        </button>
       </form>
+      <QuestionsCreator
+        v-if="exitTicketCreated"
+        grade-level="gradeLevel"
+        subject-area="subjectArea"
+      />
+      <!-- <button v-if="readyToSave" type="submit">Save</button> -->
     </div>
     <div v-else-if="!editing && exitTickets.length < 1" class="empty-display">
       <p>You do not have any exit tickets. Click the button to create one.</p>
@@ -60,8 +63,9 @@ export default {
       gradeLevel: "",
       subjectArea: "",
       editing: false,
+      enableButton: false,
+      exitTicketCreated: false,
       readyToSave: false,
-      openQuestionsCreator: false,
       exitTickets: [],
     };
   },
@@ -70,16 +74,31 @@ export default {
       e.preventDefault;
 
       const newExitTicket = {
-        // userId: this.user_id -- How do we get this?
-        title: this.title,
-        gradeLevel: this.gradeLevel,
-        subjectArea: this.subjectArea,
+        exit_ticket: {
+          user_id: 1,
+          title: this.title,
+          grade_level: this.gradeLevel,
+          subject_area: this.subjectArea,
+        },
       };
 
-      console.log(newExitTicket);
+      fetch("http://localhost:3000/users/1/exit_tickets", {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newExitTicket),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
 
       this.editing = false;
-      this.userId = "";
+      // this.userId = "";
       this.gradeLevel = "";
       this.subjectArea = "";
       this.title = "";
