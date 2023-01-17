@@ -6,9 +6,9 @@
     <div v-show="toggle" class="sidebar-content">
       <h4>Exit Tickets</h4>
       <ul>
-        <li>Exit Ticket 1</li>
-        <li>Exit Ticket 2</li>
-        <li>Exit Ticket 3</li>
+        <li v-for="ticket in $store.state.exitTickets" :key="ticket.id">
+          {{ ticket.title }}
+        </li>
       </ul>
       <button>Create a new exit ticket</button>
     </div>
