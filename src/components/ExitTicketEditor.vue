@@ -110,7 +110,8 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Success:", data);
+          // console.log("Success:", data);
+          this.$store.commit("addExitTicket", data);
         })
         .catch((error) => {
           console.error("Error:", error);
