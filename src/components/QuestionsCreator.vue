@@ -15,9 +15,7 @@ import Question from "./Question.vue";
 
 export default {
   name: "QuestionsCreator",
-  props: ["gradeLevel", "subjectArea"],
   components: {
-    // eslint-disable-next-line vue/no-unused-components
     Question,
   },
 };

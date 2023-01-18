@@ -46,11 +46,7 @@
           Add questions
         </button>
       </form>
-      <QuestionsCreator
-        v-if="exitTicketCreated"
-        grade-level="gradeLevel"
-        subject-area="subjectArea"
-      />
+      <QuestionsCreator v-if="exitTicketCreated" />
       <!-- <button v-if="readyToSave" type="submit" class="blue-btn">Save</button> -->
     </div>
     <div

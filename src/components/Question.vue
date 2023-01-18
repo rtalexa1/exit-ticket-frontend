@@ -10,11 +10,17 @@
       </select>
     </div>
     <div v-if="questionType === 'standardsBased'">
-      <p>Standards-based questions here</p>
+      <label for="student-expectation">Select a student expectation</label>
+      <select id="student-expectation" v-model="studentExpectation">
+        <option selected disabled>Select a student expectation</option>
+      </select>
     </div>
     <div v-else>
       <select v-model="questionText">
-        <option v-for="question in reflectionQuestions" :key="question.id">
+        <option
+          v-for="question in store.state.reflectionQuestions"
+          :key="question.id"
+        >
           {{ question.text }}
         </option>
       </select>
@@ -24,8 +30,8 @@
 
 <script>
 export default {
-  name: "ReflectionQuestion",
-  props: ["reflectionQuestions"],
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: "Question",
   data() {
     return {
       questionType: "",
