@@ -2,7 +2,7 @@
   <div class="editor-container">
     <div v-if="editing" class="ticket-creator-container">
       <h1>Create a Ticket</h1>
-      <form @submit="onSubmit" class="ticket-creator-form">
+      <form @submit.prevent class="ticket-creator-form">
         <label for="title">Give your exit ticket a title</label>
         <input
           id="title"
@@ -34,9 +34,14 @@
         </select>
         <!-- Button is disabled until all inputs are filled out -->
         <button
-          v-if="titleEntered && subjectAreaSelected && gradeLevelSelected"
-          type="submit"
+          v-if="
+            titleEntered &&
+            subjectAreaSelected &&
+            gradeLevelSelected &&
+            !exitTicketCreated
+          "
           class="blue-btn"
+          @click="onSubmit"
         >
           Add questions
         </button>

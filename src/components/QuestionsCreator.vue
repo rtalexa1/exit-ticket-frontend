@@ -2,11 +2,11 @@
   <p>Add up to five questions to your exit ticket</p>
   <div class="questions-creator-container">
     <!-- Pass in standardsBasedQuestions once we can access them -->
-    <Question reflection-questions="reflectionQuestions" />
-    <Question reflection-questions="reflectionQuestions" />
-    <Question reflection-questions="reflectionQuestions" />
-    <Question reflection-questions="reflectionQuestions" />
-    <Question reflection-questions="reflectionQuestions" />
+    <Question />
+    <Question />
+    <Question />
+    <Question />
+    <Question />
   </div>
 </template>
 
@@ -17,6 +17,7 @@ export default {
   name: "QuestionsCreator",
   props: ["gradeLevel", "subjectArea"],
   components: {
+    // eslint-disable-next-line vue/no-unused-components
     Question,
   },
 };
