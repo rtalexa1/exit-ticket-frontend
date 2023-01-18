@@ -19,17 +19,6 @@ export default {
   components: {
     Question,
   },
-  // methods: {
-  //   async fetchReflectionQuestions() {
-  //     const res = await fetch("http://localhost:3000/reflection_questions");
-  //     const data = await res.json();
-  //     return data;
-  //   },
-  // },
-  // async created() {
-  //   const data = await this.fetchReflectionQuestions();
-  //   this.reflectionQuestions.push(...data);
-  // },
 };
 </script>
 

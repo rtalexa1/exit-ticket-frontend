@@ -60,6 +60,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: scroll;
 }
 
 .exit-ticket-btn {
@@ -79,5 +80,6 @@ export default {
   padding: 0.4em;
   background-color: #253c55;
   color: #f2f2f2;
+  cursor: pointer;
 }
 </style>

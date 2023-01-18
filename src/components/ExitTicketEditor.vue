@@ -32,11 +32,9 @@
           <option value="math">Math</option>
           <option value="science">Science</option>
         </select>
-        <!-- Button is disabled until all t -->
+        <!-- Button is disabled until all inputs are filled out -->
         <button
-          :disabled="
-            !titleEntered || !subjectAreaSelected || !gradeLevelSelected
-          "
+          v-if="titleEntered && subjectAreaSelected && gradeLevelSelected"
           type="submit"
           class="blue-btn"
         >
@@ -172,7 +170,7 @@ label {
 input,
 select {
   margin: 2px;
-  width: 24.5em;
+  width: 5em;
 }
 
 .empty-display {
@@ -193,5 +191,6 @@ select {
   padding: 0.4em;
   background-color: #253c55;
   color: #f2f2f2;
+  cursor: pointer;
 }
 </style>
