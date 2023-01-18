@@ -4,19 +4,9 @@
       <h1>Create a Ticket</h1>
       <form @submit.prevent class="ticket-creator-form">
         <label for="title">Give your exit ticket a title</label>
-        <input
-          id="title"
-          type="text"
-          name="title"
-          v-model="title"
-          @input="titleEntered = true"
-        />
+        <input id="title" type="text" name="title" v-model="title" />
         <label for="grade-level">Select your grade level</label>
-        <select
-          id="grade-level"
-          v-model="gradeLevel"
-          @input="gradeLevelSelected = true"
-        >
+        <select id="grade-level" v-model="gradeLevel">
           <option selected disabled>Select a grade level</option>
           <option value="third-grade">Third grade</option>
           <option value="fourth-grade">Fourth grade</option>
@@ -71,9 +61,6 @@ export default {
       gradeLevel: "",
       subjectArea: "",
       editing: false,
-      titleEntered: false,
-      gradeLevelSelected: false,
-      subjectAreaSelected: false,
       exitTicketCreated: false,
       readyToSave: false,
     };

@@ -43,7 +43,6 @@
           :disable="disableInputs"
           id="reflection-questions"
           v-model="questionText"
-          @input="displayButton = true"
         >
           <option
             v-for="question in $store.state.reflectionQuestions"
@@ -53,7 +52,7 @@
           </option>
         </select>
         <br />
-        <button v-if="displayButton" @click="onSubmit" class="plus-btn">
+        <button v-if="enableButton" @click="onSubmit" class="plus-btn">
           <font-awesome-icon icon="fa-solid fa-plus" size="xl" />
           <br />
           Add another question
@@ -87,6 +86,11 @@ export default {
       this.$store.commit("addPendingQuestion", newQuestion);
       this.disableInputs = true;
       this.$emit("question-created");
+    },
+  },
+  computed: {
+    enableButton: function () {
+      return this.questionText !== "";
     },
   },
 };
