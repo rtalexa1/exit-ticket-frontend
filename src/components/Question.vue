@@ -1,4 +1,8 @@
 <template>
+  <!-- Add a form within EACH div, with a button (plus sign) that emits 
+  a signal that will enable the next Question element so that they display one 
+  at a time -->
+
   <div id="question-type-container">
     <label for="question-type"
       >What kind of question would you like to add?
@@ -19,7 +23,11 @@
     </select>
   </div>
   <div v-else-if="questionType === 'reflection'">
-    <select v-model="questionText">
+    <label for="reflection-questions"
+      >Select a reflection question to add to your exit ticket</label
+    >
+    <br />
+    <select id="reflection-questions" v-model="questionText">
       <option
         v-for="question in $store.state.reflectionQuestions"
         :key="question.id"
@@ -44,13 +52,12 @@ export default {
     onSubmit(e) {
       e.preventDefault();
 
-      const newQuestion = {
-        exit_ticket_id: this.$store.state.currentTicket.id,
-        // exitTicketId = this.exitTicketID,
-        text: this.questionText,
-      };
+      // const newQuestion = {
+      //   exit_ticket_id: this.$store.state.currentTicket.id,
+      //   text: this.questionText,
+      // };
 
-      console.log(newQuestion);
+      this.$emit("question-created");
     },
   },
 };
