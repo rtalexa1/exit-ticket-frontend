@@ -70,4 +70,14 @@ export default {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.blue-btn {
+  margin-top: 3px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  border: solid;
+  border-radius: 5px;
+  padding: 0.4em;
+  background-color: #253c55;
+  color: #f2f2f2;
+}
 </style>

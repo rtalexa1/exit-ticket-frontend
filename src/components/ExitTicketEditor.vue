@@ -40,6 +40,7 @@
             !titleEntered || !subjectAreaSelected || !gradeLevelSelected
           "
           type="submit"
+          class="blue-btn"
         >
           Add questions
         </button>
@@ -49,21 +50,25 @@
         grade-level="gradeLevel"
         subject-area="subjectArea"
       />
-      <!-- <button v-if="readyToSave" type="submit">Save</button> -->
+      <!-- <button v-if="readyToSave" type="submit" class="blue-btn">Save</button> -->
     </div>
     <div
       v-else-if="!editing && !$store.getters.anyExitTickets"
       class="empty-display"
     >
       <p>You do not have any exit tickets. Click the button to create one.</p>
-      <button @click="editing = !editing">Create ticket</button>
+      <button @click="editing = !editing" class="blue-btn">
+        Create ticket
+      </button>
     </div>
-    <div v-else>
+    <div v-else class="tickets-display">
       <p>
-        Click on a ticket to view it, or click the button to create a new
-        ticket.
+        To view a ticket, click on its title in the sidebar, or click the button
+        below to create a new ticket.
       </p>
-      <button @click="editing = !editing">Create ticket</button>
+      <button @click="editing = !editing" class="blue-btn">
+        Create ticket
+      </button>
     </div>
   </div>
 </template>
@@ -172,5 +177,21 @@ select {
 
 .empty-display {
   text-align: center;
+}
+
+.tickets-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.blue-btn {
+  margin-top: 3px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  border: solid;
+  border-radius: 5px;
+  padding: 0.4em;
+  background-color: #253c55;
+  color: #f2f2f2;
 }
 </style>
