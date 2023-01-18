@@ -5,12 +5,13 @@
     </div>
     <div v-show="toggle" class="sidebar-content">
       <h4>Exit Tickets</h4>
-      <ul>
-        <li v-for="ticket in $store.state.exitTickets" :key="ticket.id">
+      <div v-for="ticket in $store.state.exitTickets" :key="ticket.id">
+        <button class="exit-ticket-btn">
           {{ ticket.title }}
-        </li>
-      </ul>
-      <button>Create a new exit ticket</button>
+          <br />
+        </button>
+      </div>
+      <button class="blue-btn">Create a new exit ticket</button>
     </div>
   </div>
 </template>
@@ -59,5 +60,14 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.exit-ticket-btn {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
 }
 </style>
