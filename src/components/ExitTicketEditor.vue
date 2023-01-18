@@ -23,26 +23,13 @@
           <option value="fifth-grade">Fifth grade</option>
         </select>
         <label for="subject-area">Select your subject area</label>
-        <select
-          id="subject-area"
-          v-model="subjectArea"
-          @input="subjectAreaSelected = true"
-        >
+        <select id="subject-area" v-model="subjectArea">
           <option selected disabled>Select a subject area</option>
           <option value="math">Math</option>
           <option value="science">Science</option>
         </select>
-        <!-- Button is disabled until all inputs are filled out -->
-        <button
-          v-show="
-            titleEntered &&
-            subjectAreaSelected &&
-            gradeLevelSelected &&
-            !exitTicketCreated
-          "
-          class="blue-btn"
-          @click="onSubmit"
-        >
+        <!-- Button displays once all inputs are filled out -->
+        <button v-if="enableButton" class="blue-btn" @click="onSubmit">
           Add questions
         </button>
       </form>
@@ -87,7 +74,6 @@ export default {
       titleEntered: false,
       gradeLevelSelected: false,
       subjectAreaSelected: false,
-      enableButton: false,
       exitTicketCreated: false,
       readyToSave: false,
     };
@@ -128,6 +114,13 @@ export default {
       // this.gradeLevel = "";
       // this.subjectArea = "";
       // this.title = "";
+    },
+  },
+  computed: {
+    enableButton: function () {
+      return (
+        this.title !== "" && this.gradeLevel !== "" && this.subjectArea !== ""
+      );
     },
   },
 };
