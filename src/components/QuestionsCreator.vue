@@ -3,18 +3,22 @@
   <div class="questions-creator-container">
     <!-- Pass in standardsBasedQuestions once we can access them -->
     <Question @question-created="incrementQuestionNumber" />
+    <br />
     <Question
       v-if="questionNumber >= 1"
       @question-created="incrementQuestionNumber"
     />
+    <br />
     <Question
       v-if="questionNumber >= 2"
       @question-created="incrementQuestionNumber"
     />
+    <br />
     <Question
       v-if="questionNumber >= 3"
       @question-created="incrementQuestionNumber"
     />
+    <br />
     <Question v-if="questionNumber === 4" />
   </div>
 </template>

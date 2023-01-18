@@ -98,6 +98,7 @@ export default {
   flex-direction: column;
   align-items: center;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  width: 23.5em;
   padding: 1em;
   background: rgba(127, 127, 127, 0.32);
   text-align: center;

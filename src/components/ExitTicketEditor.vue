@@ -34,7 +34,7 @@
         </select>
         <!-- Button is disabled until all inputs are filled out -->
         <button
-          v-if="
+          v-show="
             titleEntered &&
             subjectAreaSelected &&
             gradeLevelSelected &&
