@@ -17,6 +17,7 @@
         <option value="reflection">Reflection</option>
       </select>
     </div>
+    <!-- Need to add a form here -> follow same pattern as below -->
     <div v-if="questionType === 'standardsBased'">
       <label for="student-expectation">Select a student expectation</label>
       <select
@@ -26,6 +27,11 @@
       >
         <option selected disabled>Select a student expectation</option>
       </select>
+      <button v-if="displayButton" @click="onSubmit" class="plus-btn">
+        <font-awesome-icon icon="fa-solid fa-plus" size="xl" />
+        <br />
+        Add another question
+      </button>
     </div>
     <div v-else-if="questionType === 'reflection'">
       <form @submit.prevent>
@@ -73,11 +79,12 @@ export default {
     onSubmit(e) {
       e.preventDefault();
 
-      // const newQuestion = {
-      //   exit_ticket_id: this.$store.state.currentTicket.id,
-      //   text: this.questionText,
-      // };
+      const newQuestion = {
+        exit_ticket_id: this.$store.state.currentTicket.id,
+        text: this.questionText,
+      };
 
+      this.$store.commit("addPendingQuestion", newQuestion);
       this.disableInputs = true;
       this.$emit("question-created");
     },

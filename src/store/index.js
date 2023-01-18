@@ -11,6 +11,7 @@ export default createStore({
       "Do you think you could teach this topic to someone else?",
       "How confident are you about your understanding of today's topic?",
     ],
+    pendingQuestions: [],
   },
   getters: {
     anyExitTickets(state) {
@@ -26,6 +27,9 @@ export default createStore({
     },
     addExitTicket(state, newExitTicket) {
       state.exitTickets.push(newExitTicket);
+    },
+    addPendingQuestion(state, question) {
+      state.pendingQuestions.push(question);
     },
   },
   actions: {
