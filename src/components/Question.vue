@@ -47,8 +47,8 @@
           </option>
         </select>
         <br />
-        <button v-if="displayButton" @click="onSubmit">
-          <font-awesome-icon icon="fa-solid fa-plus" />
+        <button v-if="displayButton" @click="onSubmit" class="plus-btn">
+          <font-awesome-icon icon="fa-solid fa-plus" size="xl" />
           <br />
           Add another question
         </button>
@@ -87,7 +87,24 @@ export default {
 
 <style>
 .question-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   padding: 1em;
   background: rgba(127, 127, 127, 0.32);
+  text-align: center;
+}
+
+select {
+  width: 10em;
+}
+
+.plus-btn {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  color: rgba(11, 100, 6, 0.92);
+  cursor: pointer;
 }
 </style>

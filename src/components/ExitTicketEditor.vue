@@ -171,7 +171,7 @@ label {
 input,
 select {
   margin: 2px;
-  width: 5em;
+  width: 10em;
 }
 
 .empty-display {
