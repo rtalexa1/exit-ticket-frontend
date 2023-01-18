@@ -4,6 +4,13 @@ export default createStore({
   state: {
     currentTicket: "",
     exitTickets: [],
+    reflectionQuestions: [
+      "How do you feel about what you learned today?",
+      "Was there anything that clicked for you today?",
+      "Is there anything that is still fuzzy for you?",
+      "Do you think you could teach this topic to someone else?",
+      "How confident are you about your understanding of today's topic?",
+    ],
   },
   getters: {
     anyExitTickets(state) {
