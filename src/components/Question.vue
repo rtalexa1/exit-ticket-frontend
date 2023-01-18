@@ -1,40 +1,59 @@
 <template>
-  <!-- Add a form within EACH div, with a button (plus sign) that emits 
-  a signal that will enable the next Question element so that they display one 
-  at a time -->
-
-  <div id="question-type-container">
-    <label for="question-type"
-      >What kind of question would you like to add?
-    </label>
-    <br />
-    <select v-model="questionType" id="question-type">
-      <option selected disabled>
-        What kind of question would you like to add?
-      </option>
-      <option value="standardsBased">Standards-based (TEKS)</option>
-      <option value="reflection">Reflection</option>
-    </select>
-  </div>
-  <div v-if="questionType === 'standardsBased'">
-    <label for="student-expectation">Select a student expectation</label>
-    <select id="student-expectation" v-model="studentExpectation">
-      <option selected disabled>Select a student expectation</option>
-    </select>
-  </div>
-  <div v-else-if="questionType === 'reflection'">
-    <label for="reflection-questions"
-      >Select a reflection question to add to your exit ticket</label
-    >
-    <br />
-    <select id="reflection-questions" v-model="questionText">
-      <option
-        v-for="question in $store.state.reflectionQuestions"
-        :key="question.id"
+  <div class="question-container">
+    <div id="question-type-container">
+      <label for="question-type"
+        >What kind of question would you like to add?
+      </label>
+      <br />
+      <select
+        :disable="disableInputs"
+        v-model="questionType"
+        id="question-type"
       >
-        {{ question }}
-      </option>
-    </select>
+        <option selected disabled>
+          What kind of question would you like to add?
+        </option>
+        <option value="standardsBased">Standards-based (TEKS)</option>
+        <option value="reflection">Reflection</option>
+      </select>
+    </div>
+    <div v-if="questionType === 'standardsBased'">
+      <label for="student-expectation">Select a student expectation</label>
+      <select
+        :disable="disableInputs"
+        id="student-expectation"
+        v-model="studentExpectation"
+      >
+        <option selected disabled>Select a student expectation</option>
+      </select>
+    </div>
+    <div v-else-if="questionType === 'reflection'">
+      <form @submit.prevent>
+        <label for="reflection-questions"
+          >Select a reflection question to add to your exit ticket</label
+        >
+        <br />
+        <select
+          :disable="disableInputs"
+          id="reflection-questions"
+          v-model="questionText"
+          @input="displayButton = true"
+        >
+          <option
+            v-for="question in $store.state.reflectionQuestions"
+            :key="question.id"
+          >
+            {{ question }}
+          </option>
+        </select>
+        <br />
+        <button v-if="displayButton" @click="onSubmit">
+          <font-awesome-icon icon="fa-solid fa-plus" />
+          <br />
+          Add another question
+        </button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -46,6 +65,8 @@ export default {
     return {
       questionType: "",
       questionText: "",
+      displayButton: false,
+      disableInputs: false,
     };
   },
   methods: {
@@ -57,10 +78,16 @@ export default {
       //   text: this.questionText,
       // };
 
+      this.disableInputs = true;
       this.$emit("question-created");
     },
   },
 };
 </script>
 
-<style></style>
+<style>
+.question-container {
+  padding: 1em;
+  background: rgba(127, 127, 127, 0.32);
+}
+</style>

@@ -4,15 +4,15 @@
     <!-- Pass in standardsBasedQuestions once we can access them -->
     <Question @question-created="incrementQuestionNumber" />
     <Question
-      v-if="questionNumber <= 1"
+      v-if="questionNumber >= 1"
       @question-created="incrementQuestionNumber"
     />
     <Question
-      v-if="questionNumber <= 2"
+      v-if="questionNumber >= 2"
       @question-created="incrementQuestionNumber"
     />
     <Question
-      v-if="questionNumber <= 3"
+      v-if="questionNumber >= 3"
       @question-created="incrementQuestionNumber"
     />
     <Question v-if="questionNumber === 4" />
