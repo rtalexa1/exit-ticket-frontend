@@ -11,6 +11,7 @@ export default createStore({
       "Do you think you could teach this topic to someone else?",
       "How confident are you about your understanding of today's topic?",
     ],
+    questionNumber: 1,
     pendingQuestions: [],
   },
   getters: {
@@ -27,6 +28,9 @@ export default createStore({
     },
     addExitTicket(state, newExitTicket) {
       state.exitTickets.push(newExitTicket);
+    },
+    incrementQuestionNumber(state) {
+      state.questionNumber++;
     },
     addPendingQuestion(state, question) {
       state.pendingQuestions.push(question);

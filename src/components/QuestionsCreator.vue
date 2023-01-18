@@ -5,21 +5,21 @@
     <Question @question-created="incrementQuestionNumber" />
     <br />
     <Question
-      v-if="questionNumber >= 1"
+      v-if="$store.state.questionNumber >= 2"
       @question-created="incrementQuestionNumber"
     />
     <br />
     <Question
-      v-if="questionNumber >= 2"
+      v-if="$store.state.questionNumber >= 3"
       @question-created="incrementQuestionNumber"
     />
     <br />
     <Question
-      v-if="questionNumber >= 3"
+      v-if="$store.state.questionNumber >= 4"
       @question-created="incrementQuestionNumber"
     />
     <br />
-    <Question v-if="questionNumber === 4" />
+    <Question v-if="$store.state.questionNumber === 5" />
   </div>
 </template>
 
@@ -31,14 +31,9 @@ export default {
   components: {
     Question,
   },
-  data() {
-    return {
-      questionNumber: 0,
-    };
-  },
   methods: {
     incrementQuestionNumber() {
-      this.questionNumber++;
+      this.$store.commit("incrementQuestionNumber");
     },
   },
 };
