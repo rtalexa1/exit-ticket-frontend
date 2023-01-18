@@ -30,8 +30,6 @@
         >
           <option selected disabled>Select a subject area</option>
           <option value="math">Math</option>
-          <option value="reading">Reading</option>
-          <option value="writing">Writing</option>
           <option value="science">Science</option>
         </select>
         <!-- Button is disabled until all t -->
@@ -119,16 +117,18 @@ export default {
         .then((data) => {
           // console.log("Success:", data);
           this.$store.commit("addExitTicket", data);
+          this.$store.commit("setCurrentTicket", data);
         })
         .catch((error) => {
           console.error("Error:", error);
         });
 
-      this.editing = false;
+      this.exitTicketCreated = true;
+      // this.editing = false;
       // this.userId = "";
-      this.gradeLevel = "";
-      this.subjectArea = "";
-      this.title = "";
+      // this.gradeLevel = "";
+      // this.subjectArea = "";
+      // this.title = "";
     },
   },
 };

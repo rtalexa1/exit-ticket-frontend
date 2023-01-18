@@ -72,7 +72,8 @@ ul {
   background-color: #f2f2f2;
   // color: var(--color-text-body);
   line-height: 1.5;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Calibri, "Gill Sans MT", "Gill Sans", "Trebuchet MS", sans-serif;
+  // Geneva, Verdana, Tahoma, sans-serif;
 }
 
 .exit-ticket-container {
