@@ -27,6 +27,10 @@
       >
         <option selected disabled>Select a student expectation</option>
       </select>
+      <input type="radio" id="q1" name="q1" value="q1" />
+      <div class="question-image-container">
+        <img src="@/assets/images/third_grade/math/q1.jpg" />
+      </div>
       <button v-if="displayButton" @click="onSubmit" class="plus-btn">
         <font-awesome-icon icon="fa-solid fa-plus" size="xl" />
         <br />
@@ -69,6 +73,8 @@ export default {
   data() {
     return {
       questionType: "",
+      studentExpectation: "",
+      contentQuestions: [],
       questionText: "",
       displayButton: false,
       disableInputs: false,
@@ -87,6 +93,9 @@ export default {
       this.disableInputs = true;
       this.$emit("question-created");
     },
+    // getQuestions() {
+
+    // }
   },
   computed: {
     enableButton: function () {
@@ -96,7 +105,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .question-container {
   display: flex;
   flex-direction: column;
@@ -106,6 +115,14 @@ export default {
   padding: 1em;
   background: rgba(127, 127, 127, 0.32);
   text-align: center;
+}
+
+img {
+  width: 35em;
+}
+
+.question-image-container {
+  width: 5em;
 }
 
 select {
