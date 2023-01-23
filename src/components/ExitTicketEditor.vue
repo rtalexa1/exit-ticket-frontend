@@ -23,7 +23,11 @@
           Add questions
         </button>
       </form>
-      <QuestionsCreator v-if="exitTicketCreated" />
+      <QuestionsCreator
+        v-if="exitTicketCreated"
+        :gradeLevel="gradeLevel"
+        :subjectArea="subjectArea"
+      />
       <!-- <button v-if="readyToSave" type="submit" class="blue-btn">Save</button> -->
     </div>
     <div
@@ -63,6 +67,7 @@ export default {
       editing: false,
       exitTicketCreated: false,
       readyToSave: false,
+      questions: [],
     };
   },
   methods: {

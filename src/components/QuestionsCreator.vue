@@ -31,10 +31,24 @@ export default {
   components: {
     Question,
   },
+  props: ["gradeLevel", "subjectArea"],
   methods: {
     incrementQuestionNumber() {
       this.$store.commit("incrementQuestionNumber");
     },
+    async fetchQuestionsByParams() {
+      // https://staar-questions.s3.us-east-2.amazonaws.com/third-grade/math/32A3.jpg
+      const res = await fetch(
+        `https://staar-questions.s3.us-east-2.amazonaws.com/${this.gradeLevel}/${this.subjectArea}/32A3.jpg`,
+        { mode: "no-cors" }
+      );
+      const imageLink = await res;
+      console.log(imageLink);
+      // return data;
+    },
+  },
+  async created() {
+    await this.fetchQuestionsByParams();
   },
 };
 </script>

@@ -27,10 +27,12 @@
       >
         <option selected disabled>Select a student expectation</option>
       </select>
-      <input type="radio" id="q1" name="q1" value="q1" />
+      <!-- <input type="radio" id="q1" name="q1" value="q1" />
       <div class="question-image-container">
-        <img src="@/assets/images/third_grade/math/q1.jpg" />
-      </div>
+        <img
+          src="https://staar-questions.s3.us-east-2.amazonaws.com/third-grade/math/32A1.jpg"
+        />
+      </div> -->
       <button v-if="displayButton" @click="onSubmit" class="plus-btn">
         <font-awesome-icon icon="fa-solid fa-plus" size="xl" />
         <br />
