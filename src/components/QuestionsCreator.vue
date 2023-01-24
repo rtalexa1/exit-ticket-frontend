@@ -31,7 +31,11 @@ export default {
   components: {
     Question,
   },
-  props: ["gradeLevel", "subjectArea"],
+  data() {
+    return {
+      imageUrl: "",
+    };
+  },
   methods: {
     incrementQuestionNumber() {
       this.$store.commit("incrementQuestionNumber");
@@ -39,12 +43,11 @@ export default {
     async fetchQuestionsByParams() {
       // https://staar-questions.s3.us-east-2.amazonaws.com/third-grade/math/32A3.jpg
       const res = await fetch(
-        `https://staar-questions.s3.us-east-2.amazonaws.com/${this.gradeLevel}/${this.subjectArea}/32A3.jpg`,
-        { mode: "no-cors" }
+        "http://localhost:3000/standards_based_questions/5"
       );
-      const imageLink = await res;
-      console.log(imageLink);
-      // return data;
+      const data = await res.json();
+      console.log(data);
+      this.imageUrl = data.image_url;
     },
   },
   async created() {

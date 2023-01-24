@@ -4,30 +4,50 @@
       <h1>Create a Ticket</h1>
       <form @submit.prevent class="ticket-creator-form">
         <label for="title">Give your exit ticket a title</label>
-        <input id="title" type="text" name="title" v-model="title" />
+        <input
+          :disabled="exitTicketCreated"
+          id="title"
+          type="text"
+          name="title"
+          v-model="title"
+        />
         <label for="grade-level">Select your grade level</label>
-        <select id="grade-level" v-model="gradeLevel">
+        <select
+          :disabled="exitTicketCreated"
+          id="grade-level"
+          v-model="gradeLevel"
+        >
           <option selected disabled>Select a grade level</option>
           <option value="third-grade">Third grade</option>
           <option value="fourth-grade">Fourth grade</option>
           <option value="fifth-grade">Fifth grade</option>
         </select>
         <label for="subject-area">Select your subject area</label>
-        <select id="subject-area" v-model="subjectArea">
+        <select
+          v-if="gradeLevel === 'fifth-grade'"
+          :disabled="exitTicketCreated"
+          id="subject-area"
+          v-model="subjectArea"
+        >
           <option selected disabled>Select a subject area</option>
           <option value="math">Math</option>
           <option value="science">Science</option>
+        </select>
+        <select
+          v-else
+          :disabled="exitTicketCreated"
+          id="subject-area"
+          v-model="subjectArea"
+        >
+          <option selected disabled>Select a subject area</option>
+          <option value="math">Math</option>
         </select>
         <!-- Button displays once all inputs are filled out -->
         <button v-if="enableButton" class="blue-btn" @click="onSubmit">
           Add questions
         </button>
       </form>
-      <QuestionsCreator
-        v-if="exitTicketCreated"
-        :gradeLevel="gradeLevel"
-        :subjectArea="subjectArea"
-      />
+      <QuestionsCreator v-if="exitTicketCreated" />
       <!-- <button v-if="readyToSave" type="submit" class="blue-btn">Save</button> -->
     </div>
     <div
@@ -100,7 +120,12 @@ export default {
           console.error("Error:", error);
         });
 
+      this.$store.commit("setGradeLevel", this.gradeLevel);
+      this.$store.commit("setSubjectArea", this.subjectArea);
       this.exitTicketCreated = true;
+
+      // Find a way to disable inputs on this part of the form once the exit
+      // ticket is created
       // this.editing = false;
       // this.userId = "";
       // this.gradeLevel = "";

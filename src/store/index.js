@@ -13,6 +13,8 @@ export default createStore({
     ],
     questionNumber: 1,
     pendingQuestions: [],
+    gradeLevel: "",
+    subjectArea: "",
   },
   getters: {
     anyExitTickets(state) {
@@ -28,6 +30,12 @@ export default createStore({
     },
     addExitTicket(state, newExitTicket) {
       state.exitTickets.push(newExitTicket);
+    },
+    setGradeLevel(state, gradeLevel) {
+      state.gradeLevel = gradeLevel;
+    },
+    setSubjectArea(state, subjectArea) {
+      state.subjectArea = subjectArea;
     },
     incrementQuestionNumber(state) {
       state.questionNumber++;
