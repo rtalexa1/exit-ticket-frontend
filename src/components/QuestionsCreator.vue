@@ -31,27 +31,10 @@ export default {
   components: {
     Question,
   },
-  data() {
-    return {
-      imageUrl: "",
-    };
-  },
   methods: {
     incrementQuestionNumber() {
       this.$store.commit("incrementQuestionNumber");
     },
-    async fetchQuestionsByParams() {
-      // https://staar-questions.s3.us-east-2.amazonaws.com/third-grade/math/32A3.jpg
-      const res = await fetch(
-        "http://localhost:3000/standards_based_questions/5"
-      );
-      const data = await res.json();
-      console.log(data);
-      this.imageUrl = data.image_url;
-    },
-  },
-  async created() {
-    await this.fetchQuestionsByParams();
   },
 };
 </script>

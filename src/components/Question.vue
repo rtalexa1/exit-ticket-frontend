@@ -24,11 +24,12 @@
         :disable="disableInputs"
         id="student-expectation"
         v-model="studentExpectation"
+        @input="fetchQuestionsByStudentExpectation"
       >
         <option selected disabled>Select a student expectation</option>
         <option
           v-for="student_expectation in currentExpectations"
-          :key="student_expectation"
+          :key="student_expectation.index"
         >
           {{ student_expectation }}
         </option>
@@ -55,6 +56,7 @@
           :disable="disableInputs"
           id="reflection-questions"
           v-model="questionText"
+          @input="getQuestions"
         >
           <option
             v-for="question in $store.state.reflectionQuestions"
@@ -161,13 +163,26 @@ export default {
         this.currentExpectations = this.fifthGradeScience;
       }
     },
-    // getQuestions() {
+    fetchQuestionsByStudentExpectation() {
+      const formattedStudentExpectation = this.formatStudentExpectation();
 
-    // }
+      fetch(
+        "http://localhost:3000/standards_based_questions/" +
+          new URLSearchParams({
+            student_expectation: formattedStudentExpectation,
+          })
+      );
+    },
   },
   computed: {
     enableButton: function () {
       return this.questionText !== "";
+    },
+    formatStudentExpectation: function () {
+      return this.studentExpectation
+        .replace(".", "")
+        .replace("(", "")
+        .replace(")", "");
     },
   },
   created() {
