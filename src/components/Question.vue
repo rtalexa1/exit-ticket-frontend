@@ -24,7 +24,7 @@
         :disable="disableInputs"
         id="student-expectation"
         v-model="studentExpectation"
-        @input="fetchQuestionsByStudentExpectation"
+        @change="fetchQuestionsByStudentExpectation"
       >
         <option selected disabled>Select a student expectation</option>
         <option
@@ -163,15 +163,12 @@ export default {
         this.currentExpectations = this.fifthGradeScience;
       }
     },
-    fetchQuestionsByStudentExpectation() {
-      const formattedStudentExpectation = this.formatStudentExpectation();
-
-      fetch(
-        "http://localhost:3000/standards_based_questions/" +
-          new URLSearchParams({
-            student_expectation: formattedStudentExpectation,
-          })
+    async fetchQuestionsByStudentExpectation() {
+      const res = await fetch(
+        `http://localhost:3000/standards_based_questions?student_expectation=${this.formatStudentExpectation}`
       );
+      const data = await res.json();
+      this.contentQuestions.push(...data);
     },
   },
   computed: {
