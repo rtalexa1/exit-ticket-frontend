@@ -1,5 +1,6 @@
 <template>
   <div class="question-container">
+    <!-- Select between reflection and standards-based question -->
     <div id="question-type-container">
       <label for="question-type"
         >What kind of question would you like to add?
@@ -17,9 +18,10 @@
         <option value="reflection">Reflection</option>
       </select>
     </div>
-    <!-- Need to add a form here -> follow same pattern as below -->
+    <!-- If user selects sb question, they will choose a student expectation -->
     <div v-if="questionType === 'standardsBased'">
       <label for="student-expectation">Select a student expectation</label>
+      <br />
       <select
         :disable="disableInputs"
         id="student-expectation"
@@ -34,10 +36,23 @@
           {{ student_expectation }}
         </option>
       </select>
-      <div v-for="question in contentQuestions" :key="question.id">
-        <input type="radio" :value="question.id" />
-        <img :src="question.image_url" />
-      </div>
+      <!-- Displays all question images for the selected SE -->
+      <form style="margin-top: 0.5em">
+        <div
+          class="question-image-container"
+          v-for="question in contentQuestions"
+          :key="question.id"
+        >
+          <img :src="question.image_url" />
+          <input
+            type="radio"
+            :id="question.id"
+            name="se-radios"
+            :value="question.id"
+          />
+          <label class="radio-label" :for="question.id">Add question</label>
+        </div>
+      </form>
       <button v-if="displayButton" @click="onSubmit" class="plus-btn">
         <font-awesome-icon icon="fa-solid fa-plus" size="xl" />
         <br />
@@ -193,18 +208,50 @@ export default {
   flex-direction: column;
   align-items: center;
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
-  width: 23.5em;
+  width: 40em;
   padding: 1em;
   background: rgba(127, 127, 127, 0.32);
   text-align: center;
+}
+
+.question-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: auto;
+  /* padding: 1em; */
 }
 
 img {
   width: 35em;
 }
 
-.question-image-container {
-  width: 5em;
+input[type="radio"] {
+  appearance: none;
+}
+
+.radio-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2em;
+  width: 28em;
+  margin: 0.5em 0;
+  border: solid;
+  border-radius: 3px;
+}
+
+.radio-label:hover {
+  background-color: #4dc04d;
+}
+
+input[type="radio"]:checked + label {
+  background-color: rgba(11, 100, 6, 0.92);
+  color: #f2f2f2;
+}
+
+input[type="radio"]:focus + label {
+  border: 1px solid;
 }
 
 select {

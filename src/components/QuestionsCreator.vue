@@ -1,7 +1,6 @@
 <template>
-  <p>Add up to five questions to your exit ticket</p>
   <div class="questions-creator-container">
-    <!-- Pass in standardsBasedQuestions once we can access them -->
+    <h3>Add up to five questions to your exit ticket</h3>
     <Question @question-created="incrementQuestionNumber" />
     <br />
     <Question
@@ -40,6 +39,10 @@ export default {
 </script>
 
 <style scoped>
+h3 {
+  padding-bottom: 0.5em;
+}
+
 input,
 select {
   margin: 2px;
@@ -51,5 +54,11 @@ select {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 1.5em;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+  border: solid;
+  /* border-radius: 5px; */
+  height: auto;
+  padding: 1em;
 }
 </style>
