@@ -15,6 +15,7 @@ export default createStore({
     pendingQuestions: [],
     gradeLevel: "",
     subjectArea: "",
+    readyToSave: false,
   },
   getters: {
     anyExitTickets(state) {
@@ -42,6 +43,9 @@ export default createStore({
     },
     addPendingQuestion(state, question) {
       state.pendingQuestions.push(question);
+    },
+    enableSave(state) {
+      state.readyToSave = true;
     },
   },
   actions: {

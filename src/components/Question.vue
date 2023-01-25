@@ -1,7 +1,7 @@
 <template>
   <div class="question-container">
     <!-- Select between reflection and standards-based question -->
-    <div id="question-type-container">
+    <div v-show="!questionStored" id="question-type-container">
       <label for="question-type"
         >What kind of question would you like to add?
       </label>
@@ -19,13 +19,13 @@
       </select>
     </div>
     <!-- If user selects sb question, they will choose a student expectation -->
-    <div v-if="questionType === 'standardsBased'">
+    <div v-if="questionType === 'standardsBased' && !questionStored">
       <label for="student-expectation">Select a student expectation</label>
       <br />
       <select
         :disable="disableInputs"
-        id="student-expectation"
         v-model="studentExpectation"
+        id="student-expectation"
         @change="fetchQuestionsByStudentExpectation"
       >
         <option selected disabled>Select a student expectation</option>
@@ -37,27 +37,39 @@
         </option>
       </select>
       <!-- Displays all question images for the selected SE -->
-      <form style="margin-top: 0.5em">
+      <form @submit.prevent>
         <div
           class="question-image-container"
           v-for="question in contentQuestions"
           :key="question.id"
+          style="margin-top: 0.5em"
         >
           <img :src="question.image_url" />
           <input
+            @change="selectQuestion"
             type="radio"
             :id="question.id"
             name="se-radios"
-            :value="question.id"
+            :value="question"
+            v-model="currentSBQuestion"
           />
           <label class="radio-label" :for="question.id">Add question</label>
         </div>
+        <button
+          v-if="displayButton"
+          @click="onSubmitSBQuestion"
+          class="plus-btn"
+        >
+          <font-awesome-icon icon="fa-solid fa-plus" size="xl" />
+          <br />
+          Add another question
+        </button>
       </form>
-      <button v-if="displayButton" @click="onSubmit" class="plus-btn">
-        <font-awesome-icon icon="fa-solid fa-plus" size="xl" />
-        <br />
-        Add another question
-      </button>
+    </div>
+    <div v-else-if="questionType === 'standardsBased' && questionStored">
+      <h2>Question {{ questionNumber }}</h2>
+      <img :src="currentSBQuestion.image_url" />
+      <button>Edit question</button>
     </div>
     <div v-else-if="questionType === 'reflection'">
       <form @submit.prevent>
@@ -68,7 +80,7 @@
         <select
           :disable="disableInputs"
           id="reflection-questions"
-          v-model="questionText"
+          v-model="currentReflectionQuestion"
           @input="getQuestions"
         >
           <option
@@ -90,8 +102,6 @@
 </template>
 
 <script>
-// import { questionCounts } from "src/constants.js";
-
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Question",
@@ -99,7 +109,10 @@ export default {
     return {
       questionType: "",
       studentExpectation: "",
-      contentQuestions: [],
+      contentQuestions: undefined,
+      questionStored: false,
+      currentSBQuestion: undefined,
+      currentReflectionQuestion: "",
       questionText: "",
       displayButton: false,
       disableInputs: false,
@@ -151,17 +164,13 @@ export default {
       fifthGradeScience: ["5.1(A)"],
     };
   },
+  props: ["questionNumber"],
   methods: {
-    onSubmit(e) {
+    onSubmitSBQuestion(e) {
       e.preventDefault();
 
-      const newQuestion = {
-        exit_ticket_id: this.$store.state.currentTicket.id,
-        text: this.questionText,
-      };
-
-      this.$store.commit("addPendingQuestion", newQuestion);
-      this.disableInputs = true;
+      this.$store.commit("addPendingQuestion", this.currentSBQuestion);
+      this.questionStored = true;
       this.$emit("question-created");
     },
     setExpectations() {
@@ -183,6 +192,10 @@ export default {
       );
       const data = await res.json();
       this.contentQuestions = [...data];
+    },
+    selectQuestion() {
+      this.displayButton = true;
+      this.$store.commit("enableSave");
     },
   },
   computed: {
@@ -239,10 +252,12 @@ input[type="radio"] {
   margin: 0.5em 0;
   border: solid;
   border-radius: 3px;
+  background-color: #f2f2f2;
 }
 
 .radio-label:hover {
   background-color: #4dc04d;
+  cursor: pointer;
 }
 
 input[type="radio"]:checked + label {

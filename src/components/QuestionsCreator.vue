@@ -1,24 +1,31 @@
 <template>
   <div class="questions-creator-container">
     <h3>Add up to five questions to your exit ticket</h3>
-    <Question @question-created="incrementQuestionNumber" />
+    <Question @question-created="incrementQuestionNumber" question-number="1" />
     <br />
     <Question
       v-if="$store.state.questionNumber >= 2"
       @question-created="incrementQuestionNumber"
+      question-number="2"
     />
     <br />
     <Question
       v-if="$store.state.questionNumber >= 3"
       @question-created="incrementQuestionNumber"
+      question-number="3"
     />
     <br />
     <Question
       v-if="$store.state.questionNumber >= 4"
       @question-created="incrementQuestionNumber"
+      question-number="4"
     />
     <br />
-    <Question v-if="$store.state.questionNumber === 5" />
+    <Question v-if="$store.state.questionNumber === 5" question-number="5" />
+    <!-- This button displays once at least one question is added to the exit ticket -->
+    <button v-if="$store.state.readyToSave" type="submit" class="blue-btn">
+      Save
+    </button>
   </div>
 </template>
 
@@ -33,6 +40,9 @@ export default {
   methods: {
     incrementQuestionNumber() {
       this.$store.commit("incrementQuestionNumber");
+    },
+    enableSave() {
+      this.$store.commit("enableSave");
     },
   },
 };

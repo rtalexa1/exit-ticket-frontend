@@ -47,8 +47,8 @@
           Add questions
         </button>
       </form>
+      <!-- Questions creator opens once exit ticket is created -->
       <QuestionsCreator v-if="exitTicketCreated" />
-      <!-- <button v-if="readyToSave" type="submit" class="blue-btn">Save</button> -->
     </div>
     <div
       v-else-if="!editing && !$store.getters.anyExitTickets"
@@ -86,7 +86,6 @@ export default {
       subjectArea: "",
       editing: false,
       exitTicketCreated: false,
-      readyToSave: false,
       questions: [],
     };
   },
