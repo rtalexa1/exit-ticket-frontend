@@ -1,23 +1,26 @@
 <template>
   <div class="questions-creator-container">
     <h3>Add up to five questions to your exit ticket</h3>
-    <Question @question-created="incrementQuestionNumber" question-number="1" />
+    <Question
+      @add-question.once="incrementQuestionNumber"
+      question-number="1"
+    />
     <br />
     <Question
       v-if="$store.state.questionNumber >= 2"
-      @question-created="incrementQuestionNumber"
+      @add-question.once="incrementQuestionNumber"
       question-number="2"
     />
     <br />
     <Question
       v-if="$store.state.questionNumber >= 3"
-      @question-created="incrementQuestionNumber"
+      @add-question.once="incrementQuestionNumber"
       question-number="3"
     />
     <br />
     <Question
       v-if="$store.state.questionNumber >= 4"
-      @question-created="incrementQuestionNumber"
+      @add-question.once="incrementQuestionNumber"
       question-number="4"
     />
     <br />
@@ -27,7 +30,7 @@
     and make POST requests to create new exit_ticket_questions with the question_id 
     and the exit_ticket_id -->
     <button v-if="$store.state.readyToSave" type="submit" class="blue-btn">
-      Save
+      Create exit ticket
     </button>
   </div>
 </template>

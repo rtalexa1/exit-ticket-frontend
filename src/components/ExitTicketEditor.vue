@@ -43,7 +43,12 @@
           <option value="math">Math</option>
         </select>
         <!-- Button displays once all inputs are filled out -->
-        <button v-if="enableButton" class="blue-btn" @click="onSubmit">
+        <button
+          :disabled="exitTicketCreated"
+          v-if="enableButton"
+          class="blue-btn"
+          @click="onSubmit"
+        >
           Add questions
         </button>
       </form>
@@ -202,5 +207,10 @@ select {
   background-color: #253c55;
   color: #f2f2f2;
   cursor: pointer;
+}
+
+button:disabled {
+  opacity: 50%;
+  cursor: default;
 }
 </style>

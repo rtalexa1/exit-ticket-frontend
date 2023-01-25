@@ -7,7 +7,7 @@
       </label>
       <br />
       <select
-        :disable="disableInputs"
+        :disabled="disableInputs"
         v-model="questionType"
         id="question-type"
       >
@@ -23,7 +23,7 @@
       <label for="student-expectation">Select a student expectation</label>
       <br />
       <select
-        :disable="disableInputs"
+        :disabled="disableInputs"
         v-model="studentExpectation"
         id="student-expectation"
         @change="fetchQuestionsByStudentExpectation"
@@ -46,33 +46,38 @@
         >
           <img :src="question.image_url" />
           <input
-            @change="selectQuestion"
             type="radio"
             :id="question.id"
             name="se-radios"
             :value="question"
             v-model="currentSBQuestion"
           />
-          <label class="radio-label" :for="question.id">Add question</label>
+          <label class="radio-label" :for="question.id">Select question</label>
         </div>
         <button
-          v-if="displayButton"
+          :disabled="currentSBQuestion === undefined"
           @click="onSubmitSBQuestion"
-          class="plus-btn"
+          class="blue-btn"
         >
-          <font-awesome-icon icon="fa-solid fa-plus" size="xl" />
-          <br />
-          Add another question
+          Save question
         </button>
       </form>
     </div>
     <div v-else-if="questionType === 'standardsBased' && questionStored">
       <h2>Question {{ questionNumber }}</h2>
       <img :src="currentSBQuestion.image_url" />
-      <!-- This edit button needs to 1.) toggle questionStored to false, and
-      2.) commit a mutation to remove the most recently added question from
-      pendingQuestions in the store -->
       <button class="blue-btn" @click="enableEdit">Edit question</button>
+      <br />
+      <button
+        :disabled="nextQuestionAdded"
+        v-show="$store.state.questionNumber != 5"
+        @click="addQuestion"
+        class="plus-btn"
+      >
+        <font-awesome-icon icon="fa-solid fa-plus" size="xl" />
+        <br />
+        Add another question
+      </button>
     </div>
     <div v-else-if="questionType === 'reflection'">
       <form @submit.prevent>
@@ -81,7 +86,7 @@
         >
         <br />
         <select
-          :disable="disableInputs"
+          :disabled="disableInputs"
           id="reflection-questions"
           v-model="currentReflectionQuestion"
           @input="getQuestions"
@@ -121,6 +126,7 @@ export default {
       disableInputs: false,
       currentExpectations: undefined,
       imageUrl: "",
+      nextQuestionAdded: false,
       thirdGradeMath: [
         "3.2(A)",
         "3.2(B)",
@@ -173,8 +179,8 @@ export default {
       e.preventDefault();
 
       this.$store.commit("addPendingQuestion", this.currentSBQuestion);
+      this.$store.commit("enableSave");
       this.questionStored = true;
-      this.$emit("question-created");
     },
     setExpectations() {
       const gradeAndSubject =
@@ -196,9 +202,9 @@ export default {
       const data = await res.json();
       this.contentQuestions = [...data];
     },
-    selectQuestion() {
-      this.displayButton = true;
-      this.$store.commit("enableSave");
+    addQuestion() {
+      this.$emit("add-question");
+      this.nextQuestionAdded = true;
     },
     enableEdit() {
       this.questionStored = false;
@@ -228,6 +234,8 @@ export default {
   flex-direction: column;
   align-items: center;
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+  border: solid 0.2em;
+  border-color: #253c55;
   width: 40em;
   padding: 1em;
   background: rgba(127, 127, 127, 0.32);
@@ -238,8 +246,12 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 1em 0;
+  border: solid 0.1em;
+  border-color: #253c55;
   width: auto;
-  /* padding: 1em; */
+  padding: 1em;
+  background-color: #f2f2f2;
 }
 
 img {
@@ -254,12 +266,12 @@ input[type="radio"] {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 1em 0 0 0;
   height: 2em;
   width: 28em;
-  margin: 0.5em 0;
   border: solid;
   border-radius: 3px;
-  background-color: #f2f2f2;
+  background-color: #fcfcfc;
 }
 
 .radio-label:hover {
@@ -280,11 +292,21 @@ select {
   width: 10em;
 }
 
+button:disabled {
+  opacity: 50%;
+  cursor: default;
+}
+
 .plus-btn {
-  background: none !important;
+  margin-top: 0.75em;
   border: none;
   padding: 0 !important;
-  color: rgba(11, 100, 6, 0.92);
+  background: none !important;
   cursor: pointer;
+  color: rgba(11, 100, 6, 0.92);
+}
+
+h2 {
+  padding-bottom: 0.5em;
 }
 </style>
