@@ -69,7 +69,10 @@
     <div v-else-if="questionType === 'standardsBased' && questionStored">
       <h2>Question {{ questionNumber }}</h2>
       <img :src="currentSBQuestion.image_url" />
-      <button>Edit question</button>
+      <!-- This edit button needs to 1.) toggle questionStored to false, and
+      2.) commit a mutation to remove the most recently added question from
+      pendingQuestions in the store -->
+      <button class="blue-btn" @click="enableEdit">Edit question</button>
     </div>
     <div v-else-if="questionType === 'reflection'">
       <form @submit.prevent>
@@ -196,6 +199,10 @@ export default {
     selectQuestion() {
       this.displayButton = true;
       this.$store.commit("enableSave");
+    },
+    enableEdit() {
+      this.questionStored = false;
+      this.$store.commit("removeLastPendingQuestion");
     },
   },
   computed: {

@@ -44,6 +44,9 @@ export default createStore({
     addPendingQuestion(state, question) {
       state.pendingQuestions.push(question);
     },
+    removeLastPendingQuestion(state) {
+      state.pendingQuestions.pop();
+    },
     enableSave(state) {
       state.readyToSave = true;
     },

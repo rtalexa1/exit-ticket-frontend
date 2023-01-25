@@ -23,6 +23,9 @@
     <br />
     <Question v-if="$store.state.questionNumber === 5" question-number="5" />
     <!-- This button displays once at least one question is added to the exit ticket -->
+    <!-- Upon submission, we need to take all the pending questions in the store
+    and make POST requests to create new exit_ticket_questions with the question_id 
+    and the exit_ticket_id -->
     <button v-if="$store.state.readyToSave" type="submit" class="blue-btn">
       Save
     </button>
