@@ -34,12 +34,10 @@
           {{ student_expectation }}
         </option>
       </select>
-      <!-- <input type="radio" id="q1" name="q1" value="q1" />
-      <div class="question-image-container">
-        <img
-          src="https://staar-questions.s3.us-east-2.amazonaws.com/third-grade/math/32A1.jpg"
-        />
-      </div> -->
+      <div v-for="question in contentQuestions" :key="question.id">
+        <input type="radio" :value="question.id" />
+        <img :src="question.image_url" />
+      </div>
       <button v-if="displayButton" @click="onSubmit" class="plus-btn">
         <font-awesome-icon icon="fa-solid fa-plus" size="xl" />
         <br />
@@ -91,6 +89,7 @@ export default {
       displayButton: false,
       disableInputs: false,
       currentExpectations: undefined,
+      imageUrl: "",
       thirdGradeMath: [
         "3.2(A)",
         "3.2(B)",
@@ -168,7 +167,7 @@ export default {
         `http://localhost:3000/standards_based_questions?student_expectation=${this.formatStudentExpectation}`
       );
       const data = await res.json();
-      this.contentQuestions.push(...data);
+      this.contentQuestions = [...data];
     },
   },
   computed: {
