@@ -4,15 +4,9 @@ export default createStore({
   state: {
     currentTicket: "",
     exitTickets: [],
-    reflectionQuestions: [
-      "How do you feel about what you learned today?",
-      "Was there anything that clicked for you today?",
-      "Is there anything that is still fuzzy for you?",
-      "Do you think you could teach this topic to someone else?",
-      "How confident are you about your understanding of today's topic?",
-    ],
     questionNumber: 1,
-    pendingQuestions: [],
+    pendingSBQuestions: [],
+    pendingReflectionQuestions: [],
     gradeLevel: "",
     subjectArea: "",
     readyToSave: false,
@@ -41,11 +35,17 @@ export default createStore({
     incrementQuestionNumber(state) {
       state.questionNumber++;
     },
-    addPendingQuestion(state, question) {
-      state.pendingQuestions.push(question);
+    addPendingSBQuestion(state, question) {
+      state.pendingSBQuestions.push(question);
     },
-    removeLastPendingQuestion(state) {
-      state.pendingQuestions.pop();
+    removeLastPendingSBQuestion(state) {
+      state.pendingSBQuestions.pop();
+    },
+    addPendingReflectionQuestion(state, question) {
+      state.pendingReflectionQuestions.push(question);
+    },
+    removeLastPendingReflectionQuestion(state) {
+      state.pendingReflectionQuestions.pop();
     },
     enableSave(state) {
       state.readyToSave = true;

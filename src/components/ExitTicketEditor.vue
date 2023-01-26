@@ -188,6 +188,10 @@ select {
   width: 10em;
 }
 
+input:disabled {
+  opacity: 50%;
+}
+
 .empty-display {
   text-align: center;
 }

@@ -79,7 +79,7 @@
         Add another question
       </button>
     </div>
-    <div v-else-if="questionType === 'reflection'">
+    <div v-else-if="questionType === 'reflection' && !questionStored">
       <form @submit.prevent>
         <label for="reflection-questions"
           >Select a reflection question to add to your exit ticket</label
@@ -99,12 +99,41 @@
           </option>
         </select>
         <br />
-        <button v-if="enableButton" @click="onSubmit" class="plus-btn">
-          <font-awesome-icon icon="fa-solid fa-plus" size="xl" />
-          <br />
-          Add another question
+        <label for="user-generated-reflection-question"
+          >Or write your own question</label
+        >
+        <br />
+        <input
+          id="user-generated-reflection-question"
+          type="text"
+          v-model="currentReflectionQuestion"
+        />
+        <br />
+        <button
+          :disabled="currentReflectionQuestionReadyToSave"
+          @click="onSubmitReflectionQuestion"
+          class="blue-btn"
+        >
+          Save question
         </button>
       </form>
+    </div>
+    <div v-if="questionType === 'reflection' && questionStored">
+      <h2>Question {{ questionNumber }}</h2>
+      <p>{{ currentReflectionQuestion }}</p>
+      <p>&#129313; &#128533; &#128528; &#128578; &#128512;</p>
+      <button class="blue-btn" @click="enableEdit">Edit question</button>
+      <br />
+      <button
+        :disabled="nextQuestionAdded"
+        v-show="$store.state.questionNumber != 5"
+        @click="addQuestion"
+        class="plus-btn"
+      >
+        <font-awesome-icon icon="fa-solid fa-plus" size="xl" />
+        <br />
+        Add another question
+      </button>
     </div>
   </div>
 </template>
@@ -178,7 +207,17 @@ export default {
     onSubmitSBQuestion(e) {
       e.preventDefault();
 
-      this.$store.commit("addPendingQuestion", this.currentSBQuestion);
+      this.$store.commit("addPendingSBQuestion", this.currentSBQuestion);
+      this.$store.commit("enableSave");
+      this.questionStored = true;
+    },
+    onSubmitReflectionQuestion(e) {
+      e.preventDefault();
+
+      this.$store.commit(
+        "addPendingReflectionQuestion",
+        this.currentReflectionQuestion
+      );
       this.$store.commit("enableSave");
       this.questionStored = true;
     },
@@ -212,14 +251,17 @@ export default {
     },
   },
   computed: {
-    enableButton: function () {
-      return this.questionText !== "";
-    },
     formatStudentExpectation: function () {
       return this.studentExpectation
         .replace(".", "")
         .replace("(", "")
         .replace(")", "");
+    },
+    currentReflectionQuestionReadyToSave: function () {
+      return (
+        this.currentReflectionQuestion === undefined ||
+        this.currentReflectionQuestion === ""
+      );
     },
   },
   created() {
