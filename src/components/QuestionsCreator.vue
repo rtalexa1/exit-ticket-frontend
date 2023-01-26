@@ -29,7 +29,11 @@
     <!-- Upon submission, we need to take all the pending questions in the store
     and make POST requests to create new exit_ticket_questions with the question_id 
     and the exit_ticket_id -->
-    <button v-if="$store.state.readyToSave" type="submit" class="blue-btn">
+    <button
+      v-if="$store.state.readyToSave"
+      @click="assignQuestionsToExitTicket"
+      class="blue-btn"
+    >
       Create exit ticket
     </button>
   </div>
@@ -49,6 +53,78 @@ export default {
     },
     enableSave() {
       this.$store.commit("enableSave");
+    },
+    async assignQuestionsToExitTicket() {
+      await this.createSBQuestions();
+      await this.createReflectionQuestions();
+    },
+    async createSBQuestions() {
+      const questions = this.$store.state.pendingSBQuestions.map((question) => {
+        return {
+          exit_ticket_id: this.$store.state.currentTicket.id,
+          sb_question_id: question.id,
+        };
+      });
+
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          standards_based_exit_ticket_questions: questions,
+        }),
+      };
+
+      const res = await fetch(
+        "http://localhost:3000//standards_based_exit_ticket_questions",
+        options
+      );
+      const data = await res.json();
+      return data;
+    },
+    async createReflectionQuestions() {
+      const questions = this.$store.state.pendingReflectionQuestions.map(
+        (question) => {
+          return {
+            text: question,
+          };
+        }
+      );
+
+      let options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          reflection_questions: questions,
+        }),
+      };
+
+      const res = await fetch(
+        "http://localhost:3000/reflection_questions",
+        options
+      );
+      const data = await res.json();
+
+      const exitTicketQuestions = data.map((question) => {
+        return {
+          exit_ticket_id: this.$store.state.currentTicket.id,
+          ref_question_id: question.id,
+        };
+      });
+
+      options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          reflection_exit_ticket_questions: exitTicketQuestions,
+        }),
+      };
+
+      const exitTicketRes = await fetch(
+        "http://localhost:3000/reflection_exit_ticket_questions",
+        options
+      );
+      const exitTicketData = await exitTicketRes.json();
+      return exitTicketData;
     },
   },
 };
@@ -74,7 +150,6 @@ select {
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
   border: solid;
   /* border-radius: 5px; */
-  height: auto;
   padding: 1em;
 }
 </style>

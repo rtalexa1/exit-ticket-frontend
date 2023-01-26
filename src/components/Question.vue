@@ -99,7 +99,7 @@
           </option>
         </select>
         <br />
-        <label for="user-generated-reflection-question"
+        <!-- <label for="user-generated-reflection-question"
           >Or write your own question</label
         >
         <br />
@@ -108,7 +108,7 @@
           type="text"
           v-model="currentReflectionQuestion"
         />
-        <br />
+        <br /> -->
         <button
           :disabled="currentReflectionQuestionReadyToSave"
           @click="onSubmitReflectionQuestion"

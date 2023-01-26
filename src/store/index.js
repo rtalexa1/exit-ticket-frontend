@@ -7,6 +7,11 @@ export default createStore({
     questionNumber: 1,
     pendingSBQuestions: [],
     pendingReflectionQuestions: [],
+    reflectionQuestions: [
+      "How well do you understand this topic?",
+      "How easily could you teach this topic to a friend?",
+      "How much do you agree with this statement: I feel confident about what I learned today.",
+    ],
     gradeLevel: "",
     subjectArea: "",
     readyToSave: false,
