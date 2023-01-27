@@ -63,6 +63,7 @@
         </button>
       </form>
     </div>
+    <!-- Displays the saved question and provides the option to edit -->
     <div v-else-if="questionType === 'standardsBased' && questionStored">
       <h2>Question {{ questionNumber }}</h2>
       <img :src="currentSBQuestion.image_url" />
@@ -79,6 +80,7 @@
         Add another question
       </button>
     </div>
+    <!-- Add a new reflection question -->
     <div v-else-if="questionType === 'reflection' && !questionStored">
       <form @submit.prevent>
         <label for="reflection-questions"
@@ -118,6 +120,7 @@
         </button>
       </form>
     </div>
+    <!-- Displays the saved question and provided the option to edit -->
     <div v-if="questionType === 'reflection' && questionStored">
       <h2>Question {{ questionNumber }}</h2>
       <p>{{ currentReflectionQuestion }}</p>
