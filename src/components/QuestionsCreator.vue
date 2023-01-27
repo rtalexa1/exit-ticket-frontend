@@ -62,8 +62,9 @@ export default {
     async createSBQuestions() {
       const questions = this.$store.state.pendingSBQuestions.map((question) => {
         return {
-          exit_ticket_id: this.$store.state.currentTicket.id,
-          sb_question_id: question.id,
+          exit_ticket_id: question.exit_ticket_id,
+          sb_question_id: question.sb_question_id,
+          order: question.order,
         };
       });
 
@@ -83,19 +84,18 @@ export default {
       return data;
     },
     async createReflectionQuestions() {
-      const questions = this.$store.state.pendingReflectionQuestions.map(
-        (question) => {
+      const reflectionQuestions =
+        this.$store.state.pendingReflectionQuestions.map((question) => {
           return {
-            text: question,
+            text: question.text,
           };
-        }
-      );
+        });
 
       let options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          reflection_questions: questions,
+          reflection_questions: reflectionQuestions,
         }),
       };
 
@@ -105,10 +105,11 @@ export default {
       );
       const data = await res.json();
 
-      const exitTicketQuestions = data.map((question) => {
+      const exitTicketQuestions = data.map((question, index) => {
         return {
           exit_ticket_id: this.$store.state.currentTicket.id,
           ref_question_id: question.id,
+          order: this.$store.state.pendingReflectionQuestions[index].order,
         };
       });
 
