@@ -1,29 +1,34 @@
 <template>
   <div class="display-container">
     <div class="exit-ticket-display-container">
-      <h1>{{ $store.state.currentTicket.title }}</h1>
-      <div
-        class="question-container"
-        v-for="question in exitTicketQuestions"
-        :key="question.order"
-      >
-        <div v-if="question.type === 'sb_question'" class="question">
-          <h2>Question {{ question.order }}</h2>
-          <div class="question-image-container">
-            <img :src="question.image_url" />
+      <div class="pdf-container" id="pdf-content">
+        <h1>{{ $store.state.currentTicket.title }}</h1>
+        <div
+          class="question-container"
+          v-for="question in exitTicketQuestions"
+          :key="question.order"
+        >
+          <div v-if="question.type === 'sb_question'" class="question">
+            <h2>Question {{ question.order }}</h2>
+            <div class="question-image-container">
+              <img :src="question.image_url" />
+            </div>
           </div>
-        </div>
-        <div v-else class="question">
-          <h2>Question {{ question.order }}</h2>
-          <p>{{ question.text }}</p>
-          <p>&#129313; &#128533; &#128528; &#128578; &#128512;</p>
+          <div v-else class="question">
+            <h2>Question {{ question.order }}</h2>
+            <p>{{ question.text }}</p>
+            <p>&#129313; &#128533; &#128528; &#128578; &#128512;</p>
+          </div>
         </div>
       </div>
     </div>
+    <button @click="exportToPDF">Save as PDF</button>
   </div>
 </template>
 
 <script>
+import html2pdf from "html2pdf.js";
+
 export default {
   name: "ExitTicketDisplay",
   data() {
@@ -40,6 +45,14 @@ export default {
       data.forEach((question) => {
         this.exitTicketQuestions.push(question);
       });
+    },
+    exportToPDF() {
+      const options = {
+        margin: 8,
+        filename: `${this.$store.state.currentTicket.title}.pdf`,
+        image: { type: "jpeg", quality: 0.98 },
+      };
+      html2pdf(document.getElementById("pdf-content"), options);
     },
   },
   async created() {
@@ -74,6 +87,13 @@ export default {
   border: solid;
   border-radius: 5px;
   padding: 1em;
+}
+
+.pdf-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .question-container {
