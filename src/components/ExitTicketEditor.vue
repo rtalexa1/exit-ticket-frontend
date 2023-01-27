@@ -1,6 +1,6 @@
 <template>
   <div class="editor-container">
-    <div v-if="editing" class="ticket-creator-container">
+    <div v-if="$store.state.editing" class="ticket-creator-container">
       <h1>Create a Ticket</h1>
       <form @submit.prevent class="ticket-creator-form">
         <label for="title">Give your exit ticket a title</label>
@@ -56,11 +56,11 @@
       <QuestionsCreator v-if="exitTicketCreated" />
     </div>
     <div
-      v-else-if="!editing && !$store.getters.anyExitTickets"
+      v-else-if="!$store.state.editing && !$store.getters.anyExitTickets"
       class="empty-display"
     >
       <p>You do not have any exit tickets. Click the button to create one.</p>
-      <button @click="editing = !editing" class="blue-btn">
+      <button @click="$store.commit('toggleEditing')" class="blue-btn">
         Create ticket
       </button>
     </div>
@@ -69,7 +69,7 @@
         To view a ticket, click on its title in the sidebar, or click the button
         below to create a new ticket.
       </p>
-      <button @click="editing = !editing" class="blue-btn">
+      <button @click="$store.commit('toggleEditing')" class="blue-btn">
         Create ticket
       </button>
     </div>
@@ -89,7 +89,6 @@ export default {
       title: "",
       gradeLevel: "",
       subjectArea: "",
-      editing: false,
       exitTicketCreated: false,
       questions: [],
     };
@@ -117,7 +116,6 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           // console.log("Success:", data);
-          this.$store.commit("addExitTicket", data);
           this.$store.commit("setCurrentTicket", data);
         })
         .catch((error) => {
