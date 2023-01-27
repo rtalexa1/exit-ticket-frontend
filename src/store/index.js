@@ -69,6 +69,10 @@ export default createStore({
     toggleEditing(state) {
       state.editing = !state.editing;
     },
+    startEditingNewTicket(state) {
+      state.editorActive = true;
+      state.editing = true;
+    },
   },
   actions: {
     async setCurrentTicket({ commit }, exitTicketId) {
@@ -78,19 +82,23 @@ export default createStore({
       const data = await res.json();
       commit("setCurrentTicket", data);
     },
-    async fetchExitTicket({ commit }, exitTicketId) {
-      const res = await fetch(
-        `http://localhost:3000/users/1/exit_tickets/${exitTicketId}`
-      );
-      const data = await res.json();
-      commit("addExitTicket", data);
-    },
+    // async fetchExitTicket({ commit }, exitTicketId) {
+    //   const res = await fetch(
+    //     `http://localhost:3000/users/1/exit_tickets/${exitTicketId}`
+    //   );
+    //   const data = await res.json();
+    //   commit("addExitTicket", data);
+    // },
     async fetchExitTickets({ commit }) {
       const res = await fetch("http://localhost:3000/users/1/exit_tickets/");
       const data = await res.json();
-      data.forEach((exitTicket) => {
-        commit("addExitTicket", exitTicket);
-      });
+      const stringified = this.state.exitTickets.map((ticket) =>
+        JSON.stringify(ticket)
+      );
+      for (let i = 0; i < data.length; i++) {
+        if (stringified.includes(JSON.stringify(data[i]))) continue;
+        commit("addExitTicket", data[i]);
+      }
     },
   },
   modules: {},

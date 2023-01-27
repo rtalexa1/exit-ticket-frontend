@@ -6,7 +6,11 @@
     <div v-show="toggle" class="sidebar-content">
       <h4>Exit Tickets</h4>
       <div v-for="ticket in $store.state.exitTickets" :key="ticket.id">
-        <button @click="displayTicket" class="exit-ticket-btn">
+        <button
+          @click="displayTicket"
+          class="exit-ticket-btn"
+          :value="ticket.id"
+        >
           {{ ticket.title }}
           <br />
         </button>
@@ -31,11 +35,10 @@ export default {
       this.toggle = !this.toggle;
     },
     createNewTicket() {
-      this.$store.commit("activateEditor");
-      this.$store.commit("enableEditing");
+      this.$store.commit("startEditingNewTicket");
     },
     displayTicket(e) {
-      console.log(e.value);
+      console.log(e.target.value);
     },
   },
   created() {
