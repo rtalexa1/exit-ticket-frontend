@@ -154,7 +154,8 @@ export default {
   justify-content: center;
   align-items: center;
   margin-top: 5em;
-  border: solid 2px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  border: solid 1.5px #f2f2f2fc;
   border-radius: 5px;
   padding: 2em;
   width: 95%;

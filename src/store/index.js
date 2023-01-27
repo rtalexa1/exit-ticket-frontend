@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
+    editorActive: true,
     currentTicket: "",
     exitTickets: [],
     questionNumber: 1,
@@ -54,6 +55,12 @@ export default createStore({
     },
     enableSave(state) {
       state.readyToSave = true;
+    },
+    activateEditor(state) {
+      state.editorActive = true;
+    },
+    deactivateEditor(state) {
+      state.editorActive = false;
     },
   },
   actions: {

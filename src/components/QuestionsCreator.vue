@@ -57,6 +57,7 @@ export default {
     async assignQuestionsToExitTicket() {
       await this.createSBQuestions();
       await this.createReflectionQuestions();
+      this.$store.commit("deactivateEditor");
     },
     async createSBQuestions() {
       const questions = this.$store.state.pendingSBQuestions.map((question) => {

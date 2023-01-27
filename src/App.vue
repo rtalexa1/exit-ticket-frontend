@@ -2,11 +2,11 @@
   <NavBar />
   <div class="container">
     <ExitTicketSidebar />
-    <div class="exit-ticket-container">
-      <!-- On first render, users will see a (mostly) blank area with a prompt. -->
-      <!-- They will be asked to choose an existing ticket from the sidebar, or to create a new one.  -->
-      <!-- Should both views be located in the ExitTicketEditor, or should it be two separate components? -->
+    <div v-if="$store.state.editorActive" class="exit-ticket-container">
       <ExitTicketEditor />
+    </div>
+    <div v-else class="exit-ticket-container">
+      <ExitTicketDisplay />
     </div>
   </div>
   <Footer />
@@ -16,6 +16,7 @@
 import NavBar from "./components/NavBar.vue";
 import ExitTicketSidebar from "./components/ExitTicketSidebar.vue";
 import ExitTicketEditor from "./components/ExitTicketEditor.vue";
+import ExitTicketDisplay from "./components/ExitTicketDisplay.vue";
 import Footer from "./components/Footer.vue";
 
 export default {
@@ -23,6 +24,7 @@ export default {
     NavBar,
     ExitTicketSidebar,
     ExitTicketEditor,
+    ExitTicketDisplay,
     Footer,
   },
   methods: {
