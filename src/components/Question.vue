@@ -317,6 +317,8 @@ export default {
 
 img {
   width: 35em;
+  /* The border kind of makes it feel like too many lines? Little cramped. */
+  /* border: solid 2px; */
 }
 
 input[type="radio"] {

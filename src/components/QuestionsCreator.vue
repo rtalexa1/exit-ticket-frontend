@@ -152,7 +152,7 @@ select {
   margin-top: 1.5em;
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
   border: solid;
-  /* border-radius: 5px; */
+  border-radius: 20px;
   padding: 1em;
 }
 </style>

@@ -7,13 +7,13 @@
         v-for="question in exitTicketQuestions"
         :key="question.order"
       >
-        <div v-if="question.type === 'sb_question'">
+        <div v-if="question.type === 'sb_question'" class="question">
           <h2>Question {{ question.order }}</h2>
           <div class="question-image-container">
             <img :src="question.image_url" />
           </div>
         </div>
-        <div v-else>
+        <div v-else class="question">
           <h2>Question {{ question.order }}</h2>
           <p>{{ question.text }}</p>
           <p>&#129313; &#128533; &#128528; &#128578; &#128512;</p>
@@ -72,7 +72,7 @@ export default {
   margin-top: 1.5em;
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
   border: solid;
-  /* border-radius: 5px; */
+  border-radius: 5px;
   padding: 1em;
 }
 
@@ -80,9 +80,11 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0.5em 0;
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
   border: solid 0.2em;
   border-color: #253c55;
+  border-radius: 5px;
   width: 40em;
   padding: 1em;
   background: rgba(127, 127, 127, 0.32);
