@@ -38,7 +38,11 @@ export default {
       this.$store.commit("startEditingNewTicket");
     },
     displayTicket(e) {
-      console.log(e.target.value);
+      const ticket = this.$store.state.exitTickets.find(
+        (ticket) => ticket.id == e.target.value
+      );
+      this.$store.commit("setCurrentTicket", ticket);
+      this.$store.commit("deactivateEditor");
     },
   },
   created() {

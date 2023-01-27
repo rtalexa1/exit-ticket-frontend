@@ -296,6 +296,7 @@ export default {
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
   border: solid 0.2em;
   border-color: #253c55;
+  border-radius: 5px;
   width: 40em;
   padding: 1em;
   background: rgba(127, 127, 127, 0.32);
