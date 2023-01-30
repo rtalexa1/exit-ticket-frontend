@@ -16,13 +16,17 @@
           </div>
           <div v-else class="question">
             <h2>Question {{ question.order }}</h2>
-            <p>{{ question.text }}</p>
-            <p>&#129313; &#128533; &#128528; &#128578; &#128512;</p>
+            <div class="reflection-question-container">
+              <p>{{ question.text }}</p>
+              <p style="font-size: x-large">
+                &#129313; &#128533; &#128528; &#128578; &#128512;
+              </p>
+            </div>
           </div>
         </div>
       </div>
+      <button @click="exportToPDF" class="blue-btn">Save as PDF</button>
     </div>
-    <button @click="exportToPDF">Save as PDF</button>
   </div>
 </template>
 
@@ -50,7 +54,12 @@ export default {
       const options = {
         margin: 8,
         filename: `${this.$store.state.currentTicket.title}.pdf`,
-        image: { type: "jpeg", quality: 0.98 },
+        image: { type: "jpeg", quality: 0.95 },
+        html2canvas: {
+          dpi: 300,
+          letterRendering: true,
+          useCORS: true,
+        },
       };
       html2pdf(document.getElementById("pdf-content"), options);
     },
@@ -112,6 +121,18 @@ export default {
 }
 
 .question-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1em 0;
+  border: solid 0.1em;
+  border-color: #253c55;
+  width: auto;
+  padding: 1em;
+  background-color: #f2f2f2;
+}
+
+.reflection-question-container {
   display: flex;
   flex-direction: column;
   align-items: center;
