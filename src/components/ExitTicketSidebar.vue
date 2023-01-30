@@ -62,7 +62,7 @@ export default {
   align-items: center;
   border-width: 0 2px 0 2px;
   border-style: solid;
-  height: 35em;
+  height: 100vh;
   padding: 5em 1em 1em 1em;
   background-color: #fcfcfc;
 }
