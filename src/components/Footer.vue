@@ -10,6 +10,7 @@ export default {
 
 <style scoped>
 .footer {
+  opacity: 0;
   position: absolute;
   border-top: solid 2px;
   width: 100%;

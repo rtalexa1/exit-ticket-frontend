@@ -60,7 +60,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-width: 0 2px 0 2px;
+  border-width: 0 2px 0 0;
   border-style: solid;
   height: 100vh;
   padding: 5em 1em 1em 1em;
