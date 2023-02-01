@@ -1,6 +1,14 @@
 <template>
   <div class="modal-backdrop">
     <div class="modal">
+      <div class="modal-header">
+        <font-awesome-icon
+          class="icon"
+          icon="fa-solid fa-x"
+          @click="$store.commit('closeRegistrationModal')"
+        />
+      </div>
+      <h2>Create an account</h2>
       <p v-if="errorMessage">{{ errorMessage }}</p>
       <input type="text" placeholder="Email" v-model="email" />
       <input type="password" placeholder="Password" v-model="password" />
@@ -27,6 +35,8 @@ export default {
         // eslint-disable-next-line no-unused-vars
         .then((data) => {
           console.log("Successfully registered!");
+          this.$store.commit("setCurrentUser", getAuth().currentUser);
+          this.$store.commit("closeRegistrationModal");
         })
         .catch((error) => {
           console.log(error.code);
@@ -34,15 +44,12 @@ export default {
             case "auth/invalid-email":
               this.errorMessage = "Invalid email";
               break;
-            case "auth/wrong-password":
-              this.errorMessage = "Incorrect password, please try again";
-              break;
             default:
-              this.errorMessage = "Email or password is incorrect";
+              this.errorMessage =
+                "Email or password is invalid, please try again";
               break;
           }
         });
-      this.$store.commit("logUserIn");
     },
   },
 };
@@ -59,5 +66,33 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  border: solid 1.5px #f2f2f2fc;
+  border-radius: 5px;
+  width: 15em;
+  height: 10em;
+  background: #fcfcfc;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.icon {
+  padding-right: 1em;
+  cursor: pointer;
+}
+
+input {
+  margin: 0.1em 0;
 }
 </style>

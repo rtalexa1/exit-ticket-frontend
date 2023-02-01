@@ -7,8 +7,7 @@
       <p>Signed in as {{ $store.state.currentUser.email }}</p>
       <button class="sign-out-btn">Sign out</button>
     </div>
-    <div v-else>
-      <!-- Add logic to open sign-in/registration modals when these buttons are clicked -->
+    <div v-else class="user-display">
       <p>Not logged in</p>
       <p>
         <button

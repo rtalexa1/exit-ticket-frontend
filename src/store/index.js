@@ -28,14 +28,13 @@ export default createStore({
     },
   },
   mutations: {
-    logUserIn(state) {
-      state.isLoggedIn = true;
-    },
-    logUserOut(state) {
-      state.isLoggedIn = false;
-    },
     setCurrentUser(state, user) {
       state.currentUser = user;
+      state.isLoggedIn = true;
+    },
+    resetCurrentUser(state) {
+      state.currentUser = null;
+      state.isLoggedIn = false;
     },
     openRegistrationModal(state) {
       state.registrationModalOpen = true;

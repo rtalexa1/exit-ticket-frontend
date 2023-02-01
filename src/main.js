@@ -8,7 +8,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faBars, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faPlus, faX } from "@fortawesome/free-solid-svg-icons";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBPwsfdGzQ73nUuLkViabUD-RpAzmXmOmU",
@@ -24,7 +24,7 @@ const app = initializeApp(firebaseConfig);
 // eslint-disable-next-line no-unused-vars
 const analytics = getAnalytics(app);
 
-library.add(faBars, faPlus);
+library.add(faBars, faPlus, faX);
 
 createApp(App)
   .use(store)

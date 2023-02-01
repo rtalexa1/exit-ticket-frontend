@@ -1,6 +1,14 @@
 <template>
   <div class="modal-backdrop">
     <div class="modal">
+      <div class="modal-header">
+        <font-awesome-icon
+          class="icon"
+          icon="fa-solid fa-x"
+          @click="$store.commit('closeSignInModal')"
+        />
+      </div>
+      <h2>Sign In</h2>
       <p v-if="errorMessage">{{ errorMessage }}</p>
       <p><input type="text" placeholder="Type your email" v-model="email" /></p>
       <p>
@@ -28,11 +36,13 @@ export default {
     };
   },
   methods: {
-    register() {
+    signIn() {
       signInWithEmailAndPassword(getAuth(), this.email, this.password)
         // eslint-disable-next-line no-unused-vars
         .then((data) => {
           console.log("Successfully signed in!");
+          this.$store.commit("setCurrentUser", getAuth().currentUser);
+          this.$store.commit("closeSignInModal");
         })
         .catch((error) => {
           console.log(error.code);
@@ -51,7 +61,6 @@ export default {
               break;
           }
         });
-      this.$store.commit("logUserIn");
     },
   },
 };
@@ -75,8 +84,26 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  border: solid 1.5px #f2f2f2fc;
+  border-radius: 5px;
   width: 15em;
   height: 10em;
   background: #fcfcfc;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.icon {
+  padding-right: 1em;
+  cursor: pointer;
+}
+
+input {
+  margin: 0.1em 0;
 }
 </style>
