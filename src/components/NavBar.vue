@@ -10,8 +10,22 @@
     <div v-else>
       <!-- Add logic to open sign-in/registration modals when these buttons are clicked -->
       <p>Not logged in</p>
-      <p><button class="sign-in-register-btn">Sign in</button></p>
-      <p><button class="sign-in-register-btn">Create an account</button></p>
+      <p>
+        <button
+          class="sign-in-register-btn"
+          @click="$store.commit('openSignInModal')"
+        >
+          Sign in
+        </button>
+      </p>
+      <p>
+        <button
+          class="sign-in-register-btn"
+          @click="$store.commit('openRegistrationModal')"
+        >
+          Create an account
+        </button>
+      </p>
     </div>
   </div>
 </template>

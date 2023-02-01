@@ -4,6 +4,8 @@ export default createStore({
   state: {
     isLoggedIn: false,
     currentUser: null,
+    registrationModalOpen: false,
+    signInModalOpen: false,
     editorActive: true,
     editing: false,
     currentTicket: undefined,
@@ -34,6 +36,18 @@ export default createStore({
     },
     setCurrentUser(state, user) {
       state.currentUser = user;
+    },
+    openRegistrationModal(state) {
+      state.registrationModalOpen = true;
+    },
+    closeRegistrationModal(state) {
+      state.registrationModalOpen = false;
+    },
+    openSignInModal(state) {
+      state.signInModalOpen = true;
+    },
+    closeSignInModal(state) {
+      state.signInModalOpen = false;
     },
     setCurrentTicket(state, exitTicket) {
       state.currentTicket = exitTicket;

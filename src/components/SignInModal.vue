@@ -1,13 +1,17 @@
 <template>
-  <div>
-    <p v-if="errorMessage">{{ errorMessage }}</p>
-    <input type="text" placeholder="Type your email" v-model="email" />
-    <input
-      type="password"
-      placeholder="Type your password"
-      v-model="password"
-    />
-    <button @click="signIn" class="blue-btn">Submit</button>
+  <div class="modal-backdrop">
+    <div class="modal">
+      <p v-if="errorMessage">{{ errorMessage }}</p>
+      <p><input type="text" placeholder="Type your email" v-model="email" /></p>
+      <p>
+        <input
+          type="password"
+          placeholder="Type your password"
+          v-model="password"
+        />
+      </p>
+      <button @click="signIn" class="blue-btn">Submit</button>
+    </div>
   </div>
 </template>
 
@@ -53,4 +57,26 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 15em;
+  height: 10em;
+  background: #fcfcfc;
+}
+</style>
