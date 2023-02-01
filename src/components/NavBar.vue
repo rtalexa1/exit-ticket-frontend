@@ -1,10 +1,32 @@
 <template>
-  <div class="nav-bar"></div>
+  <div class="nav-bar">
+    <div class="logo"></div>
+  </div>
+  <div class="user-display">
+    <div v-if="$store.state.isLoggedIn">
+      <p>Signed in as {{ $store.state.currentUser.email }}</p>
+      <button class="sign-out-btn">Sign out</button>
+    </div>
+    <div v-else>
+      <!-- Add logic to open sign-in/registration modals when these buttons are clicked -->
+      <p>Not logged in</p>
+      <p><button class="sign-in-register-btn">Sign in</button></p>
+      <p><button class="sign-in-register-btn">Create an account</button></p>
+    </div>
+  </div>
 </template>
 
 <script>
+import { getAuth, signOut } from "firebase/auth";
+
 export default {
   name: "NavBar",
+  methods: {
+    signOut() {
+      const auth = getAuth();
+      signOut(auth);
+    },
+  },
 };
 </script>
 
@@ -13,11 +35,49 @@ export default {
 .nav-bar {
   position: fixed;
   display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
   border-bottom: solid 2px;
   border-color: black;
   width: 100%;
   height: 4em;
   background-color: #253c55;
+  color: #f2f2f2;
+}
+
+.logo {
+  position: relative;
+  border-right: solid 2px;
+  width: 10.8em;
+}
+
+.user-display {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #f2f2f2;
+  font-size: medium;
+  text-align: center;
+}
+
+.sign-out-btn {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  color: #f2f2f2;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.sign-in-register-btn {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: medium;
   color: #f2f2f2;
 }
 </style>

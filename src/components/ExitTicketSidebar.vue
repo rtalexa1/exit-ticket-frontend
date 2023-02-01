@@ -63,7 +63,7 @@ export default {
   border-width: 0 2px 0 0;
   border-style: solid;
   height: 100vh;
-  padding: 5em 1em 1em 1em;
+  padding: 1em;
   background-color: #fcfcfc;
 }
 

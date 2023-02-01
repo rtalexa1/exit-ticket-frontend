@@ -46,6 +46,7 @@ export default {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         this.$store.commit("logUserIn");
+        this.$store.commit("setCurrentUser", user);
       } else {
         this.$store.commit("logUserOut");
       }

@@ -3,6 +3,7 @@ import { createStore } from "vuex";
 export default createStore({
   state: {
     isLoggedIn: false,
+    currentUser: null,
     editorActive: true,
     editing: false,
     currentTicket: undefined,
@@ -30,6 +31,9 @@ export default createStore({
     },
     logUserOut(state) {
       state.isLoggedIn = false;
+    },
+    setCurrentUser(state, user) {
+      state.currentUser = user;
     },
     setCurrentTicket(state, exitTicket) {
       state.currentTicket = exitTicket;
