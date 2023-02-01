@@ -1,17 +1,21 @@
 <template>
   <div>
     <p v-if="errorMessage">{{ errorMessage }}</p>
-    <input type="text" placeholder="Email" v-model="email" />
-    <input type="password" placeholder="Password" v-model="password" />
-    <button @click="register" class="blue-btn">Submit</button>
+    <input type="text" placeholder="Type your email" v-model="email" />
+    <input
+      type="password"
+      placeholder="Type your password"
+      v-model="password"
+    />
+    <button @click="signIn" class="blue-btn">Submit</button>
   </div>
 </template>
 
 <script>
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default {
-  name: "RegistrationModal",
+  name: "SignInModal",
   data() {
     return {
       email: "",
@@ -21,16 +25,19 @@ export default {
   },
   methods: {
     register() {
-      createUserWithEmailAndPassword(getAuth(), this.email, this.password)
+      signInWithEmailAndPassword(getAuth(), this.email, this.password)
         // eslint-disable-next-line no-unused-vars
         .then((data) => {
-          console.log("Successfully registered!");
+          console.log("Successfully signed in!");
         })
         .catch((error) => {
           console.log(error.code);
           switch (error.code) {
             case "auth/invalid-email":
               this.errorMessage = "Invalid email";
+              break;
+            case "auth/user-not-found":
+              this.errorMessage = "No account for that email";
               break;
             case "auth/wrong-password":
               this.errorMessage = "Incorrect password, please try again";
