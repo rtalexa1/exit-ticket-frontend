@@ -1,30 +1,30 @@
 <template>
   <div class="nav-bar">
     <div class="logo"></div>
-  </div>
-  <div class="user-display">
-    <div v-if="$store.state.isLoggedIn">
-      <p>Signed in as {{ $store.state.currentUser.email }}</p>
-      <button class="sign-out-btn">Sign out</button>
-    </div>
-    <div v-else class="user-display">
-      <p>Not logged in</p>
-      <p>
-        <button
-          class="sign-in-register-btn"
-          @click="$store.commit('openSignInModal')"
-        >
-          Sign in
-        </button>
-      </p>
-      <p>
-        <button
-          class="sign-in-register-btn"
-          @click="$store.commit('openRegistrationModal')"
-        >
-          Create an account
-        </button>
-      </p>
+    <div class="user-display">
+      <div v-if="$store.state.isLoggedIn">
+        <p>Signed in as {{ $store.state.currentUser.email }}</p>
+        <button class="sign-out-btn" @click="signOut">Sign out</button>
+      </div>
+      <div v-else>
+        <p>Not logged in</p>
+        <p>
+          <button
+            class="sign-in-register-btn"
+            @click="$store.commit('openSignInModal')"
+          >
+            Sign in
+          </button>
+        </p>
+        <p>
+          <button
+            class="sign-in-register-btn"
+            @click="$store.commit('openRegistrationModal')"
+          >
+            Create an account
+          </button>
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -38,6 +38,7 @@ export default {
     signOut() {
       const auth = getAuth();
       signOut(auth);
+      this.$store.commit("resetCurrentUser");
     },
   },
 };
@@ -61,7 +62,7 @@ export default {
 .logo {
   position: relative;
   border-right: solid 2px;
-  width: 10.8em;
+  width: 12.3em;
 }
 
 .user-display {
@@ -70,6 +71,8 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
   color: #f2f2f2;
   font-size: medium;
   text-align: center;

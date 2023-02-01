@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar" :class="{ toggled: toggle }">
-    <div class="icon">
+    <div class="sidebar-icon">
       <font-awesome-icon icon="fa-solid fa-bars" @click="onClick" />
     </div>
     <div v-show="toggle" class="sidebar-content">
@@ -52,13 +52,14 @@ export default {
 </script>
 
 <style>
-.icon {
+.sidebar-icon {
   cursor: pointer;
 }
 
 .sidebar {
   display: flex;
   flex-direction: column;
+  margin-top: 4em;
   align-items: center;
   border-width: 0 2px 0 0;
   border-style: solid;
