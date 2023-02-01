@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import NavBar from "./components/NavBar.vue";
 import ExitTicketSidebar from "./components/ExitTicketSidebar.vue";
 import ExitTicketEditor from "./components/ExitTicketEditor.vue";
@@ -39,6 +40,16 @@ export default {
   async created() {
     const exitTickets = await this.fetchExitTickets();
     this.$store.commit("setExitTickets", exitTickets);
+  },
+  onMounted() {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.$store.commit("logUserIn");
+      } else {
+        this.$store.commit("logUserOut");
+      }
+    });
   },
 };
 </script>

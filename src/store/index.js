@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
+    isLoggedIn: false,
     editorActive: true,
     editing: false,
     currentTicket: undefined,
@@ -24,6 +25,12 @@ export default createStore({
     },
   },
   mutations: {
+    logUserIn(state) {
+      state.isLoggedIn = true;
+    },
+    logUserOut(state) {
+      state.isLoggedIn = false;
+    },
     setCurrentTicket(state, exitTicket) {
       state.currentTicket = exitTicket;
     },

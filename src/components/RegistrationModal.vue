@@ -40,6 +40,7 @@ export default {
               break;
           }
         });
+      this.$store.commit("logUserIn");
     },
   },
 };
