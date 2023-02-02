@@ -46,10 +46,22 @@ export default {
   methods: {
     signIn() {
       signInWithEmailAndPassword(getAuth(), this.email, this.password)
-        // eslint-disable-next-line no-unused-vars
-        .then((data) => {
-          console.log("Successfully signed in!");
-          this.$store.commit("setCurrentUser", getAuth().currentUser);
+        .then((result) => {
+          result.user.email;
+        })
+        .then((result) => {
+          const options = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: result,
+            }),
+          };
+
+          fetch("http://localhost:3000//users", options);
+        })
+        .then((result) => {
+          this.$store.commit("setCurrentUser", result.json());
           this.$store.commit("closeSignInModal");
         })
         .catch((error) => {

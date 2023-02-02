@@ -40,10 +40,27 @@ export default {
   methods: {
     register() {
       createUserWithEmailAndPassword(getAuth(), this.email, this.password)
-        // eslint-disable-next-line no-unused-vars
-        .then((data) => {
-          console.log("Successfully registered!");
-          this.$store.commit("setCurrentUser", getAuth().currentUser);
+        .then((result) => {
+          return result.user.email;
+        })
+        .then((result) => {
+          const user = {
+            user: {
+              email: result,
+            },
+          };
+
+          const options = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(user),
+          };
+
+          return fetch("http://localhost:3000//users", options);
+        })
+        .then((result) => result.json())
+        .then((result) => {
+          this.$store.commit("setCurrentUser", result);
           this.$store.commit("closeRegistrationModal");
         })
         .catch((error) => {
