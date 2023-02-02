@@ -47,21 +47,14 @@ export default {
     signIn() {
       signInWithEmailAndPassword(getAuth(), this.email, this.password)
         .then((result) => {
-          result.user.email;
+          return result.user.email;
         })
         .then((result) => {
-          const options = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email: result,
-            }),
-          };
-
-          fetch("http://localhost:3000//users", options);
+          return fetch(`http://localhost:3000//users?email=${result}`);
         })
+        .then((result) => result.json())
         .then((result) => {
-          this.$store.commit("setCurrentUser", result.json());
+          this.$store.commit("setCurrentUser", result);
           this.$store.commit("closeSignInModal");
         })
         .catch((error) => {
@@ -86,7 +79,15 @@ export default {
       const provider = new GoogleAuthProvider();
       signInWithPopup(getAuth(), provider)
         .then((result) => {
-          this.$store.commit("setCurrentUser", result.user);
+          return result.user.email;
+        })
+        .then((result) => {
+          return fetch(`http://localhost:3000//users?email=${result}`);
+        })
+        .then((result) => result.json())
+        .then((result) => {
+          // Not setting the current user
+          this.$store.commit("setCurrentUser", result);
           this.$store.commit("closeSignInModal");
         })
         .catch((error) => {
