@@ -19,12 +19,20 @@
         />
       </p>
       <button @click="signIn" class="blue-btn">Submit</button>
+      <button @click="signInWithGoogle" class="blue-btn">
+        Sign in with Google
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 
 export default {
   name: "SignInModal",
@@ -62,6 +70,17 @@ export default {
           }
         });
     },
+    signInWithGoogle() {
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(getAuth(), provider)
+        .then((result) => {
+          this.$store.commit("setCurrentUser", result.user);
+          this.$store.commit("closeSignInModal");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
@@ -88,7 +107,7 @@ export default {
   border: solid 1.5px #f2f2f2fc;
   border-radius: 5px;
   width: 15em;
-  height: 10em;
+  height: 13em;
   background: #fcfcfc;
 }
 

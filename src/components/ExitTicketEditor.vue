@@ -156,7 +156,7 @@ export default {
   border: solid 1.5px #f2f2f2fc;
   border-radius: 5px;
   padding: 2em;
-  width: 95%;
+  width: 97%;
   height: auto;
   background-color: #fcfcfc;
 }
