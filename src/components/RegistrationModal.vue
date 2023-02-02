@@ -80,7 +80,26 @@ export default {
       const provider = new GoogleAuthProvider();
       signInWithPopup(getAuth(), provider)
         .then((result) => {
-          this.$store.commit("setCurrentUser", result.user);
+          return result.user.email;
+        })
+        .then((result) => {
+          const user = {
+            user: {
+              email: result,
+            },
+          };
+
+          const options = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(user),
+          };
+
+          return fetch("http://localhost:3000//users", options);
+        })
+        .then((result) => result.json())
+        .then((result) => {
+          this.$store.commit("setCurrentUser", result);
           this.$store.commit("closeRegistrationModal");
         })
         .catch((error) => {

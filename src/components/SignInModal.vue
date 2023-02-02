@@ -86,7 +86,6 @@ export default {
         })
         .then((result) => result.json())
         .then((result) => {
-          // Not setting the current user
           this.$store.commit("setCurrentUser", result);
           this.$store.commit("closeSignInModal");
         })
