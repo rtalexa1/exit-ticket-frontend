@@ -43,7 +43,7 @@ export default {
   methods: {
     async fetchTicketQuestions() {
       const res = await fetch(
-        `http://localhost:3000/users/1/exit_tickets/${this.$store.state.currentTicket.id}`
+        `http://localhost:3000/users/${this.$store.state.currentUser.id}/exit_tickets/${this.$store.state.currentTicket.id}`
       );
       const data = await res.json();
       data.forEach((question) => {

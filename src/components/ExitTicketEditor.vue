@@ -99,20 +99,23 @@ export default {
 
       const newExitTicket = {
         exit_ticket: {
-          user_id: 1,
+          user_id: this.$store.state.currentUser.id,
           title: this.title,
           grade_level: this.gradeLevel,
           subject_area: this.subjectArea,
         },
       };
 
-      fetch("http://localhost:3000/users/1/exit_tickets", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newExitTicket),
-      })
+      fetch(
+        `http://localhost:3000/users/${this.$store.state.currentUser.id}/exit_tickets`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newExitTicket),
+        }
+      )
         .then((response) => response.json())
         .then((data) => {
           // console.log("Success:", data);

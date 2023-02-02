@@ -99,9 +99,9 @@ export default createStore({
     },
   },
   actions: {
-    async setCurrentTicket({ commit }, exitTicketId) {
+    async setCurrentTicket({ commit, state }, exitTicketId) {
       const res = await fetch(
-        `http://localhost:3000/users/1/exit_tickets/${exitTicketId}`
+        `http://localhost:3000/users/${state.currentUser.id}/exit_tickets/${exitTicketId}`
       );
       const data = await res.json();
       commit("setCurrentTicket", data);
