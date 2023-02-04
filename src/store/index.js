@@ -61,6 +61,9 @@ export default createStore({
     addExitTicket(state, newExitTicket) {
       state.exitTickets.push(newExitTicket);
     },
+    addUserlessExitTicket(state, newExitTicket) {
+      state.userLessExitTickets.push(newExitTicket);
+    },
     setGradeLevel(state, gradeLevel) {
       state.gradeLevel = gradeLevel;
     },

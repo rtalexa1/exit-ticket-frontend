@@ -57,7 +57,14 @@ export default {
     async assignQuestionsToExitTicket() {
       await this.createSBQuestions();
       await this.createReflectionQuestions();
-      this.$store.commit("addExitTicket", this.$store.state.currentTicket);
+      if (this.$store.state.currentUser) {
+        this.$store.commit("addExitTicket", this.$store.state.currentTicket);
+      } else {
+        this.$store.commit(
+          "addUserlessExitTicket",
+          this.$store.state.currentTicket
+        );
+      }
       this.$store.commit("deactivateEditor");
     },
     async createSBQuestions() {

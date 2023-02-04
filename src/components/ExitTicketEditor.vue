@@ -106,16 +106,13 @@ export default {
         },
       };
 
-      fetch(
-        `http://localhost:3000/users/${this.$store.state.currentUser.id}/exit_tickets`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newExitTicket),
-        }
-      )
+      fetch("http://localhost:3000/exit_tickets", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newExitTicket),
+      })
         .then((response) => response.json())
         .then((data) => {
           // console.log("Success:", data);
