@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import NavBar from "./components/NavBar.vue";
 import RegistrationModal from "./components/RegistrationModal.vue";
 import SignInModal from "./components/SignInModal.vue";
@@ -46,17 +45,6 @@ export default {
   async created() {
     const exitTickets = await this.fetchExitTickets();
     this.$store.commit("setExitTickets", exitTickets);
-  },
-  onMounted() {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        this.$store.commit("logUserIn");
-        this.$store.commit("setCurrentUser", user);
-      } else {
-        this.$store.commit("logUserOut");
-      }
-    });
   },
 };
 </script>
