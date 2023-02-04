@@ -4,20 +4,42 @@
       <font-awesome-icon icon="fa-solid fa-bars" @click="onClick" />
     </div>
     <div v-show="toggle" class="sidebar-content">
-      <h4>Exit Tickets</h4>
-      <div v-for="ticket in $store.state.exitTickets" :key="ticket.id">
-        <button
-          @click="displayTicket"
-          class="exit-ticket-btn"
-          :value="ticket.id"
-        >
-          {{ ticket.title }}
-          <br />
+      <div v-if="$store.state.currentUser">
+        <h4>Exit Tickets</h4>
+        <div v-for="ticket in $store.state.exitTickets" :key="ticket.id">
+          <button
+            @click="displayTicket"
+            class="exit-ticket-btn"
+            :value="ticket.id"
+          >
+            {{ ticket.title }}
+            <br />
+          </button>
+        </div>
+        <button @click="createNewTicket" class="blue-btn">
+          Create a new exit ticket
         </button>
       </div>
-      <button @click="createNewTicket" class="blue-btn">
-        Create a new exit ticket
-      </button>
+      <div v-else class="prompt">
+        <p>
+          <button
+            class="sign-in-register-btn"
+            @click="$store.commit('openSignInModal')"
+          >
+            Sign in
+          </button>
+        </p>
+        <p>OR</p>
+        <p>
+          <button
+            class="sign-in-register-btn"
+            @click="$store.commit('openRegistrationModal')"
+          >
+            Create an account
+          </button>
+        </p>
+        <p>to save your exit tickets</p>
+      </div>
     </div>
   </div>
 </template>
@@ -101,5 +123,20 @@ export default {
   background-color: #253c55;
   color: #f2f2f2;
   cursor: pointer;
+}
+
+.prompt {
+  margin-top: 1em;
+  text-align: center;
+}
+
+.sign-in-register-btn {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: medium;
+  color: #253c55;
 }
 </style>

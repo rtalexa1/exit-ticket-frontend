@@ -134,14 +134,6 @@ export default {
       this.$store.commit("setGradeLevel", this.gradeLevel);
       this.$store.commit("setSubjectArea", this.subjectArea);
       this.exitTicketCreated = true;
-
-      // Find a way to disable inputs on this part of the form once the exit
-      // ticket is created
-      // this.editing = false;
-      // this.userId = "";
-      // this.gradeLevel = "";
-      // this.subjectArea = "";
-      // this.title = "";
     },
   },
   computed: {
