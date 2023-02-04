@@ -219,7 +219,14 @@ export default {
         this.$store.state.questionNumber
       );
 
-      this.$store.commit("addPendingSBQuestion", question);
+      if (this.$store.state.currentUser) {
+        this.$store.commit("addPendingSBQuestion", question);
+      } else {
+        localStorage.setItem(
+          `question${this.$store.state.questionNumber}`,
+          JSON.stringify(question)
+        );
+      }
       this.$store.commit("enableSave");
       this.questionStored = true;
     },
@@ -235,7 +242,15 @@ export default {
         this.$store.state.questionNumber
       );
 
-      this.$store.commit("addPendingReflectionQuestion", question);
+      if (this.$store.state.currentUser) {
+        this.$store.commit("addPendingReflectionQuestion", question);
+      } else {
+        localStorage.setItem(
+          `question${this.$store.state.questionNumber}`,
+          JSON.stringify(question)
+        );
+      }
+
       this.$store.commit("enableSave");
       this.questionStored = true;
     },

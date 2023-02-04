@@ -99,28 +99,37 @@ export default {
 
       const newExitTicket = {
         exit_ticket: {
-          user_id: this.$store.state.currentUser.id,
+          user_id: "",
           title: this.title,
           grade_level: this.gradeLevel,
           subject_area: this.subjectArea,
         },
       };
 
-      fetch("http://localhost:3000/exit_tickets", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newExitTicket),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          // console.log("Success:", data);
-          this.$store.commit("setCurrentTicket", data);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+      if (this.$store.state.currentUser) {
+        newExitTicket.exit_ticket.user_id = this.$store.state.currentUser.id;
+        fetch(
+          `http://localhost:3000/users/${this.$store.state.currentUser}/exit_tickets`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newExitTicket),
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            this.$store.commit("setCurrentTicket", data);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      } else {
+        this.$store.commit("addUserlessExitTicket", newExitTicket);
+        localStorage.exitTicket = JSON.stringify(newExitTicket);
+        this.$store.commit("setCurrentTicket", newExitTicket);
+      }
 
       this.$store.commit("setGradeLevel", this.gradeLevel);
       this.$store.commit("setSubjectArea", this.subjectArea);
