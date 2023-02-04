@@ -10,6 +10,7 @@ export default createStore({
     editing: false,
     currentTicket: undefined,
     exitTickets: [],
+    userLessExitTickets: [],
     questionNumber: 1,
     pendingSBQuestions: [],
     pendingReflectionQuestions: [],
@@ -114,7 +115,9 @@ export default createStore({
     //   commit("addExitTicket", data);
     // },
     async fetchExitTickets({ commit }) {
-      const res = await fetch("http://localhost:3000/users/1/exit_tickets/");
+      const res = await fetch(
+        `http://localhost:3000/users/${this.state.currentUser.id}/exit_tickets/`
+      );
       const data = await res.json();
       const stringified = this.state.exitTickets.map((ticket) =>
         JSON.stringify(ticket)

@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import NavBar from "./components/NavBar.vue";
 import RegistrationModal from "./components/RegistrationModal.vue";
 import SignInModal from "./components/SignInModal.vue";
@@ -33,18 +34,13 @@ export default {
     ExitTicketDisplay,
     Footer,
   },
-  methods: {
-    // Would it be better to create this method as an action somehow, since we
-    // are ultimately committing the data to the store?
-    async fetchExitTickets() {
-      const res = await fetch("http://localhost:3000/users/1/exit_tickets/");
-      const data = await res.json();
-      return data;
-    },
-  },
-  async created() {
-    const exitTickets = await this.fetchExitTickets();
-    this.$store.commit("setExitTickets", exitTickets);
+  onMounted() {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.$store.dispatch("fetchExitTickets");
+      }
+    });
   },
 };
 </script>
