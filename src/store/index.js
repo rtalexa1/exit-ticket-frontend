@@ -2,8 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    isLoggedIn: false,
-    currentUser: null,
+    currentUser: JSON.parse(localStorage.getItem("currentUser")),
     registrationModalOpen: false,
     signInModalOpen: false,
     editorActive: true,
@@ -31,11 +30,11 @@ export default createStore({
   mutations: {
     setCurrentUser(state, user) {
       state.currentUser = user;
-      state.isLoggedIn = true;
+      localStorage.setItem("currentUser", JSON.stringify(user));
     },
     resetCurrentUser(state) {
       state.currentUser = null;
-      state.isLoggedIn = false;
+      localStorage.removeItem("currentUser");
     },
     openRegistrationModal(state) {
       state.registrationModalOpen = true;

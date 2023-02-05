@@ -2,7 +2,7 @@
   <div class="nav-bar">
     <div class="logo"></div>
     <div class="user-display">
-      <div v-if="$store.state.isLoggedIn">
+      <div v-if="$store.state.currentUser">
         <p>Signed in as {{ $store.state.currentUser.email }}</p>
         <button class="sign-out-btn" @click="signOut">Sign out</button>
       </div>

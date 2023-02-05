@@ -39,6 +39,8 @@ export default {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         this.$store.dispatch("fetchExitTickets");
+      } else {
+        this.$store.commit("resetCurrentUser");
       }
     });
   },

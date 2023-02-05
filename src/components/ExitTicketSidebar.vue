@@ -103,6 +103,7 @@ export default {
   flex-direction: column;
   align-items: center;
   overflow-y: scroll;
+  text-align: center;
 }
 
 .exit-ticket-btn {
