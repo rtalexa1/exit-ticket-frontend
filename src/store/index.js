@@ -12,7 +12,8 @@ export default createStore({
     currentTicket: undefined,
     currentTicketQuestions: [],
     exitTickets: [],
-    userLessExitTickets: [],
+    userLessExitTicket: undefined,
+    userlessQuestions: [],
     questionNumber: 1,
     pendingSBQuestions: [],
     pendingReflectionQuestions: [],
@@ -89,8 +90,17 @@ export default createStore({
     clearExitTickets(state) {
       state.exitTickets = [];
     },
-    addUserlessExitTicket(state, newExitTicket) {
-      state.userLessExitTickets.push(newExitTicket);
+    setUserlessExitTicket(state, newExitTicket) {
+      state.userLessExitTicket = newExitTicket;
+    },
+    resetUserlessExitTicket(state) {
+      state.userLessExitTicket = undefined;
+    },
+    addUserlessQuestion(state, question) {
+      state.userlessQuestions.push(question);
+    },
+    resetUserlessQuestions(state) {
+      state.userlessQuestions = [];
     },
     setGradeLevel(state, gradeLevel) {
       state.gradeLevel = gradeLevel;
@@ -115,6 +125,9 @@ export default createStore({
     },
     enableSave(state) {
       state.readyToSave = true;
+    },
+    disableSave(state) {
+      state.readyToSave = false;
     },
     activateEditor(state) {
       state.editorActive = true;
@@ -142,6 +155,7 @@ export default createStore({
       commit("setCurrentTicket", data);
     },
     async fetchTicketQuestions({ commit, state }) {
+      console.log("action dispatched");
       const res = await fetch(
         `http://localhost:3000/users/${state.currentUser.id}/exit_tickets/${state.currentTicket.id}`
       );

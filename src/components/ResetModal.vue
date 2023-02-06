@@ -24,7 +24,7 @@ export default {
       this.$store.commit("removeCurrentExitTicketFromCollection");
       this.$store.commit("resetCurrentTicket");
       this.$store.commit("resetCurrentTicketQuestions");
-      this.$store.commit("closeDeleteModal");
+      this.$store.commit("closeResetModal");
       this.$store.commit("disableEditing");
       this.$store.commit("activateEditor");
     },

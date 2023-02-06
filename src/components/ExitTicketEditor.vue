@@ -126,7 +126,7 @@ export default {
             console.error("Error:", error);
           });
       } else {
-        this.$store.commit("addUserlessExitTicket", newExitTicket);
+        this.$store.commit("setUserlessExitTicket", newExitTicket);
         localStorage.exitTicket = JSON.stringify(newExitTicket);
         this.$store.commit("setCurrentTicket", newExitTicket);
       }

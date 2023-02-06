@@ -59,17 +59,20 @@ export default {
       this.$store.commit("enableSave");
     },
     async assignQuestionsToExitTicket() {
-      await this.createSBQuestions();
-      await this.createReflectionQuestions();
       if (this.$store.state.currentUser) {
+        await this.createSBQuestions();
+        await this.createReflectionQuestions();
         this.$store.commit("addExitTicket", this.$store.state.currentTicket);
+        this.$store.dispatch("fetchTicketQuestions");
       } else {
-        this.$store.commit(
-          "addUserlessExitTicket",
-          this.$store.state.currentTicket
+        localStorage.setItem(
+          "userlessQuestions",
+          JSON.stringify(this.$store.state.userlessQuestions)
         );
       }
+
       this.$store.commit("deactivateEditor");
+      this.$store.commit("disableSave");
     },
     async createSBQuestions() {
       const questions = this.$store.state.pendingSBQuestions.map((question) => {

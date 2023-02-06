@@ -222,10 +222,7 @@ export default {
       if (this.$store.state.currentUser) {
         this.$store.commit("addPendingSBQuestion", question);
       } else {
-        localStorage.setItem(
-          `question${this.$store.state.questionNumber}`,
-          JSON.stringify(question)
-        );
+        this.$store.commit("addUserlessQuestion", question);
       }
       this.$store.commit("enableSave");
       this.questionStored = true;
@@ -245,10 +242,7 @@ export default {
       if (this.$store.state.currentUser) {
         this.$store.commit("addPendingReflectionQuestion", question);
       } else {
-        localStorage.setItem(
-          `question${this.$store.state.questionNumber}`,
-          JSON.stringify(question)
-        );
+        this.$store.commit("addUserlessQuestion", question);
       }
 
       this.$store.commit("enableSave");
