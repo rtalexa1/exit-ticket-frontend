@@ -26,7 +26,7 @@
         </div>
       </div>
       <button @click="exportToPDF" class="blue-btn">Save as PDF</button>
-      <button class="blue-btn">Edit</button>
+      <!-- <button class="blue-btn">Edit</button> -->
       <button @click="$store.commit('openDeleteModal')" class="blue-btn">
         Delete
       </button>
