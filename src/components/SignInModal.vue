@@ -55,6 +55,7 @@ export default {
         .then((result) => result.json())
         .then((result) => {
           this.$store.commit("setCurrentUser", result);
+          this.$store.dispatch("fetchExitTickets");
           this.$store.commit("closeSignInModal");
         })
         .catch((error) => {
@@ -87,6 +88,7 @@ export default {
         .then((result) => result.json())
         .then((result) => {
           this.$store.commit("setCurrentUser", result);
+          this.$store.dispatch("fetchExitTickets");
           this.$store.commit("closeSignInModal");
         })
         .catch((error) => {

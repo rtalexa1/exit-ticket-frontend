@@ -64,6 +64,8 @@ export default {
         (ticket) => ticket.id == e.target.value
       );
       this.$store.commit("setCurrentTicket", ticket);
+      this.$store.commit("resetCurrentTicketQuestions");
+      this.$store.dispatch("fetchTicketQuestions");
       this.$store.commit("deactivateEditor");
     },
   },

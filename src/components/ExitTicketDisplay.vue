@@ -5,7 +5,7 @@
         <h1>{{ $store.state.currentTicket.title }}</h1>
         <div
           class="question-container"
-          v-for="question in exitTicketQuestions"
+          v-for="question in $store.state.currentTicketQuestions"
           :key="question.order"
         >
           <div v-if="question.type === 'sb_question'" class="question">
@@ -35,21 +35,7 @@ import html2pdf from "html2pdf.js";
 
 export default {
   name: "ExitTicketDisplay",
-  data() {
-    return {
-      exitTicketQuestions: [],
-    };
-  },
   methods: {
-    async fetchTicketQuestions() {
-      const res = await fetch(
-        `http://localhost:3000/users/${this.$store.state.currentUser.id}/exit_tickets/${this.$store.state.currentTicket.id}`
-      );
-      const data = await res.json();
-      data.forEach((question) => {
-        this.exitTicketQuestions.push(question);
-      });
-    },
     exportToPDF() {
       const options = {
         margin: 8,
@@ -63,9 +49,6 @@ export default {
       };
       html2pdf(document.getElementById("pdf-content"), options);
     },
-  },
-  async created() {
-    await this.fetchTicketQuestions();
   },
 };
 </script>

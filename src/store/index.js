@@ -8,6 +8,7 @@ export default createStore({
     editorActive: true,
     editing: false,
     currentTicket: undefined,
+    currentTicketQuestions: [],
     exitTickets: [],
     userLessExitTickets: [],
     questionNumber: 1,
@@ -53,6 +54,12 @@ export default createStore({
     },
     resetCurrentTicket(state) {
       state.currentTicket = undefined;
+    },
+    addCurrentTicketQuestion(state, question) {
+      state.currentTicketQuestions.push(question);
+    },
+    resetCurrentTicketQuestions(state) {
+      state.currentTicketQuestions = [];
     },
     setExitTickets(state, exitTickets) {
       exitTickets.forEach((ticket) => state.exitTickets.push(ticket));
@@ -112,13 +119,16 @@ export default createStore({
       const data = await res.json();
       commit("setCurrentTicket", data);
     },
-    // async fetchExitTicket({ commit }, exitTicketId) {
-    //   const res = await fetch(
-    //     `http://localhost:3000/users/1/exit_tickets/${exitTicketId}`
-    //   );
-    //   const data = await res.json();
-    //   commit("addExitTicket", data);
-    // },
+    async fetchTicketQuestions({ commit, state }) {
+      const res = await fetch(
+        `http://localhost:3000/users/${state.currentUser.id}/exit_tickets/${state.currentTicket.id}`
+      );
+      const data = await res.json();
+      console.log(data);
+      data.forEach((question) => {
+        commit("addCurrentTicketQuestion", question);
+      });
+    },
     async fetchExitTickets({ commit }) {
       const res = await fetch(
         `http://localhost:3000/users/${this.state.currentUser.id}/exit_tickets/`
