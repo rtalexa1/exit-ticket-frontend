@@ -66,7 +66,7 @@ export default {
 body {
   font-size: large;
   line-height: 1.5;
-  font-family: "Bitter", sans-serif;
+  font-family: "Comfortaa", sans-serif;
 }
 
 html {
