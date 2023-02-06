@@ -42,6 +42,7 @@ export default {
       this.$store.commit("resetCurrentUser");
       this.$store.commit("resetCurrentTicket");
       this.$store.commit("clearExitTickets");
+      this.$store.commit("activateEditor");
     },
   },
 };
@@ -88,6 +89,7 @@ export default {
   color: #f2f2f2;
   text-decoration: underline;
   cursor: pointer;
+  font-size: inherit;
 }
 
 .sign-in-register-btn {
