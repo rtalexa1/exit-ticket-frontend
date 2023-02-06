@@ -38,7 +38,10 @@ export default {
     signOut() {
       const auth = getAuth();
       signOut(auth);
+
       this.$store.commit("resetCurrentUser");
+      this.$store.commit("resetCurrentTicket");
+      this.$store.commit("clearExitTickets");
     },
   },
 };

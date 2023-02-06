@@ -60,6 +60,9 @@ export default createStore({
     addExitTicket(state, newExitTicket) {
       state.exitTickets.push(newExitTicket);
     },
+    clearExitTickets(state) {
+      state.exitTickets = [];
+    },
     addUserlessExitTicket(state, newExitTicket) {
       state.userLessExitTickets.push(newExitTicket);
     },
