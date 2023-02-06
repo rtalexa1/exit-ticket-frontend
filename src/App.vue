@@ -4,6 +4,7 @@
     <ExitTicketSidebar />
     <SignInModal v-if="$store.state.signInModalOpen" />
     <RegistrationModal v-if="$store.state.registrationModalOpen" />
+    <DeleteModal v-if="$store.state.deleteModalOpen" />
     <div v-if="$store.state.editorActive" class="exit-ticket-container">
       <ExitTicketEditor />
     </div>
@@ -19,6 +20,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import NavBar from "./components/NavBar.vue";
 import RegistrationModal from "./components/RegistrationModal.vue";
 import SignInModal from "./components/SignInModal.vue";
+import DeleteModal from "./components/DeleteModal.vue";
 import ExitTicketSidebar from "./components/ExitTicketSidebar.vue";
 import ExitTicketEditor from "./components/ExitTicketEditor.vue";
 import ExitTicketDisplay from "./components/ExitTicketDisplay.vue";
@@ -29,6 +31,7 @@ export default {
     NavBar,
     RegistrationModal,
     SignInModal,
+    DeleteModal,
     ExitTicketSidebar,
     ExitTicketEditor,
     ExitTicketDisplay,

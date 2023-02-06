@@ -5,6 +5,7 @@ export default createStore({
     currentUser: JSON.parse(localStorage.getItem("currentUser")),
     registrationModalOpen: false,
     signInModalOpen: false,
+    deleteModalOpen: false,
     editorActive: true,
     editing: false,
     currentTicket: undefined,
@@ -49,6 +50,12 @@ export default createStore({
     closeSignInModal(state) {
       state.signInModalOpen = false;
     },
+    openDeleteModal(state) {
+      state.deleteModalOpen = true;
+    },
+    closeDeleteModal(state) {
+      state.deleteModalOpen = false;
+    },
     setCurrentTicket(state, exitTicket) {
       state.currentTicket = exitTicket;
     },
@@ -66,6 +73,11 @@ export default createStore({
     },
     addExitTicket(state, newExitTicket) {
       state.exitTickets.push(newExitTicket);
+    },
+    removeCurrentExitTicketFromCollection(state) {
+      state.exitTickets = state.exitTickets.filter(
+        (ticket) => ticket !== state.currentTicket
+      );
     },
     clearExitTickets(state) {
       state.exitTickets = [];
@@ -103,6 +115,9 @@ export default createStore({
     deactivateEditor(state) {
       state.editorActive = false;
     },
+    disableEditing(state) {
+      state.editing = false;
+    },
     toggleEditing(state) {
       state.editing = !state.editing;
     },
@@ -124,7 +139,6 @@ export default createStore({
         `http://localhost:3000/users/${state.currentUser.id}/exit_tickets/${state.currentTicket.id}`
       );
       const data = await res.json();
-      console.log(data);
       data.forEach((question) => {
         commit("addCurrentTicketQuestion", question);
       });
