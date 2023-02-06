@@ -36,6 +36,10 @@
     >
       Create exit ticket
     </button>
+    <!-- This button will open a modal that will ask the user if they're sure.
+    If the user says yes, then all ticket data will be reset and the editor will 
+    revert to its default state -->
+    <button>Cancel</button>
   </div>
 </template>
 

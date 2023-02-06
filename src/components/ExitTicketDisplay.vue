@@ -27,8 +27,15 @@
       </div>
       <button @click="exportToPDF" class="blue-btn">Save as PDF</button>
       <!-- <button class="blue-btn">Edit</button> -->
-      <button @click="$store.commit('openDeleteModal')" class="blue-btn">
+      <button
+        v-if="$store.state.currentUser"
+        @click="$store.commit('openDeleteModal')"
+        class="blue-btn"
+      >
         Delete
+      </button>
+      <button v-else @click="$store.commit('openResetModal')" class="blue-btn">
+        Start over
       </button>
     </div>
   </div>
