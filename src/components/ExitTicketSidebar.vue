@@ -83,7 +83,7 @@ export default {
 .sidebar {
   display: flex;
   flex-direction: column;
-  margin-top: 4em;
+  margin-top: 5em;
   align-items: center;
   border-width: 0 2px 0 0;
   border-style: solid;
@@ -115,6 +115,7 @@ export default {
   color: #069;
   text-decoration: underline;
   cursor: pointer;
+  font-size: inherit;
 }
 
 .blue-btn {
@@ -139,7 +140,7 @@ export default {
   padding: 0 !important;
   text-decoration: underline;
   cursor: pointer;
-  font-size: medium;
+  font-size: inherit;
   color: #253c55;
 }
 </style>

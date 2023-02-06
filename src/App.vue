@@ -60,6 +60,12 @@ export default {
   padding: 0;
 }
 
+body {
+  font-size: large;
+  line-height: 1.5;
+  font-family: "Bitter", sans-serif;
+}
+
 html {
   overflow-y: scroll;
   height: 100%;
@@ -70,6 +76,16 @@ ul {
   display: contents;
 }
 
+button {
+  font-size: smaller;
+  font-family: inherit;
+}
+
+input {
+  font-size: smaller;
+  font-family: inherit;
+}
+
 .container {
   display: flex;
   flex-direction: row;
@@ -77,10 +93,6 @@ ul {
   width: 100%;
   min-height: 100%;
   background-color: #f2f2f2;
-  // color: var(--color-text-body);
-  line-height: 1.5;
-  font-family: Calibri, "Gill Sans MT", "Gill Sans", "Trebuchet MS", sans-serif;
-  // Geneva, Verdana, Tahoma, sans-serif;
 }
 
 .exit-ticket-container {
