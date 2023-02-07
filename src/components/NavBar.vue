@@ -71,7 +71,7 @@ export default {
 
 .logo {
   position: relative;
-  border-right: solid 2px;
+  // border-right: solid 2px;
   border-bottom: solid 2px;
   width: 9em;
   height: 6em;

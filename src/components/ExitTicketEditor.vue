@@ -148,6 +148,7 @@ export default {
 
 <style scoped lang="scss">
 .editor-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
