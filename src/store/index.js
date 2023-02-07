@@ -10,6 +10,7 @@ export default createStore({
     cancelModalOpen: false,
     editorActive: true,
     editing: false,
+    exitTicketCreated: false,
     currentTicket: undefined,
     currentTicketQuestions: [],
     exitTickets: [],
@@ -76,6 +77,12 @@ export default createStore({
     },
     resetCurrentTicket(state) {
       state.currentTicket = undefined;
+    },
+    setExitTicketCreated(state) {
+      state.exitTicketCreated = true;
+    },
+    resetExitTicketCreated(state) {
+      state.exitTicketCreated = false;
     },
     addCurrentTicketQuestion(state, question) {
       state.currentTicketQuestions.push(question);
@@ -151,6 +158,17 @@ export default createStore({
     startEditingNewTicket(state) {
       state.editorActive = true;
       state.editing = true;
+    },
+    totalReset(state) {
+      state.currentTicket = undefined;
+      state.currentTicketQuestions = [];
+      state.exitTicketCreated = false;
+      state.userLessExitTicket = undefined;
+      state.userlessQuestions = [];
+      state.editing = false;
+      state.gradeLevel = "";
+      state.subjectArea = "";
+      state.readyToSave = false;
     },
   },
   actions: {

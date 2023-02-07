@@ -5,7 +5,7 @@
       <form @submit.prevent class="ticket-creator-form">
         <label for="title">Give your exit ticket a title</label>
         <input
-          :disabled="exitTicketCreated"
+          :disabled="$store.state.exitTicketCreated"
           id="title"
           type="text"
           name="title"
@@ -13,7 +13,7 @@
         />
         <label for="grade-level">Select your grade level</label>
         <select
-          :disabled="exitTicketCreated"
+          :disabled="$store.state.exitTicketCreated"
           id="grade-level"
           v-model="gradeLevel"
         >
@@ -25,7 +25,7 @@
         <label for="subject-area">Select your subject area</label>
         <select
           v-if="gradeLevel === 'fifth-grade'"
-          :disabled="exitTicketCreated"
+          :disabled="$store.state.exitTicketCreated"
           id="subject-area"
           v-model="subjectArea"
         >
@@ -35,16 +35,17 @@
         </select>
         <select
           v-else
-          :disabled="exitTicketCreated"
+          :disabled="$store.state.exitTicketCreated"
           id="subject-area"
           v-model="subjectArea"
+          style="margin-bottom: 5px"
         >
           <option selected disabled>Select a subject area</option>
           <option value="math">Math</option>
         </select>
         <!-- Button displays once all inputs are filled out -->
         <button
-          :disabled="exitTicketCreated"
+          :disabled="$store.state.exitTicketCreated"
           v-if="enableButton"
           class="blue-btn"
           @click="onSubmit"
@@ -53,7 +54,7 @@
         </button>
       </form>
       <!-- Questions creator opens once exit ticket is created -->
-      <QuestionsCreator v-if="exitTicketCreated" />
+      <QuestionsCreator v-if="$store.state.exitTicketCreated" />
     </div>
     <div
       v-else-if="!$store.state.editing && !$store.getters.anyExitTickets"
@@ -91,7 +92,6 @@ export default {
       title: "",
       gradeLevel: "",
       subjectArea: "",
-      exitTicketCreated: false,
       questions: [],
     };
   },
@@ -135,7 +135,13 @@ export default {
 
       this.$store.commit("setGradeLevel", this.gradeLevel);
       this.$store.commit("setSubjectArea", this.subjectArea);
-      this.exitTicketCreated = true;
+      this.$store.commit("setExitTicketCreated");
+      this.resetData();
+    },
+    resetData() {
+      this.title = "";
+      this.gradeLevel = "";
+      this.subjectArea = "";
     },
   },
   computed: {

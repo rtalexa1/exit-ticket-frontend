@@ -26,16 +26,10 @@
 export default {
   name: "CancelModal",
   methods: {
-    async cancelTicket() {
-      await fetch(
-        `http://localhost:3000/users/${this.$store.state.currentUser.id}/exit_tickets/${this.$store.state.currentTicket.id}`,
-        { method: "DELETE" }
-      );
-
-      this.$store.commit("resetCurrentTicket");
-      this.$store.commit("resetCurrentTicketQuestions");
+    cancelTicket() {
+      localStorage.removeItem("exitTicket");
+      this.$store.commit("totalReset");
       this.$store.commit("closeCancelModal");
-      this.$store.commit("disableEditing");
     },
   },
 };
