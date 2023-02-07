@@ -33,6 +33,7 @@
       v-if="$store.state.readyToSave"
       @click="assignQuestionsToExitTicket"
       class="blue-btn"
+      style="margin-bottom: 5px"
     >
       Create exit ticket
     </button>

@@ -64,29 +64,29 @@ export default {
   border-bottom: solid 2px;
   // border-color: black;
   width: 100%;
-  height: 6em;
+  height: 4em;
   background-color: #253c55;
   color: #f2f2f2;
 }
 
 .logo {
   position: relative;
-  // border-right: solid 2px;
   border-bottom: solid 2px;
-  width: 9em;
-  height: 6em;
+  width: 6em;
+  height: 4em;
 }
 
 .user-display {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
+  align-items: space-around;
   width: 100%;
   height: 100%;
   color: #f2f2f2;
   font-size: medium;
+  line-height: 1.2;
   text-align: center;
 }
 

@@ -11,7 +11,12 @@
       <h2>Create an account</h2>
       <p v-if="errorMessage">{{ errorMessage }}</p>
       <input type="text" placeholder="Email" v-model="email" />
-      <input type="password" placeholder="Password" v-model="password" />
+      <input
+        type="password"
+        placeholder="Password"
+        v-model="password"
+        style="margin-bottom: 5px"
+      />
       <button @click="register" class="blue-btn">Submit</button>
       <button @click="signInWithGoogle" class="blue-btn">
         Sign up with Google
@@ -131,7 +136,7 @@ export default {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   border: solid 1.5px #f2f2f2fc;
   border-radius: 5px;
-  width: 15em;
+  width: 20em;
   height: 13em;
   background: #fcfcfc;
 }

@@ -25,7 +25,9 @@
           </div>
         </div>
       </div>
-      <button @click="exportToPDF" class="blue-btn">Save as PDF</button>
+      <button @click="exportToPDF" class="blue-btn" style="margin-bottom: 3px">
+        Save as PDF
+      </button>
       <!-- <button class="blue-btn">Edit</button> -->
       <button
         v-if="$store.state.currentUser"
@@ -70,8 +72,8 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  // margin-top: 7em;
-  // margin-bottom: 6em;
+  margin-top: 5em;
+  margin-bottom: 1em;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   border: solid 1.5px #f2f2f2fc;
   border-radius: 5px;

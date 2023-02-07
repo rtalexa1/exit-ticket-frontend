@@ -83,7 +83,7 @@ export default {
 .sidebar {
   display: flex;
   flex-direction: column;
-  margin-top: 7em;
+  margin-top: 5em;
   margin-bottom: 1em;
   margin-left: 1em;
   align-items: center;

@@ -16,6 +16,7 @@
           type="password"
           placeholder="Type your password"
           v-model="password"
+          style="margin-bottom: 5px"
         />
       </p>
       <button @click="signIn" class="blue-btn">Submit</button>

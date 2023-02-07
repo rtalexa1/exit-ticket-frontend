@@ -10,8 +10,12 @@
       </div>
       <h2>Delete</h2>
       <p>Are you sure you want to delete this ticket?</p>
-      <button @click="deleteTicket">Yes</button>
-      <button @click="$store.commit('closeDeleteModal')">No</button>
+      <div class="button-group">
+        <button @click="deleteTicket" class="blue-btn">Yes</button>
+        <button @click="$store.commit('closeDeleteModal')" class="blue-btn">
+          No
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -74,7 +78,15 @@ export default {
   cursor: pointer;
 }
 
-input {
-  margin: 0.1em 0;
+p {
+  text-align: center;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 5px;
+  width: 40%;
 }
 </style>

@@ -59,7 +59,9 @@
       v-else-if="!$store.state.editing && !$store.getters.anyExitTickets"
       class="empty-display"
     >
-      <p>You do not have any exit tickets. Click the button to create one.</p>
+      <p style="margin-bottom: 5px">
+        You do not have any exit tickets. Click the button to create one.
+      </p>
       <button @click="$store.commit('toggleEditing')" class="blue-btn">
         Create ticket
       </button>
@@ -148,13 +150,13 @@ export default {
 
 <style scoped lang="scss">
 .editor-container {
-  position: relative;
+  // position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 7em;
-  margin-bottom: 6em;
+  margin-top: 5em;
+  margin-bottom: 1em;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   border: solid 1.5px #f2f2f2fc;
   border-radius: 5px;
@@ -181,6 +183,7 @@ export default {
 }
 
 label {
+  padding: 0.3em;
   text-align: center;
 }
 
@@ -188,7 +191,8 @@ input,
 select,
 option {
   margin: 2px;
-  width: 10em;
+  width: 15em;
+  height: 2em;
   font-family: inherit;
 }
 

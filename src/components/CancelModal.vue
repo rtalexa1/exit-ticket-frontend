@@ -9,9 +9,15 @@
         />
       </div>
       <h2>Cancel</h2>
-      <p>Do you want to stop editing this ticket and lose your changes?</p>
-      <button @click="cancelTicket">Yes</button>
-      <button @click="$store.commit('closeCancelModal')">No</button>
+      <p>
+        Would you like to stop editing this ticket? Your changes will be lost.
+      </p>
+      <div class="button-group">
+        <button @click="cancelTicket" class="blue-btn">Yes</button>
+        <button @click="$store.commit('closeCancelModal')" class="blue-btn">
+          No
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -72,7 +78,7 @@ export default {
   cursor: pointer;
 }
 
-input {
-  margin: 0.1em 0;
+p {
+  text-align: center;
 }
 </style>
