@@ -1,5 +1,6 @@
 <template>
   <div class="nav-bar">
+    <div class="spaceholder"></div>
     <div class="logo">
       <img
         src="../assets/images/Math-Exit-Ticket-1.jpg"
@@ -64,16 +65,19 @@ export default {
   border-bottom: solid 2px;
   // border-color: black;
   width: 100%;
-  height: 4em;
+  height: 5.3em;
   background-color: #253c55;
   color: #f2f2f2;
 }
 
+.spaceholder {
+  width: 2.5em;
+}
 .logo {
   position: relative;
   border-bottom: solid 2px;
-  width: 6em;
-  height: 4em;
+  width: 8em;
+  height: 5.3em;
 }
 
 .user-display {
