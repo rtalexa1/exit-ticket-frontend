@@ -62,9 +62,9 @@ export default {
   flex-direction: row;
   justify-content: flex-start;
   border-bottom: solid 2px;
-  border-color: black;
+  // border-color: black;
   width: 100%;
-  height: 7em;
+  height: 6em;
   background-color: #253c55;
   color: #f2f2f2;
 }
@@ -72,8 +72,9 @@ export default {
 .logo {
   position: relative;
   border-right: solid 2px;
-  width: 7em;
-  height: 7em;
+  border-bottom: solid 2px;
+  width: 9em;
+  height: 6em;
 }
 
 .user-display {

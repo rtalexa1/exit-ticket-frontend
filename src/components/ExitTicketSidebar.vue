@@ -83,12 +83,16 @@ export default {
 .sidebar {
   display: flex;
   flex-direction: column;
-  margin-top: 5em;
+  margin-top: 7em;
+  margin-bottom: 1em;
+  margin-left: 1em;
   align-items: center;
-  border-width: 0 2px 0 0;
-  border-style: solid;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  border: solid 1.5px #f2f2f2fc;
+  border-radius: 5px;
+  padding: 2em;
   width: 12em;
-  height: 100vh;
+  height: auto;
   padding: 1em;
   background-color: #fcfcfc;
 }
