@@ -1,6 +1,12 @@
 <template>
   <div class="nav-bar">
-    <div class="logo"></div>
+    <div class="logo">
+      <img
+        src="../assets/images/Math-Exit-Ticket-1.jpg"
+        alt="logo"
+        class="logo"
+      />
+    </div>
     <div class="user-display">
       <div v-if="$store.state.currentUser">
         <p>Signed in as {{ $store.state.currentUser.email }}</p>
@@ -58,7 +64,7 @@ export default {
   border-bottom: solid 2px;
   border-color: black;
   width: 100%;
-  height: 5em;
+  height: 7em;
   background-color: #253c55;
   color: #f2f2f2;
 }
@@ -66,7 +72,8 @@ export default {
 .logo {
   position: relative;
   border-right: solid 2px;
-  width: 12.3em;
+  width: 7em;
+  height: 7em;
 }
 
 .user-display {
