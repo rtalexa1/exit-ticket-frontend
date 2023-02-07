@@ -1,9 +1,9 @@
 <template>
-  <div class="sidebar" :class="{ toggled: toggle }">
-    <div class="sidebar-icon">
+  <div class="sidebar">
+    <!-- <div class="sidebar-icon">
       <font-awesome-icon icon="fa-solid fa-bars" @click="onClick" />
-    </div>
-    <div v-show="toggle" class="sidebar-content">
+    </div> -->
+    <div class="sidebar-content">
       <div v-if="$store.state.currentUser">
         <h4>Exit Tickets</h4>
         <div v-for="ticket in $store.state.exitTickets" :key="ticket.id">
@@ -87,18 +87,19 @@ export default {
   align-items: center;
   border-width: 0 2px 0 0;
   border-style: solid;
+  width: 12em;
   height: 100vh;
   padding: 1em;
   background-color: #fcfcfc;
 }
 
-.toggled {
+/* .toggled {
   width: 12em;
 }
 
 .untoggled {
   width: 0.5em;
-}
+} */
 
 .sidebar-content {
   display: flex;
