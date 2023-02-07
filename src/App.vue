@@ -6,6 +6,7 @@
     <RegistrationModal v-if="$store.state.registrationModalOpen" />
     <DeleteModal v-if="$store.state.deleteModalOpen" />
     <ResetModal v-if="$store.state.resetModalOpen" />
+    <CancelModal v-if="$store.state.cancelModalOpen" />
     <div v-if="$store.state.editorActive" class="exit-ticket-container">
       <ExitTicketEditor />
     </div>
@@ -23,6 +24,7 @@ import RegistrationModal from "./components/RegistrationModal.vue";
 import SignInModal from "./components/SignInModal.vue";
 import DeleteModal from "./components/DeleteModal.vue";
 import ResetModal from "./components/ResetModal.vue";
+import CancelModal from "./components/CancelModal.vue";
 import ExitTicketSidebar from "./components/ExitTicketSidebar.vue";
 import ExitTicketEditor from "./components/ExitTicketEditor.vue";
 import ExitTicketDisplay from "./components/ExitTicketDisplay.vue";
@@ -35,6 +37,7 @@ export default {
     SignInModal,
     DeleteModal,
     ResetModal,
+    CancelModal,
     ExitTicketSidebar,
     ExitTicketEditor,
     ExitTicketDisplay,

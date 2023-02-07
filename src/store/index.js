@@ -7,6 +7,7 @@ export default createStore({
     signInModalOpen: false,
     deleteModalOpen: false,
     resetModalOpen: false,
+    cancelModalOpen: false,
     editorActive: true,
     editing: false,
     currentTicket: undefined,
@@ -63,6 +64,12 @@ export default createStore({
     },
     closeResetModal(state) {
       state.resetModalOpen = false;
+    },
+    openCancelModal(state) {
+      state.cancelModalOpen = true;
+    },
+    closeCancelModal(state) {
+      state.cancelModalOpen = false;
     },
     setCurrentTicket(state, exitTicket) {
       state.currentTicket = exitTicket;
