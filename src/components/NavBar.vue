@@ -70,6 +70,12 @@ export default {
 .spaceholder {
   width: 2.5em;
 }
+@media (max-width: 768px) {
+  .spaceholder {
+    width: 0em;
+  }
+}
+
 .logo {
   position: relative;
   border-bottom: solid 2px;
@@ -89,6 +95,12 @@ export default {
   font-size: medium;
   line-height: 1.2;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  .user-display {
+    font-size: small;
+  }
 }
 
 .sign-out-btn {

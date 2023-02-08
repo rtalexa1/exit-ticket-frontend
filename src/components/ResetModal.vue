@@ -1,6 +1,6 @@
 <template>
   <div class="modal-backdrop">
-    <div class="modal">
+    <div class="util-modal modal">
       <div class="modal-header">
         <font-awesome-icon
           class="icon"
@@ -34,43 +34,10 @@ export default {
 };
 </script>
 
-<style scoped>
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  border: solid 1.5px #f2f2f2fc;
-  border-radius: 5px;
-  width: 18em;
-  height: 18em;
-  background: #fcfcfc;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  padding-top: 1em;
-  padding-bottom: 1em;
-}
-
-.icon {
-  padding-right: 1em;
-  cursor: pointer;
+<style>
+.util-modal {
+  height: 12em;
+  padding: 0 1em;
 }
 
 p {
