@@ -144,6 +144,8 @@
 <script>
 import HybridReflectionQuestion from "@/classes/HybridReflectionQuestion";
 import SBExitTicketQuestion from "@/classes/SBReflectionExitTicketQuestion";
+import UserlessSBQuestion from "@/classes/UserlessSBQuestion";
+import UserlessReflectionQuestion from "@/classes/UserlessReflectionQuestion";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -213,15 +215,20 @@ export default {
     onSubmitSBQuestion(e) {
       e.preventDefault();
 
-      const question = new SBExitTicketQuestion(
-        this.$store.state.currentTicket.id,
-        this.currentSBQuestion.id,
-        this.$store.state.questionNumber
-      );
+      let question;
 
       if (this.$store.state.currentUser) {
+        question = new SBExitTicketQuestion(
+          this.$store.state.currentTicket.id,
+          this.currentSBQuestion.id,
+          this.$store.state.questionNumber
+        );
         this.$store.commit("addPendingSBQuestion", question);
       } else {
+        question = new UserlessSBQuestion(
+          this.currentSBQuestion.image_url,
+          this.$store.state.questionNumber
+        );
         this.$store.commit("addUserlessQuestion", question);
       }
       this.$store.commit("enableSave");
@@ -233,15 +240,20 @@ export default {
       // to create the actual reflection question
       // Maybe just slap the text in here and pull everything apart in the
       // QuestionsCreator to do the POST requests?
-      const question = new HybridReflectionQuestion(
-        this.$store.state.currentTicket.id,
-        this.currentReflectionQuestion,
-        this.$store.state.questionNumber
-      );
+      let question;
 
       if (this.$store.state.currentUser) {
+        question = new HybridReflectionQuestion(
+          this.$store.state.currentTicket.id,
+          this.currentReflectionQuestion,
+          this.$store.state.questionNumber
+        );
         this.$store.commit("addPendingReflectionQuestion", question);
       } else {
+        question = new UserlessReflectionQuestion(
+          this.currentReflectionQuestion,
+          this.$store.state.questionNumber
+        );
         this.$store.commit("addUserlessQuestion", question);
       }
 

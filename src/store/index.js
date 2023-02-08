@@ -165,6 +165,7 @@ export default createStore({
       state.exitTicketCreated = false;
       state.userlessExitTicket = undefined;
       state.userlessQuestions = [];
+      state.questionNumber = 1;
       state.editing = false;
       state.gradeLevel = "";
       state.subjectArea = "";
@@ -174,6 +175,7 @@ export default createStore({
       state.currentUser = null;
       localStorage.removeItem("currentUser");
       state.currentTicket = undefined;
+      state.currentTicketQuestions = [];
       state.exitTickets = [];
       state.editorActive = true;
       state.editing = false;
