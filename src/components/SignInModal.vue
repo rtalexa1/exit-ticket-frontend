@@ -101,7 +101,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -117,13 +117,13 @@ export default {
 .modal {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   border: solid 1.5px #f2f2f2fc;
   border-radius: 5px;
-  width: 15em;
-  height: 13em;
+  width: 18em;
+  height: 18em;
   background: #fcfcfc;
 }
 
@@ -131,11 +131,16 @@ export default {
   display: flex;
   justify-content: flex-end;
   width: 100%;
+  padding-top: 1em;
 }
 
 .icon {
   padding-right: 1em;
   cursor: pointer;
+}
+
+h2 {
+  padding-bottom: 5px;
 }
 
 input {
