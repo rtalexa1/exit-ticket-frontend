@@ -2,10 +2,13 @@
   <div class="display-container">
     <div class="exit-ticket-display-container">
       <div class="pdf-container" id="pdf-content">
-        <h1>{{ $store.state.currentTicket.title }}</h1>
+        <h1 v-if="$store.state.userlessExitTicket">
+          {{ $store.state.userlessExitTicket.exit_ticket.title }}
+        </h1>
+        <h1 v-else>{{ $store.state.currentTicket.title }}</h1>
         <div
           class="question-container"
-          v-for="question in $store.state.currentTicketQuestions"
+          v-for="question in selectQuestions"
           :key="question.order"
         >
           <div v-if="question.type === 'sb_question'" class="question">
@@ -61,6 +64,15 @@ export default {
         },
       };
       html2pdf(document.getElementById("pdf-content"), options);
+    },
+  },
+  computed: {
+    selectQuestions: function () {
+      if (this.$store.state.userlessExitTicket) {
+        return this.$store.state.userlessQuestions;
+      } else {
+        return this.$store.state.currentTicketQuestions;
+      }
     },
   },
 };

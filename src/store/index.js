@@ -14,7 +14,7 @@ export default createStore({
     currentTicket: undefined,
     currentTicketQuestions: [],
     exitTickets: [],
-    userLessExitTicket: undefined,
+    userlessExitTicket: undefined,
     userlessQuestions: [],
     questionNumber: 1,
     pendingSBQuestions: [],
@@ -105,10 +105,10 @@ export default createStore({
       state.exitTickets = [];
     },
     setUserlessExitTicket(state, newExitTicket) {
-      state.userLessExitTicket = newExitTicket;
+      state.userlessExitTicket = newExitTicket;
     },
     resetUserlessExitTicket(state) {
-      state.userLessExitTicket = undefined;
+      state.userlessExitTicket = undefined;
     },
     addUserlessQuestion(state, question) {
       state.userlessQuestions.push(question);
@@ -163,12 +163,23 @@ export default createStore({
       state.currentTicket = undefined;
       state.currentTicketQuestions = [];
       state.exitTicketCreated = false;
-      state.userLessExitTicket = undefined;
+      state.userlessExitTicket = undefined;
       state.userlessQuestions = [];
       state.editing = false;
       state.gradeLevel = "";
       state.subjectArea = "";
       state.readyToSave = false;
+    },
+    signOut(state) {
+      state.currentUser = null;
+      localStorage.removeItem("currentUser");
+      state.currentTicket = undefined;
+      state.exitTickets = [];
+      state.editorActive = true;
+      state.editing = false;
+      state.exitTicketCreated = false;
+      state.gradeLevel = "";
+      state.subjectArea = "";
     },
   },
   actions: {
@@ -180,7 +191,6 @@ export default createStore({
       commit("setCurrentTicket", data);
     },
     async fetchTicketQuestions({ commit, state }) {
-      console.log("action dispatched");
       const res = await fetch(
         `http://localhost:3000/users/${state.currentUser.id}/exit_tickets/${state.currentTicket.id}`
       );

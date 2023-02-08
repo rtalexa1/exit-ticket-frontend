@@ -46,10 +46,7 @@ export default {
       const auth = getAuth();
       signOut(auth);
 
-      this.$store.commit("resetCurrentUser");
-      this.$store.commit("resetCurrentTicket");
-      this.$store.commit("clearExitTickets");
-      this.$store.commit("activateEditor");
+      this.$store.commit("signOut");
     },
   },
 };

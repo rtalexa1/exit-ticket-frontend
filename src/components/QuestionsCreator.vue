@@ -66,7 +66,7 @@ export default {
         await this.createSBQuestions();
         await this.createReflectionQuestions();
         this.$store.commit("addExitTicket", this.$store.state.currentTicket);
-        this.$store.dispatch("fetchTicketQuestions");
+        await this.$store.dispatch("fetchTicketQuestions");
       } else {
         localStorage.setItem(
           "userlessQuestions",
@@ -76,6 +76,7 @@ export default {
 
       this.$store.commit("deactivateEditor");
       this.$store.commit("disableSave");
+      this.$store.commit("resetExitTicketCreated");
     },
     async createSBQuestions() {
       const questions = this.$store.state.pendingSBQuestions.map((question) => {
