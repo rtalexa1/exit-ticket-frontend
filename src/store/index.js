@@ -125,6 +125,9 @@ export default createStore({
     incrementQuestionNumber(state) {
       state.questionNumber++;
     },
+    resetQuestionNumber(state) {
+      state.questionNumber = 1;
+    },
     addPendingSBQuestion(state, question) {
       state.pendingSBQuestions.push(question);
     },
@@ -166,6 +169,7 @@ export default createStore({
       state.userlessExitTicket = undefined;
       state.userlessQuestions = [];
       state.questionNumber = 1;
+      state.editorActive = true;
       state.editing = false;
       state.gradeLevel = "";
       state.subjectArea = "";

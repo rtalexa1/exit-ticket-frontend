@@ -77,6 +77,7 @@ export default {
       this.$store.commit("deactivateEditor");
       this.$store.commit("disableSave");
       this.$store.commit("resetExitTicketCreated");
+      this.$store.commit("resetQuestionNumber");
     },
     async createSBQuestions() {
       const questions = this.$store.state.pendingSBQuestions.map((question) => {

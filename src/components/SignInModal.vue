@@ -57,6 +57,7 @@ export default {
         .then((result) => {
           this.$store.commit("setCurrentUser", result);
           this.$store.dispatch("fetchExitTickets");
+          this.$store.commit("totalReset");
           this.$store.commit("closeSignInModal");
         })
         .catch((error) => {
