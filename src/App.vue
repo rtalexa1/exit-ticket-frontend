@@ -67,9 +67,17 @@ export default {
 }
 
 body {
+  min-height: 100%;
+  background-color: #f2f2f2;
   font-size: large;
   line-height: 1.5;
   font-family: "Comfortaa", sans-serif;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: medium;
+  }
 }
 
 html {
@@ -100,6 +108,14 @@ input {
   height: 100%;
   min-height: 35em;
   background-color: #f2f2f2;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
 }
 
 .exit-ticket-container {

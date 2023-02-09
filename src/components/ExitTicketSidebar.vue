@@ -16,9 +16,9 @@
             <br />
           </button>
         </div>
-        <!-- <button @click="createNewTicket" class="blue-btn">
+        <button @click="createNewTicket" class="blue-btn">
           Create a new exit ticket
-        </button> -->
+        </button>
       </div>
       <div v-else class="prompt">
         <p>
@@ -56,9 +56,9 @@ export default {
     onClick() {
       this.toggle = !this.toggle;
     },
-    // createNewTicket() {
-    //   this.$store.commit("startEditingNewTicket");
-    // },
+    createNewTicket() {
+      this.$store.commit("startEditingNewTicket");
+    },
     displayTicket(e) {
       const ticket = this.$store.state.exitTickets.find(
         (ticket) => ticket.id == e.target.value
@@ -95,6 +95,13 @@ export default {
   height: auto;
   padding: 1em;
   background-color: #fcfcfc;
+}
+
+@media (max-width: 1200px) {
+  .sidebar {
+    margin-left: 0;
+    width: 95%;
+  }
 }
 
 /* .toggled {

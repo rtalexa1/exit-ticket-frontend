@@ -37,7 +37,7 @@
         </option>
       </select>
       <!-- Displays all question images for the selected SE -->
-      <form @submit.prevent>
+      <form @submit.prevent class="question-form">
         <div
           class="question-image-container"
           v-for="question in contentQuestions"
@@ -54,13 +54,15 @@
           />
           <label class="radio-label" :for="question.id">Select question</label>
         </div>
-        <button
-          :disabled="currentSBQuestion === undefined"
-          @click="onSubmitSBQuestion"
-          class="blue-btn"
-        >
-          Save question
-        </button>
+        <div class="button-wrapper">
+          <button
+            :disabled="currentSBQuestion === undefined"
+            @click="onSubmitSBQuestion"
+            class="blue-btn"
+          >
+            Save question
+          </button>
+        </div>
       </form>
     </div>
     <!-- Displays the saved question and provides the option to edit -->
@@ -82,7 +84,7 @@
     </div>
     <!-- Add a new reflection question -->
     <div v-else-if="questionType === 'reflection' && !questionStored">
-      <form @submit.prevent>
+      <form @submit.prevent class="question-form">
         <label for="reflection-questions"
           >Select a reflection question to add to your exit ticket</label
         >
@@ -313,6 +315,7 @@ export default {
 .question-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
   border: solid 0.2em;
@@ -324,9 +327,27 @@ export default {
   text-align: center;
 }
 
+@media (max-width: 768px) {
+  .question-container {
+    width: 95%;
+  }
+
+  .question-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  form {
+    width: 95%;
+  }
+}
+
 .question-image-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   margin: 1em 0;
   border: solid 0.1em;
@@ -336,10 +357,22 @@ export default {
   background-color: #f2f2f2;
 }
 
+@media (max-width: 768px) {
+  .question-image-container {
+    width: 95%;
+  }
+}
+
 img {
-  width: 35em;
+  width: 33em;
   /* The border kind of makes it feel like too many lines? Little cramped. */
   /* border: solid 2px; */
+}
+
+@media (max-width: 768px) {
+  img {
+    width: 95%;
+  }
 }
 
 input[type="radio"] {
@@ -358,6 +391,12 @@ input[type="radio"] {
   background-color: #fcfcfc;
 }
 
+@media (max-width: 768px) {
+  .radio-label {
+    width: 90%;
+  }
+}
+
 .radio-label:hover {
   background-color: #4dc04d;
   cursor: pointer;
@@ -374,6 +413,13 @@ input[type="radio"]:focus + label {
 
 select {
   width: 10em;
+}
+
+.button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 button:disabled {

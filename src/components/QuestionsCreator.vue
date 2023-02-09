@@ -174,4 +174,10 @@ select {
   border-radius: 20px;
   padding: 1em;
 }
+
+@media (max-width: 768px) {
+  .questions-creator-container {
+    width: 90vw;
+  }
+}
 </style>

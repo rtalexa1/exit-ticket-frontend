@@ -172,6 +172,13 @@ export default {
   background-color: #fcfcfc;
 }
 
+@media (max-width: 1200px) {
+  .editor-container {
+    margin-top: 0;
+    width: 95%;
+  }
+}
+
 .ticket-creator-container {
   display: flex;
   flex-direction: column;
