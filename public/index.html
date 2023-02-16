@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa">
+    <script>
+      window.___gcfg = {
+        parsetags: 'explicit'
+      };
+      function renderWidget() {
+        gapi.sharetoclassroom.render("widget-div",
+          { "url": "http://localhost:8080/#/" });
+      }
+    </script>
+    <script src="https://apis.google.com/js/platform.js">
+    </script>
   </head>
   <body>
     <div id="app"></div>

@@ -31,6 +31,7 @@
       <button @click="exportToPDF" class="blue-btn" style="margin-bottom: 3px">
         Save as PDF
       </button>
+      <div id="widget-div"></div>
       <!-- <button class="blue-btn">Edit</button> -->
       <button
         v-if="$store.state.currentUser"
@@ -74,6 +75,9 @@ export default {
         return this.$store.state.currentTicketQuestions;
       }
     },
+  },
+  async mounted() {
+    await window.renderWidget();
   },
 };
 </script>

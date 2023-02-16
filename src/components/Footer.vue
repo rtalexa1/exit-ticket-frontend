@@ -4,13 +4,14 @@
 
 <script>
 export default {
-  name: "PageFooter",
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: "Footer",
 };
 </script>
 
 <style scoped>
 .footer {
-  position: fixed;
+  position: relative;
   bottom: 0;
   border-top: solid 2px #f2f2f2fc;
   width: 100%;

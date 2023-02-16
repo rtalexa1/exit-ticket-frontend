@@ -105,7 +105,6 @@ input {
   flex-direction: row;
   align-items: flex-start;
   width: 100%;
-  height: 100%;
   min-height: 35em;
   background-color: #f2f2f2;
 }
