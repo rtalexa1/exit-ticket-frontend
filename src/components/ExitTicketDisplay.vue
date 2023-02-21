@@ -21,17 +21,23 @@
             <h2>Question {{ question.order }}</h2>
             <div class="reflection-question-container">
               <p>{{ question.text }}</p>
-              <p style="font-size: x-large">
-                &#129313; &#128533; &#128528; &#128578; &#128512;
+              <p style="font-size: xx-large">
+                &#128579; &#128533; &#128528; &#128578; &#128512;
               </p>
             </div>
           </div>
         </div>
       </div>
-      <button @click="exportToPDF" class="blue-btn" style="margin-bottom: 3px">
+      <div class="google-btn">
+        <div id="widget-div"></div>
+      </div>
+      <button
+        @click="exportToPDF"
+        class="blue-btn"
+        style="margin-top: 0; margin-bottom: 6px"
+      >
         Save as PDF
       </button>
-      <div id="widget-div"></div>
       <!-- <button class="blue-btn">Edit</button> -->
       <button
         v-if="$store.state.currentUser"
@@ -88,7 +94,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 6.3em;
+  margin-top: 1em;
   margin-bottom: 1em;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   border: solid 1.5px #f2f2f2fc;
@@ -185,5 +191,9 @@ img {
   img {
     width: 15em;
   }
+}
+
+.google-btn {
+  margin-top: 5px;
 }
 </style>

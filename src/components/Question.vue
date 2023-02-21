@@ -126,7 +126,9 @@
     <div v-if="questionType === 'reflection' && questionStored">
       <h2>Question {{ questionNumber }}</h2>
       <p>{{ currentReflectionQuestion }}</p>
-      <p>&#129313; &#128533; &#128528; &#128578; &#128512;</p>
+      <p style="font-size: xx-large">
+        &#128579; &#128533; &#128528; &#128578; &#128512;
+      </p>
       <button class="blue-btn" @click="enableEdit">Edit question</button>
       <br />
       <button

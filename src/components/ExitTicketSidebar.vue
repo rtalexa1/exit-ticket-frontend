@@ -25,6 +25,7 @@
           <button
             class="sign-in-register-btn"
             @click="$store.commit('openSignInModal')"
+            style="color: #253c55"
           >
             Sign in
           </button>
@@ -34,6 +35,7 @@
           <button
             class="sign-in-register-btn"
             @click="$store.commit('openRegistrationModal')"
+            style="color: #253c55"
           >
             Create an account
           </button>
@@ -83,7 +85,7 @@ export default {
 .sidebar {
   display: flex;
   flex-direction: column;
-  margin-top: 6.3em;
+  margin-top: 1em;
   margin-bottom: 1em;
   margin-left: 1em;
   align-items: center;
