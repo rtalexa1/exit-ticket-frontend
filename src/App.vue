@@ -59,7 +59,6 @@
 
 <script>
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-// import NavBar from "./components/NavBar.vue";
 import RegistrationModal from "./components/RegistrationModal.vue";
 import SignInModal from "./components/SignInModal.vue";
 import DeleteModal from "./components/DeleteModal.vue";
@@ -68,11 +67,9 @@ import CancelModal from "./components/CancelModal.vue";
 import ExitTicketSidebar from "./components/ExitTicketSidebar.vue";
 import ExitTicketEditor from "./components/ExitTicketEditor.vue";
 import ExitTicketDisplay from "./components/ExitTicketDisplay.vue";
-// import Footer from "./components/Footer.vue";
 
 export default {
   components: {
-    // NavBar,
     RegistrationModal,
     SignInModal,
     DeleteModal,
@@ -81,7 +78,6 @@ export default {
     ExitTicketSidebar,
     ExitTicketEditor,
     ExitTicketDisplay,
-    // Footer,
   },
   methods: {
     signOut() {
