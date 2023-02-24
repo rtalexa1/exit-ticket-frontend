@@ -197,14 +197,14 @@ export default createStore({
   actions: {
     async setCurrentTicket({ commit, state }, exitTicketId) {
       const res = await fetch(
-        `http://exit-ticket-api.herokuapp.com/users/${state.currentUser.id}/exit_tickets/${exitTicketId}`
+        `https://exit-ticket-api.herokuapp.com/users/${state.currentUser.id}/exit_tickets/${exitTicketId}`
       );
       const data = await res.json();
       commit("setCurrentTicket", data);
     },
     async fetchTicketQuestions({ commit, state }) {
       const res = await fetch(
-        `http://exit-ticket-api.herokuapp.com/users/${state.currentUser.id}/exit_tickets/${state.currentTicket.id}`
+        `https://exit-ticket-api.herokuapp.com/users/${state.currentUser.id}/exit_tickets/${state.currentTicket.id}`
       );
       const data = await res.json();
       data.forEach((question) => {
@@ -213,7 +213,7 @@ export default createStore({
     },
     async fetchExitTickets({ commit }) {
       const res = await fetch(
-        `http://exit-ticket-api.herokuapp.com/users/${this.state.currentUser.id}/exit_tickets/`
+        `https://exit-ticket-api.herokuapp.com/users/${this.state.currentUser.id}/exit_tickets/`
       );
       const data = await res.json();
       const stringified = this.state.exitTickets.map((ticket) =>

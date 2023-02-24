@@ -279,7 +279,7 @@ export default {
     },
     async fetchQuestionsByStudentExpectation() {
       const res = await fetch(
-        `http://exit-ticket-api.herokuapp.com/standards_based_questions?student_expectation=${this.formatStudentExpectation}`
+        `https://exit-ticket-api.herokuapp.com/standards_based_questions?student_expectation=${this.formatStudentExpectation}`
       );
       const data = await res.json();
       this.contentQuestions = [...data];

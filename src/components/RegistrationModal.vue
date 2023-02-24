@@ -61,7 +61,7 @@ export default {
             body: JSON.stringify(user),
           };
 
-          return fetch("http://exit-ticket-api.herokuapp.com/users", options);
+          return fetch("https://exit-ticket-api.herokuapp.com/users", options);
         })
         .then((result) => result.json())
         .then((result) => {
@@ -100,7 +100,7 @@ export default {
             body: JSON.stringify(user),
           };
 
-          return fetch("http://exit-ticket-api.herokuapp.com/users", options);
+          return fetch("https://exit-ticket-api.herokuapp.com/users", options);
         })
         .then((result) => result.json())
         .then((result) => {

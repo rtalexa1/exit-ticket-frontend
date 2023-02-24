@@ -52,7 +52,7 @@ export default {
         })
         .then((result) => {
           return fetch(
-            `http://exit-ticket-api.herokuapp.com/users?email=${result}`
+            `https://exit-ticket-api.herokuapp.com/users?email=${result}`
           );
         })
         .then((result) => result.json())
@@ -88,7 +88,7 @@ export default {
         })
         .then((result) => {
           return fetch(
-            `http://exit-ticket-api.herokuapp.com/users?email=${result}`
+            `https://exit-ticket-api.herokuapp.com/users?email=${result}`
           );
         })
         .then((result) => result.json())

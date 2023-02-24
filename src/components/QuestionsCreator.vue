@@ -122,7 +122,7 @@ export default {
       };
 
       const res = await fetch(
-        "http://exit-ticket-api.herokuapp.com/reflection_questions",
+        "https://exit-ticket-api.herokuapp.com/reflection_questions",
         options
       );
       const data = await res.json();
@@ -144,7 +144,7 @@ export default {
       };
 
       const exitTicketRes = await fetch(
-        "http://exit-ticket-api.herokuapp.com/reflection_exit_ticket_questions",
+        "https://exit-ticket-api.herokuapp.com/reflection_exit_ticket_questions",
         options
       );
       const exitTicketData = await exitTicketRes.json();

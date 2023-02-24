@@ -111,7 +111,7 @@ export default {
       if (this.$store.state.currentUser) {
         newExitTicket.exit_ticket.user_id = this.$store.state.currentUser.id;
         fetch(
-          `http://exit-ticket-api.herokuapp.com/users/${this.$store.state.currentUser.id}/exit_tickets`,
+          `https://exit-ticket-api.herokuapp.com/users/${this.$store.state.currentUser.id}/exit_tickets`,
           {
             method: "POST",
             headers: {
