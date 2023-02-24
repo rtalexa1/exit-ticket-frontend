@@ -134,11 +134,17 @@ export default createStore({
     removeLastPendingSBQuestion(state) {
       state.pendingSBQuestions.pop();
     },
+    resetPendingSBQuestions(state) {
+      state.pendingSBQuestions = [];
+    },
     addPendingReflectionQuestion(state, question) {
       state.pendingReflectionQuestions.push(question);
     },
     removeLastPendingReflectionQuestion(state) {
       state.pendingReflectionQuestions.pop();
+    },
+    resetPendingReflectionQuestions(state) {
+      state.pendingReflectionQuestions = [];
     },
     enableSave(state) {
       state.readyToSave = true;
@@ -191,14 +197,14 @@ export default createStore({
   actions: {
     async setCurrentTicket({ commit, state }, exitTicketId) {
       const res = await fetch(
-        `http://localhost:3000/users/${state.currentUser.id}/exit_tickets/${exitTicketId}`
+        `http://exit-ticket-api.herokuapp.com/users/${state.currentUser.id}/exit_tickets/${exitTicketId}`
       );
       const data = await res.json();
       commit("setCurrentTicket", data);
     },
     async fetchTicketQuestions({ commit, state }) {
       const res = await fetch(
-        `http://localhost:3000/users/${state.currentUser.id}/exit_tickets/${state.currentTicket.id}`
+        `http://exit-ticket-api.herokuapp.com/users/${state.currentUser.id}/exit_tickets/${state.currentTicket.id}`
       );
       const data = await res.json();
       data.forEach((question) => {
@@ -207,7 +213,7 @@ export default createStore({
     },
     async fetchExitTickets({ commit }) {
       const res = await fetch(
-        `http://localhost:3000/users/${this.state.currentUser.id}/exit_tickets/`
+        `http://exit-ticket-api.herokuapp.com/users/${this.state.currentUser.id}/exit_tickets/`
       );
       const data = await res.json();
       const stringified = this.state.exitTickets.map((ticket) =>

@@ -19,8 +19,8 @@
         >
           <option selected disabled>Select a grade level</option>
           <option value="third-grade">Third grade</option>
-          <option value="fourth-grade">Fourth grade</option>
-          <option value="fifth-grade">Fifth grade</option>
+          <!-- <option value="fourth-grade">Fourth grade</option>
+          <option value="fifth-grade">Fifth grade</option> -->
         </select>
         <label for="subject-area">Select your subject area</label>
         <select
@@ -111,7 +111,7 @@ export default {
       if (this.$store.state.currentUser) {
         newExitTicket.exit_ticket.user_id = this.$store.state.currentUser.id;
         fetch(
-          `http://exit-ticket-api.herokuapp.com/${this.$store.state.currentUser}/exit_tickets`,
+          `http://exit-ticket-api.herokuapp.com/users/${this.$store.state.currentUser.id}/exit_tickets`,
           {
             method: "POST",
             headers: {
@@ -133,6 +133,7 @@ export default {
         this.$store.commit("setCurrentTicket", newExitTicket);
       }
 
+      this.$store.commit("resetCurrentTicketQuestions");
       this.$store.commit("setGradeLevel", this.gradeLevel);
       this.$store.commit("setSubjectArea", this.subjectArea);
       this.$store.commit("setExitTicketCreated");

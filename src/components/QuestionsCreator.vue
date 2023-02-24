@@ -76,6 +76,8 @@ export default {
 
       this.$store.commit("deactivateEditor");
       this.$store.commit("disableSave");
+      this.$store.commit("resetPendingSBQuestions");
+      this.$store.commit("resetPendingReflectionQuestions");
       this.$store.commit("resetExitTicketCreated");
       this.$store.commit("resetQuestionNumber");
     },

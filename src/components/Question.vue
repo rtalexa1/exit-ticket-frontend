@@ -283,6 +283,9 @@ export default {
       );
       const data = await res.json();
       this.contentQuestions = [...data];
+      if (this.studentExpectation === "3.2(A)") {
+        this.contentQuestions = this.contentQuestions.slice(2);
+      }
     },
     addQuestion() {
       this.$emit("add-question");
