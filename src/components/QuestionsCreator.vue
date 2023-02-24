@@ -97,7 +97,7 @@ export default {
       };
 
       const res = await fetch(
-        "http://localhost:3000/standards_based_exit_ticket_questions",
+        "http://exit-ticket-api.herokuapp.com/standards_based_exit_ticket_questions",
         options
       );
       const data = await res.json();
@@ -120,7 +120,7 @@ export default {
       };
 
       const res = await fetch(
-        "http://localhost:3000/reflection_questions",
+        "http://exit-ticket-api.herokuapp.com/reflection_questions",
         options
       );
       const data = await res.json();
@@ -142,7 +142,7 @@ export default {
       };
 
       const exitTicketRes = await fetch(
-        "http://localhost:3000/reflection_exit_ticket_questions",
+        "http://exit-ticket-api.herokuapp.com/reflection_exit_ticket_questions",
         options
       );
       const exitTicketData = await exitTicketRes.json();

@@ -29,7 +29,7 @@ export default {
     async cancelTicket() {
       if (this.$store.state.currentUser) {
         await fetch(
-          `http://localhost:3000/users/${this.$store.state.currentUser.id}/exit_tickets/${this.$store.state.currentTicket.id}`,
+          `http://exit-ticket-api.herokuapp.com/users/${this.$store.state.currentUser.id}/exit_tickets/${this.$store.state.currentTicket.id}`,
           { method: "DELETE" }
         );
       } else {

@@ -51,7 +51,9 @@ export default {
           return result.user.email;
         })
         .then((result) => {
-          return fetch(`http://localhost:3000//users?email=${result}`);
+          return fetch(
+            `http://exit-ticket-api.herokuapp.com/users?email=${result}`
+          );
         })
         .then((result) => result.json())
         .then((result) => {
@@ -85,7 +87,9 @@ export default {
           return result.user.email;
         })
         .then((result) => {
-          return fetch(`http://localhost:3000//users?email=${result}`);
+          return fetch(
+            `http://exit-ticket-api.herokuapp.com/users?email=${result}`
+          );
         })
         .then((result) => result.json())
         .then((result) => {
