@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import RegistrationModal from "./components/RegistrationModal.vue";
 import SignInModal from "./components/SignInModal.vue";
 import DeleteModal from "./components/DeleteModal.vue";
@@ -87,14 +87,14 @@ export default {
       this.$store.commit("signOut");
     },
   },
-  onMounted() {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        this.$store.dispatch("fetchExitTickets");
-      }
-    });
-  },
+  // onMounted() {
+  //   const auth = getAuth();
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       this.$store.dispatch("fetchExitTickets");
+  //     }
+  //   });
+  // },
 };
 </script>
 
