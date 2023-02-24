@@ -72,7 +72,9 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("fetchExitTickets");
+    if (this.$store.state.currentUser) {
+      this.$store.dispatch("fetchExitTickets");
+    }
   },
 };
 </script>
