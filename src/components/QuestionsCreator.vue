@@ -99,7 +99,7 @@ export default {
       };
 
       const res = await fetch(
-        "http://exit-ticket-api.herokuapp.com/standards_based_exit_ticket_questions",
+        "https://exit-ticket-api.herokuapp.com/standards_based_exit_ticket_questions",
         options
       );
       const data = await res.json();
