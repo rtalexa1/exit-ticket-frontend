@@ -24,6 +24,6 @@ Additional features that I would like to implement in the future include:
 - Vuex
 
 ## Contact
-Richard Alexander - rtalexa1@gmail.com
-Project link: https://github.com/rtalexa1/exit-ticket-frontend
+Richard Alexander - rtalexa1@gmail.com  
+Project link: https://github.com/rtalexa1/exit-ticket-frontend  
 Link to back end repo: https://github.com/rtalexa1/exit-ticket-api
