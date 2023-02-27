@@ -1,29 +1,29 @@
-# exit_ticket_frontend
+# README
 
-## Project setup
-```
-npm install
-```
+Much like software developers test their programs to make sure
+they are working as expected, it is crucial for teachers to be
+able to assess their students' learning to make sure that they are
+mastering academic standards. I created this app to make it
+quicker and easier for teachers to make simple assessments (known
+as "exit tickets") that they can use with their students. Once
+created, these exit tickets can be saved as a PDF or linked to a
+teacher's Google Classroom. I wish something like this existed
+when I was working in the classroom!
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Features
+- Draw from a collection of standards-based (academic) and reflection questions to create exit tickets
+- Save finished tickets as a PDF or share the page to Google Classroom
+- Secure login with Firebase Authentication
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Additional features that I would like to implement in the future include:
+- Option to edit existing tickets
+- Standards-based questions for additional grade levels
 
-### Run your unit tests
-```
-npm run test:unit
-```
+## Built With
+- Vue.js
+- Vuex
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Contact
+Richard Alexander - rtalexa1@gmail.com
+Project link: https://github.com/rtalexa1/exit-ticket-frontend
+Link to back end repo: https://github.com/rtalexa1/exit-ticket-api
