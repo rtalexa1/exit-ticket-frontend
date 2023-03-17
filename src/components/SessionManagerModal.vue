@@ -40,6 +40,37 @@ export default {
       errorMessage: "",
     };
   },
+  methods: {
+    ...mapActions(["registerUser", "loginUser", "logoutUser"]),
+    onSignUp(event) {
+      event.preventDefault();
+      let data = {
+        user: {
+          email: this.signUpEmail,
+          password: this.signUpPassword,
+        },
+      };
+      this.registerUser(data);
+      this.resetData();
+    },
+    onLogin(event) {
+      event.preventDefault();
+      let data = {
+        user: {
+          email: this.loginEmail,
+          password: this.loginPassword,
+        },
+      };
+      this.loginUser(data);
+      this.resetData();
+    },
+    resetData() {
+      this.signUpEmail = "";
+      this.signUpPassword = "";
+      this.loginEmail = "";
+      this.loginPassword = "";
+    },
+  },
   computed: {
     ...mapGetters(["getAuthToken", "getUserEmail", "getUserID", "isLoggedIn"]),
   },

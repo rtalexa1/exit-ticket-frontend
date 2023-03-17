@@ -39,6 +39,8 @@
   </nav>
   <div class="container">
     <ExitTicketSidebar />
+    <!-- Todo: Refactor this code (and any other code) for just the one modal -->
+    <!-- With that, we need to refactor the store -->
     <SessionManagerModal v-if="$store.state.signInModalOpen" />
     <SessionManagerModal v-if="$store.state.registrationModalOpen" />
     <DeleteModal v-if="$store.state.deleteModalOpen" />
