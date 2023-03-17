@@ -39,8 +39,8 @@
   </nav>
   <div class="container">
     <ExitTicketSidebar />
-    <SignInModal v-if="$store.state.signInModalOpen" />
-    <RegistrationModal v-if="$store.state.registrationModalOpen" />
+    <SessionManagerModal v-if="$store.state.signInModalOpen" />
+    <SessionManagerModal v-if="$store.state.registrationModalOpen" />
     <DeleteModal v-if="$store.state.deleteModalOpen" />
     <ResetModal v-if="$store.state.resetModalOpen" />
     <CancelModal v-if="$store.state.cancelModalOpen" />
@@ -58,9 +58,7 @@
 </template>
 
 <script>
-import { getAuth, signOut } from "firebase/auth";
-import RegistrationModal from "./components/RegistrationModal.vue";
-import SignInModal from "./components/SignInModal.vue";
+import SessionManagerModal from "./components/SessionManagerModal.vue";
 import DeleteModal from "./components/DeleteModal.vue";
 import ResetModal from "./components/ResetModal.vue";
 import CancelModal from "./components/CancelModal.vue";
@@ -70,8 +68,7 @@ import ExitTicketDisplay from "./components/ExitTicketDisplay.vue";
 
 export default {
   components: {
-    RegistrationModal,
-    SignInModal,
+    SessionManagerModal,
     DeleteModal,
     ResetModal,
     CancelModal,
@@ -79,22 +76,6 @@ export default {
     ExitTicketEditor,
     ExitTicketDisplay,
   },
-  methods: {
-    signOut() {
-      const auth = getAuth();
-      signOut(auth);
-
-      this.$store.commit("signOut");
-    },
-  },
-  // onMounted() {
-  //   const auth = getAuth();
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       this.$store.dispatch("fetchExitTickets");
-  //     }
-  //   });
-  // },
 };
 </script>
 

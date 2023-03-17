@@ -26,14 +26,22 @@
 </template>
 
 <script>
+import "@/store/index.js";
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   name: "RegistrationModal",
   data() {
     return {
-      email: "",
-      password: "",
+      signUpEmail: "",
+      signUpPassword: "",
+      loginEmail: "",
+      loginPassword: "",
       errorMessage: "",
     };
+  },
+  computed: {
+    ...mapGetters(["getAuthToken", "getUserEmail", "getUserID", "isLoggedIn"]),
   },
 };
 </script>
