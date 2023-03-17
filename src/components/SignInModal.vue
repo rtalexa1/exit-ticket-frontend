@@ -36,7 +36,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["registerUser", "loginUser", "logoutUser"]),
+    ...mapActions(["logInUser"]),
     onLogin(event) {
       event.preventDefault();
       let data = {
@@ -45,7 +45,7 @@ export default {
           password: this.loginPassword,
         },
       };
-      this.loginUser(data);
+      this.$store.dispatch("logInUser", data);
       this.resetData();
       this.$store.commit("closeSignInModal");
     },

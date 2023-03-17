@@ -14,6 +14,7 @@ if (cookieExists) {
   const authTokenExists = auth_token !== "undefined" && auth_token !== null;
   if (authTokenExists) {
     store.dispatch("loginUserWithToken", { auth_token });
+    console.log("It's working!");
   }
 }
 

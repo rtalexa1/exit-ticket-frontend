@@ -36,7 +36,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["registerUser", "loginUser", "logoutUser"]),
+    ...mapActions(["registerUser"]),
     onSignUp(event) {
       event.preventDefault();
       let data = {

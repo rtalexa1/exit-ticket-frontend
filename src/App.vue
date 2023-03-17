@@ -11,8 +11,8 @@
         />
       </div>
       <div class="user-display">
-        <div v-if="$store.state.isLoggedIn">
-          <p>Signed in as {{ $store.state.user.email }}</p>
+        <div v-if="$store.getters.isLoggedIn">
+          <p>Signed in as {{ $store.state.sessionManager.user.email }}</p>
           <!-- <button class="sign-out-btn" @click="signOut">Sign out</button> -->
         </div>
         <div v-else>
@@ -77,6 +77,19 @@ export default {
     ExitTicketSidebar,
     ExitTicketEditor,
     ExitTicketDisplay,
+  },
+  mounted() {
+    let localAuthToken = localStorage.auth_token;
+    let cookieExists =
+      localAuthToken !== "undefined" && localAuthToken !== null;
+    if (cookieExists) {
+      const auth_token = localStorage.getItem("auth-token");
+      const authTokenExists = auth_token !== "undefined" && auth_token !== null;
+      if (authTokenExists) {
+        this.$store.dispatch("loginUserWithToken", { auth_token });
+        console.log("It's working!");
+      }
+    }
   },
 };
 </script>
