@@ -39,10 +39,8 @@
   </nav>
   <div class="container">
     <ExitTicketSidebar />
-    <!-- Todo: Refactor this code (and any other code) for just the one modal -->
-    <!-- With that, we need to refactor the store -->
-    <SessionManagerModal v-if="$store.state.signInModalOpen" />
-    <SessionManagerModal v-if="$store.state.registrationModalOpen" />
+    <SignInModal v-if="$store.state.signInModalOpen" />
+    <RegistrationModal v-if="$store.state.registrationModalOpen" />
     <DeleteModal v-if="$store.state.deleteModalOpen" />
     <ResetModal v-if="$store.state.resetModalOpen" />
     <CancelModal v-if="$store.state.cancelModalOpen" />
@@ -60,7 +58,8 @@
 </template>
 
 <script>
-import SessionManagerModal from "./components/SessionManagerModal.vue";
+import SignInModal from "./components/SignInModal.vue";
+import RegistrationModal from "./components/RegistrationModal.vue";
 import DeleteModal from "./components/DeleteModal.vue";
 import ResetModal from "./components/ResetModal.vue";
 import CancelModal from "./components/CancelModal.vue";
@@ -70,7 +69,8 @@ import ExitTicketDisplay from "./components/ExitTicketDisplay.vue";
 
 export default {
   components: {
-    SessionManagerModal,
+    SignInModal,
+    RegistrationModal,
     DeleteModal,
     ResetModal,
     CancelModal,
