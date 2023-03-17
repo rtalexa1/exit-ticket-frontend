@@ -1,13 +1,12 @@
 import axios from "axios";
 
 // Update url for production
-const BASE_URL = "http://localhost3000/";
+const BASE_URL = "http://localhost:3000/";
 
 const state = {
   auth_token: null,
   user: {
     id: null,
-    // username: null,
     email: null,
   },
 };

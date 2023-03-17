@@ -10,17 +10,14 @@
       </div>
       <h2>Create an account</h2>
       <p v-if="errorMessage">{{ errorMessage }}</p>
-      <input type="text" placeholder="Email" v-model="email" />
+      <input type="text" placeholder="Email" v-model="signUpEmail" />
       <input
         type="password"
         placeholder="Password"
-        v-model="password"
+        v-model="signUpPassword"
         style="margin-bottom: 5px"
       />
-      <button @click="register" class="blue-btn">Submit</button>
-      <button @click="signInWithGoogle" class="blue-btn">
-        Sign up with Google
-      </button>
+      <button @click="onSignUp" class="blue-btn">Submit</button>
     </div>
   </div>
 </template>
@@ -35,8 +32,6 @@ export default {
     return {
       signUpEmail: "",
       signUpPassword: "",
-      loginEmail: "",
-      loginPassword: "",
       errorMessage: "",
     };
   },
@@ -52,23 +47,11 @@ export default {
       };
       this.registerUser(data);
       this.resetData();
-    },
-    onLogin(event) {
-      event.preventDefault();
-      let data = {
-        user: {
-          email: this.loginEmail,
-          password: this.loginPassword,
-        },
-      };
-      this.loginUser(data);
-      this.resetData();
+      this.$store.commit("closeRegistrationModal");
     },
     resetData() {
       this.signUpEmail = "";
       this.signUpPassword = "";
-      this.loginEmail = "";
-      this.loginPassword = "";
     },
   },
   computed: {

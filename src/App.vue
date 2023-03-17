@@ -11,9 +11,9 @@
         />
       </div>
       <div class="user-display">
-        <div v-if="$store.state.currentUser">
-          <p>Signed in as {{ $store.state.currentUser.email }}</p>
-          <button class="sign-out-btn" @click="signOut">Sign out</button>
+        <div v-if="$store.state.isLoggedIn">
+          <p>Signed in as {{ $store.state.user.email }}</p>
+          <!-- <button class="sign-out-btn" @click="signOut">Sign out</button> -->
         </div>
         <div v-else>
           <p>Not logged in</p>

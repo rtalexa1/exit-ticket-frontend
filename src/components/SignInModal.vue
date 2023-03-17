@@ -5,22 +5,19 @@
         <font-awesome-icon
           class="icon"
           icon="fa-solid fa-x"
-          @click="$store.commit('closeRegistrationModal')"
+          @click="$store.commit('closeSignInModal')"
         />
       </div>
       <h2>Create an account</h2>
       <p v-if="errorMessage">{{ errorMessage }}</p>
-      <input type="text" placeholder="Email" v-model="email" />
+      <input type="text" placeholder="Email" v-model="loginEmail" />
       <input
         type="password"
         placeholder="Password"
-        v-model="password"
+        v-model="loginPassword"
         style="margin-bottom: 5px"
       />
-      <button @click="register" class="blue-btn">Submit</button>
-      <button @click="signInWithGoogle" class="blue-btn">
-        Sign up with Google
-      </button>
+      <button @click="onLogin" class="blue-btn">Submit</button>
     </div>
   </div>
 </template>
@@ -30,11 +27,9 @@ import "@/store/index.js";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-  name: "RegistrationModal",
+  name: "SignInModal",
   data() {
     return {
-      signUpEmail: "",
-      signUpPassword: "",
       loginEmail: "",
       loginPassword: "",
       errorMessage: "",
@@ -42,17 +37,6 @@ export default {
   },
   methods: {
     ...mapActions(["registerUser", "loginUser", "logoutUser"]),
-    onSignUp(event) {
-      event.preventDefault();
-      let data = {
-        user: {
-          email: this.signUpEmail,
-          password: this.signUpPassword,
-        },
-      };
-      this.registerUser(data);
-      this.resetData();
-    },
     onLogin(event) {
       event.preventDefault();
       let data = {
@@ -63,10 +47,9 @@ export default {
       };
       this.loginUser(data);
       this.resetData();
+      this.$store.commit("closeSignInModal");
     },
     resetData() {
-      this.signUpEmail = "";
-      this.signUpPassword = "";
       this.loginEmail = "";
       this.loginPassword = "";
     },
