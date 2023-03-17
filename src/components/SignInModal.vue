@@ -28,13 +28,6 @@
 </template>
 
 <script>
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
-
 export default {
   name: "SignInModal",
   data() {
@@ -43,64 +36,6 @@ export default {
       password: "",
       errorMessage: "",
     };
-  },
-  methods: {
-    signIn() {
-      signInWithEmailAndPassword(getAuth(), this.email, this.password)
-        .then((result) => {
-          return result.user.email;
-        })
-        .then((result) => {
-          return fetch(
-            `https://exit-ticket-api.herokuapp.com/users?email=${result}`
-          );
-        })
-        .then((result) => result.json())
-        .then((result) => {
-          this.$store.commit("setCurrentUser", result);
-          this.$store.dispatch("fetchExitTickets");
-          this.$store.commit("totalReset");
-          this.$store.commit("closeSignInModal");
-        })
-        .catch((error) => {
-          console.log(error.code);
-          switch (error.code) {
-            case "auth/invalid-email":
-              this.errorMessage = "Invalid email";
-              break;
-            case "auth/user-not-found":
-              this.errorMessage = "No account for that email";
-              break;
-            case "auth/wrong-password":
-              this.errorMessage = "Incorrect password, please try again";
-              break;
-            default:
-              this.errorMessage = "Email or password is incorrect";
-              break;
-          }
-        });
-    },
-    signInWithGoogle() {
-      const provider = new GoogleAuthProvider();
-      signInWithPopup(getAuth(), provider)
-        .then((result) => {
-          return result.user.email;
-        })
-        .then((result) => {
-          return fetch(
-            `https://exit-ticket-api.herokuapp.com/users?email=${result}`
-          );
-        })
-        .then((result) => result.json())
-        .then((result) => {
-          this.$store.commit("setCurrentUser", result);
-          this.$store.dispatch("fetchExitTickets");
-          this.$store.commit("closeSignInModal");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
   },
 };
 </script>

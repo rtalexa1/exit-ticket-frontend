@@ -26,13 +26,6 @@
 </template>
 
 <script>
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
-
 export default {
   name: "RegistrationModal",
   data() {
@@ -41,76 +34,6 @@ export default {
       password: "",
       errorMessage: "",
     };
-  },
-  methods: {
-    register() {
-      createUserWithEmailAndPassword(getAuth(), this.email, this.password)
-        .then((result) => {
-          return result.user.email;
-        })
-        .then((result) => {
-          const user = {
-            user: {
-              email: result,
-            },
-          };
-
-          const options = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(user),
-          };
-
-          return fetch("https://exit-ticket-api.herokuapp.com/users", options);
-        })
-        .then((result) => result.json())
-        .then((result) => {
-          this.$store.commit("setCurrentUser", result);
-          this.$store.commit("closeRegistrationModal");
-        })
-        .catch((error) => {
-          console.log(error.code);
-          switch (error.code) {
-            case "auth/invalid-email":
-              this.errorMessage = "Invalid email";
-              break;
-            default:
-              this.errorMessage =
-                "Email or password is invalid, please try again";
-              break;
-          }
-        });
-    },
-    signInWithGoogle() {
-      const provider = new GoogleAuthProvider();
-      signInWithPopup(getAuth(), provider)
-        .then((result) => {
-          return result.user.email;
-        })
-        .then((result) => {
-          const user = {
-            user: {
-              email: result,
-            },
-          };
-
-          const options = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(user),
-          };
-
-          return fetch("https://exit-ticket-api.herokuapp.com/users", options);
-        })
-        .then((result) => result.json())
-        .then((result) => {
-          this.$store.commit("setCurrentUser", result);
-          this.$store.commit("closeRegistrationModal");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
   },
 };
 </script>
