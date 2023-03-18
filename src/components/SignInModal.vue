@@ -24,7 +24,7 @@
 
 <script>
 import "@/store/index.js";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "SignInModal",
@@ -53,9 +53,6 @@ export default {
       this.loginEmail = "";
       this.loginPassword = "";
     },
-  },
-  computed: {
-    ...mapGetters(["getAuthToken", "getUserEmail", "getUserID", "isLoggedIn"]),
   },
 };
 </script>
