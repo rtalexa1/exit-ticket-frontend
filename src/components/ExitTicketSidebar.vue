@@ -4,7 +4,7 @@
       <font-awesome-icon icon="fa-solid fa-bars" @click="onClick" />
     </div> -->
     <div class="sidebar-content">
-      <div v-if="$store.state.currentUser">
+      <div v-if="$store.getters.isLoggedIn">
         <h4>Exit Tickets</h4>
         <div v-for="ticket in $store.state.exitTickets" :key="ticket.id">
           <button

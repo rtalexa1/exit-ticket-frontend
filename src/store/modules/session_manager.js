@@ -49,7 +49,7 @@ const actions = {
           resolve(response);
         })
         .catch((error) => {
-          reject(error);
+          reject(new Error(error));
         });
     });
   },

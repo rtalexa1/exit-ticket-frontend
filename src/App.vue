@@ -13,6 +13,7 @@
       <div class="user-display">
         <div v-if="$store.getters.isLoggedIn">
           <p>Signed in as {{ $store.state.sessionManager.user.email }}</p>
+          <!-- <p>{{ this.getAuthToken }}</p> -->
           <!-- <button class="sign-out-btn" @click="signOut">Sign out</button> -->
         </div>
         <div v-else>
@@ -66,6 +67,8 @@ import CancelModal from "./components/CancelModal.vue";
 import ExitTicketSidebar from "./components/ExitTicketSidebar.vue";
 import ExitTicketEditor from "./components/ExitTicketEditor.vue";
 import ExitTicketDisplay from "./components/ExitTicketDisplay.vue";
+import "@/store/index.js";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -78,18 +81,23 @@ export default {
     ExitTicketEditor,
     ExitTicketDisplay,
   },
+  methods: {
+    ...mapActions(["loginWithUserToken"]),
+  },
   mounted() {
     let localAuthToken = localStorage.auth_token;
     let cookieExists =
       localAuthToken !== "undefined" && localAuthToken !== null;
     if (cookieExists) {
-      const auth_token = localStorage.getItem("auth-token");
+      const auth_token = localStorage.getItem("auth_token");
       const authTokenExists = auth_token !== "undefined" && auth_token !== null;
       if (authTokenExists) {
-        this.$store.dispatch("loginUserWithToken", { auth_token });
-        console.log("It's working!");
+        this.$store.dispatch("loginWithUserToken", { auth_token });
       }
     }
+  },
+  computed: {
+    ...mapGetters(["getAuthToken", "getUserEmail", "getUserID", "isLoggedIn"]),
   },
 };
 </script>
