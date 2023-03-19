@@ -1,14 +1,9 @@
 import { createStore } from "vuex";
+import modalManager from "./modules/modal_manager";
 import sessionManager from "@/store/modules/session_manager";
 
 export default createStore({
   state: {
-    currentUser: JSON.parse(localStorage.getItem("currentUser")),
-    registrationModalOpen: false,
-    signInModalOpen: false,
-    deleteModalOpen: false,
-    resetModalOpen: false,
-    cancelModalOpen: false,
     editorActive: true,
     editing: false,
     exitTicketCreated: false,
@@ -35,44 +30,6 @@ export default createStore({
     },
   },
   mutations: {
-    setCurrentUser(state, user) {
-      state.currentUser = user;
-      localStorage.setItem("currentUser", JSON.stringify(user));
-    },
-    resetCurrentUser(state) {
-      state.currentUser = null;
-      localStorage.removeItem("currentUser");
-    },
-    openRegistrationModal(state) {
-      state.registrationModalOpen = true;
-    },
-    closeRegistrationModal(state) {
-      state.registrationModalOpen = false;
-    },
-    openSignInModal(state) {
-      state.signInModalOpen = true;
-    },
-    closeSignInModal(state) {
-      state.signInModalOpen = false;
-    },
-    openDeleteModal(state) {
-      state.deleteModalOpen = true;
-    },
-    closeDeleteModal(state) {
-      state.deleteModalOpen = false;
-    },
-    openResetModal(state) {
-      state.resetModalOpen = true;
-    },
-    closeResetModal(state) {
-      state.resetModalOpen = false;
-    },
-    openCancelModal(state) {
-      state.cancelModalOpen = true;
-    },
-    closeCancelModal(state) {
-      state.cancelModalOpen = false;
-    },
     setCurrentTicket(state, exitTicket) {
       state.currentTicket = exitTicket;
     },
@@ -227,6 +184,7 @@ export default createStore({
     },
   },
   modules: {
+    modalManager,
     sessionManager,
   },
 });
