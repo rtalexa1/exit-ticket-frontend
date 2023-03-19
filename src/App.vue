@@ -13,8 +13,7 @@
       <div class="user-display">
         <div v-if="$store.getters.isLoggedIn">
           <p>Signed in as {{ $store.state.sessionManager.user.email }}</p>
-          <!-- <p>{{ this.getAuthToken }}</p> -->
-          <!-- <button class="sign-out-btn" @click="signOut">Sign out</button> -->
+          <button class="sign-out-btn" @click="logOutUser">Logout</button>
         </div>
         <div v-else>
           <p>Not logged in</p>
@@ -82,7 +81,7 @@ export default {
     ExitTicketDisplay,
   },
   methods: {
-    ...mapActions(["loginWithUserToken"]),
+    ...mapActions(["loginWithUserToken", "logOutUser"]),
   },
   mounted() {
     let localAuthToken = localStorage.auth_token;
