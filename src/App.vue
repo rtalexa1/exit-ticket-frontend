@@ -12,8 +12,11 @@
       </div>
       <div class="user-display">
         <div v-if="$store.getters.isLoggedIn">
-          <p>Signed in as {{ $store.state.sessionManager.user.email }}</p>
-          <button class="sign-out-btn" @click="logOutUser">Logout</button>
+          <div v-if="$store.state.sessionManager.user.email">
+            <p>Signed in as {{ $store.state.sessionManager.user.email }}</p>
+            <button class="sign-out-btn" @click="logOutUser">Logout</button>
+          </div>
+          <div v-else class="loader"></div>
         </div>
         <div v-else>
           <p>Not logged in</p>
@@ -39,10 +42,10 @@
   </nav>
   <div class="container">
     <ExitTicketSidebar />
-    <SignInModal v-if="$store.state.signInModalOpen" />
-    <RegistrationModal v-if="$store.state.registrationModalOpen" />
-    <DeleteModal v-if="$store.state.deleteModalOpen" />
-    <ResetModal v-if="$store.state.resetModalOpen" />
+    <SignInModal v-if="$store.state.modalManager.signInModalOpen" />
+    <RegistrationModal v-if="$store.state.modalManager.registrationModalOpen" />
+    <DeleteModal v-if="$store.state.modalManager.deleteModalOpen" />
+    <ResetModal v-if="$store.state.modalManager.resetModalOpen" />
     <CancelModal v-if="$store.state.cancelModalOpen" />
     <div v-if="$store.state.editorActive" class="exit-ticket-container">
       <ExitTicketEditor />
@@ -83,7 +86,7 @@ export default {
   methods: {
     ...mapActions(["loginWithUserToken", "logOutUser"]),
   },
-  mounted() {
+  async mounted() {
     let localAuthToken = localStorage.auth_token;
     let cookieExists =
       localAuthToken !== "undefined" && localAuthToken !== null;
@@ -91,7 +94,7 @@ export default {
       const auth_token = localStorage.getItem("auth_token");
       const authTokenExists = auth_token !== "undefined" && auth_token !== null;
       if (authTokenExists) {
-        this.$store.dispatch("loginWithUserToken", { auth_token });
+        await this.$store.dispatch("loginWithUserToken", { auth_token });
       }
     }
   },
@@ -214,6 +217,24 @@ input {
   cursor: pointer;
   font-size: medium;
   color: #f2f2f2;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .container {

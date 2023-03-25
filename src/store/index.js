@@ -170,9 +170,8 @@ export default createStore({
       });
     },
     async fetchExitTickets({ commit }) {
-      const res = await fetch(
-        `https://exit-ticket-api.herokuapp.com/users/${this.state.currentUser.id}/exit_tickets/`
-      );
+      console.log("Fetching");
+      const res = await fetch(`https://localhost:3000/exit_tickets/`);
       const data = await res.json();
       const stringified = this.state.exitTickets.map((ticket) =>
         JSON.stringify(ticket)

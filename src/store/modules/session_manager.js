@@ -32,6 +32,7 @@ const actions = {
       axios
         .post(`${BASE_URL}users`, payload)
         .then((response) => {
+          console.log(response.data.data.email);
           commit("setUserInfo", response);
           resolve(response);
         })
@@ -92,6 +93,7 @@ const actions = {
 };
 const mutations = {
   setUserInfo(state, payload) {
+    console.log("Setting user info");
     state.user = payload.data.user;
     state.auth_token = payload.headers.authorization;
     axios.defaults.headers.common["Authorization"] =

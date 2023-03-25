@@ -1,8 +1,5 @@
 <template>
   <div class="sidebar">
-    <!-- <div class="sidebar-icon">
-      <font-awesome-icon icon="fa-solid fa-bars" @click="onClick" />
-    </div> -->
     <div class="sidebar-content">
       <div v-if="$store.getters.isLoggedIn">
         <h4>Exit Tickets</h4>
@@ -49,15 +46,7 @@
 <script>
 export default {
   name: "ExitTicketSidebar",
-  data() {
-    return {
-      toggle: true,
-    };
-  },
   methods: {
-    onClick() {
-      this.toggle = !this.toggle;
-    },
     createNewTicket() {
       this.$store.commit("startEditingNewTicket");
     },
@@ -72,7 +61,8 @@ export default {
     },
   },
   created() {
-    if (this.$store.state.currentUser) {
+    if (this.$store.getters.isLoggedIn) {
+      console.log("working");
       this.$store.dispatch("fetchExitTickets");
     }
   },
