@@ -8,7 +8,7 @@
           @click="$store.commit('closeSignInModal')"
         />
       </div>
-      <h2>Create an account</h2>
+      <h2>Sign in</h2>
       <p v-if="errorMessage">{{ errorMessage }}</p>
       <input type="text" placeholder="Email" v-model="loginEmail" />
       <input

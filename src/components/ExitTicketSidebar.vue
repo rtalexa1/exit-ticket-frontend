@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "ExitTicketSidebar",
   methods: {
@@ -60,11 +62,13 @@ export default {
       this.$store.commit("deactivateEditor");
     },
   },
-  created() {
-    if (this.$store.getters.isLoggedIn) {
-      console.log("working");
+  updated() {
+    if (this.isLoggedIn) {
       this.$store.dispatch("fetchExitTickets");
     }
+  },
+  computed: {
+    ...mapGetters(["isLoggedIn"]),
   },
 };
 </script>

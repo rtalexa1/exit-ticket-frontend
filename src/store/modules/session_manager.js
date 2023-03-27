@@ -32,7 +32,6 @@ const actions = {
       axios
         .post(`${BASE_URL}users`, payload)
         .then((response) => {
-          console.log(response.data.data.email);
           commit("setUserInfo", response);
           resolve(response);
         })
@@ -46,6 +45,7 @@ const actions = {
       axios
         .post(`${BASE_URL}users/sign_in`, payload)
         .then((response) => {
+          console.log(response);
           commit("setUserInfo", response);
           resolve(response);
         })

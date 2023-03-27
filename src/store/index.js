@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import axios from "axios";
 import modalManager from "./modules/modal_manager";
 import sessionManager from "@/store/modules/session_manager";
 
@@ -169,17 +170,35 @@ export default createStore({
         commit("addCurrentTicketQuestion", question);
       });
     },
-    async fetchExitTickets({ commit }) {
-      console.log("Fetching");
-      const res = await fetch(`https://localhost:3000/exit_tickets/`);
-      const data = await res.json();
-      const stringified = this.state.exitTickets.map((ticket) =>
-        JSON.stringify(ticket)
-      );
-      for (let i = 0; i < data.length; i++) {
-        if (stringified.includes(JSON.stringify(data[i]))) continue;
-        commit("addExitTicket", data[i]);
-      }
+    async fetchExitTickets({ commit, state }) {
+      const BASE_URL = "http://localhost:3000/";
+      const config = {
+        headers: {
+          Authorization: state.sessionManager.auth_token,
+        },
+      };
+
+      new Promise((resolve, reject) => {
+        axios
+          .get(`${BASE_URL}exit_tickets`, config)
+          .then((response) => {
+            commit("setExitTickets", response.data);
+            resolve();
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+
+      // const res = await fetch("https://localhost:3000/exit_tickets");
+      // const data = await res.json();
+      // const stringified = this.state.exitTickets.map((ticket) =>
+      //   JSON.stringify(ticket)
+      // );
+      // for (let i = 0; i < data.length; i++) {
+      //   if (stringified.includes(JSON.stringify(data[i]))) continue;
+      //   commit("addExitTicket", data[i]);
+      // }
     },
   },
   modules: {
