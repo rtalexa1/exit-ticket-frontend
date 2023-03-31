@@ -1,7 +1,8 @@
 import { createStore } from "vuex";
+// import { toRaw } from "vue";
 import axios from "axios";
 import modalManager from "./modules/modal_manager";
-import sessionManager from "@/store/modules/session_manager";
+import sessionManager from "./modules/session_manager";
 
 export default createStore({
   state: {
@@ -170,7 +171,7 @@ export default createStore({
         commit("addCurrentTicketQuestion", question);
       });
     },
-    async fetchExitTickets({ commit, state }) {
+    fetchExitTickets({ commit, state }) {
       const BASE_URL = "http://localhost:3000/";
       const config = {
         headers: {
@@ -182,8 +183,10 @@ export default createStore({
         axios
           .get(`${BASE_URL}exit_tickets`, config)
           .then((response) => {
-            commit("setExitTickets", response.data);
-            resolve();
+            const tickets = response.data;
+            tickets.forEach((ticket) => {
+              commit("addExitTicket", ticket);
+            });
           })
           .catch((error) => {
             reject(error);

@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import "@/store/index.js";
 import { mapGetters } from "vuex";
 
 export default {
@@ -63,12 +64,12 @@ export default {
     },
   },
   updated() {
-    if (this.isLoggedIn) {
+    if (this.isLoggedIn && !this.anyExitTickets) {
       this.$store.dispatch("fetchExitTickets");
     }
   },
   computed: {
-    ...mapGetters(["isLoggedIn"]),
+    ...mapGetters(["isLoggedIn", "anyExitTickets"]),
   },
 };
 </script>
