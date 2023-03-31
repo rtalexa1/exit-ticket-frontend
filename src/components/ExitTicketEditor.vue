@@ -81,6 +81,7 @@
 
 <script>
 import QuestionsCreator from "./QuestionsCreator.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "ExitTicketEditor",
@@ -108,18 +109,15 @@ export default {
         },
       };
 
-      if (this.$store.state.currentUser) {
-        newExitTicket.exit_ticket.user_id = this.$store.state.currentUser.id;
-        fetch(
-          `https://exit-ticket-api.herokuapp.com/users/${this.$store.state.currentUser.id}/exit_tickets`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newExitTicket),
-          }
-        )
+      if (this.isLoggedIn) {
+        newExitTicket.exit_ticket.user_id = this.getUserID;
+        fetch("https://exit-ticket-api.herokuapp.com/exit_tickets", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newExitTicket),
+        })
           .then((response) => response.json())
           .then((data) => {
             this.$store.commit("setCurrentTicket", data);
@@ -152,6 +150,7 @@ export default {
       );
     },
   },
+  ...mapGetters(["getUserID", "isLoggedIn"]),
 };
 </script>
 
