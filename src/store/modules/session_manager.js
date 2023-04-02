@@ -28,11 +28,15 @@ const getters = {
 };
 const actions = {
   registerUser({ commit }, payload) {
+    commit("displayLoader");
     return new Promise((resolve, reject) => {
       axios
         .post(`${BASE_URL}users`, payload)
         .then((response) => {
           commit("setUserInfo", response);
+          setTimeout(() => {
+            commit("hideLoader");
+          }, 300);
           resolve(response);
         })
         .catch((error) => {
@@ -47,11 +51,10 @@ const actions = {
         .post(`${BASE_URL}users/sign_in`, payload)
         .then((response) => {
           commit("setUserInfo", response);
-          resolve(response);
           setTimeout(() => {
             commit("hideLoader");
-            console.log("Loader hidden");
           }, 300);
+          resolve(response);
         })
         .catch((error) => {
           reject(new Error(error));
@@ -107,6 +110,7 @@ const mutations = {
     state.user = payload.data.user;
     state.auth_token = localStorage.getItem("auth_token");
   },
+  // Add logic to this function to reset all exit-ticket-related data in rootState
   resetUserInfo(state) {
     state.user = {
       id: null,
