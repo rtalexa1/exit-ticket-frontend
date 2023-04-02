@@ -41,12 +41,17 @@ const actions = {
     });
   },
   logInUser({ commit }, payload) {
+    commit("displayLoader");
     return new Promise((resolve, reject) => {
       axios
         .post(`${BASE_URL}users/sign_in`, payload)
         .then((response) => {
           commit("setUserInfo", response);
           resolve(response);
+          setTimeout(() => {
+            commit("hideLoader");
+            console.log("Loader hidden");
+          }, 300);
         })
         .catch((error) => {
           reject(new Error(error));

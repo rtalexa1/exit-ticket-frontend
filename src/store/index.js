@@ -6,6 +6,7 @@ import sessionManager from "./modules/session_manager";
 
 export default createStore({
   state: {
+    loaderVisible: false,
     editorActive: true,
     editing: false,
     exitTicketCreated: false,
@@ -32,6 +33,12 @@ export default createStore({
     },
   },
   mutations: {
+    displayLoader(state) {
+      state.loaderVisible = true;
+    },
+    hideLoader(state) {
+      state.loaderVisible = false;
+    },
     setCurrentTicket(state, exitTicket) {
       state.currentTicket = exitTicket;
     },

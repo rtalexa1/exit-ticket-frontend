@@ -11,7 +11,10 @@
         />
       </div>
       <div class="user-display">
-        <div v-if="$store.getters.isLoggedIn">
+        <div class="loader" v-if="$store.state.loaderVisible"></div>
+        <div
+          v-else-if="$store.getters.isLoggedIn && !$store.state.loaderVisible"
+        >
           <p>Signed in as {{ $store.state.sessionManager.user.email }}</p>
           <button class="sign-out-btn" @click="logOutUser">Logout</button>
         </div>
@@ -181,7 +184,7 @@ input {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: space-around;
+  align-items: center;
   width: 100%;
   height: 100%;
   color: #f2f2f2;
@@ -219,10 +222,12 @@ input {
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */
   border-top: 16px solid #3498db; /* Blue */
+  border-bottom: 16px solid #3498db;
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 30px;
+  height: 30px;
   animation: spin 2s linear infinite;
+  text-align: center;
 }
 
 @keyframes spin {
