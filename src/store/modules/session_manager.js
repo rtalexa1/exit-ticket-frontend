@@ -26,6 +26,29 @@ const getters = {
     return !loggedOut;
   },
 };
+const mutations = {
+  setUserInfo(state, payload) {
+    state.user = payload.data.user;
+    state.auth_token = payload.headers.authorization;
+    axios.defaults.headers.common["Authorization"] =
+      payload.headers.authorization;
+    localStorage.setItem("auth_token", payload.headers.authorization);
+  },
+  setUserInfoFromToken(state, payload) {
+    state.user = payload.data.user;
+    state.auth_token = localStorage.getItem("auth_token");
+  },
+  // Add logic to this function to reset all exit-ticket-related data in rootState
+  resetUserInfo(state) {
+    state.user = {
+      id: null,
+      email: null,
+    };
+    state.auth_token = null;
+    localStorage.removeItem("auth_token");
+    axios.defaults.headers.common["Authorization"] = null;
+  },
+};
 const actions = {
   registerUser({ commit }, payload) {
     commit("displayLoader");
@@ -98,32 +121,9 @@ const actions = {
     });
   },
 };
-const mutations = {
-  setUserInfo(state, payload) {
-    state.user = payload.data.user;
-    state.auth_token = payload.headers.authorization;
-    axios.defaults.headers.common["Authorization"] =
-      payload.headers.authorization;
-    localStorage.setItem("auth_token", payload.headers.authorization);
-  },
-  setUserInfoFromToken(state, payload) {
-    state.user = payload.data.user;
-    state.auth_token = localStorage.getItem("auth_token");
-  },
-  // Add logic to this function to reset all exit-ticket-related data in rootState
-  resetUserInfo(state) {
-    state.user = {
-      id: null,
-      email: null,
-    };
-    state.auth_token = null;
-    localStorage.removeItem("auth_token");
-    axios.defaults.headers.common["Authorization"] = null;
-  },
-};
 export default {
   state,
   getters,
-  actions,
   mutations,
+  actions,
 };
