@@ -73,7 +73,7 @@
       <br />
       <button
         :disabled="nextQuestionAdded"
-        v-show="$store.state.questionNumber != 5"
+        v-show="$store.state.ticketManager.questionNumber != 5"
         @click="addQuestion"
         class="plus-btn"
       >
@@ -96,7 +96,7 @@
           @input="getQuestions"
         >
           <option
-            v-for="question in $store.state.reflectionQuestions"
+            v-for="question in $store.state.ticketManager.reflectionQuestions"
             :key="question.id"
           >
             {{ question }}
@@ -133,7 +133,7 @@
       <br />
       <button
         :disabled="nextQuestionAdded"
-        v-show="$store.state.questionNumber != 5"
+        v-show="$store.state.ticketManager.questionNumber != 5"
         @click="addQuestion"
         class="plus-btn"
       >
@@ -147,6 +147,7 @@
 
 <script>
 import "@/store/index.js";
+import { mapGetters } from "vuex";
 import HybridReflectionQuestion from "@/classes/HybridReflectionQuestion";
 import SBExitTicketQuestion from "@/classes/SBReflectionExitTicketQuestion";
 import UserlessSBQuestion from "@/classes/UserlessSBQuestion";
@@ -222,17 +223,17 @@ export default {
 
       let question;
 
-      if (this.$store.state.currentUser) {
+      if (this.isLoggedIn) {
         question = new SBExitTicketQuestion(
-          this.$store.state.currentTicket.id,
+          this.$store.state.ticketManager.currentTicket.id,
           this.currentSBQuestion.id,
-          this.$store.state.questionNumber
+          this.$store.state.ticketManager.questionNumber
         );
         this.$store.commit("addPendingSBQuestion", question);
       } else {
         question = new UserlessSBQuestion(
           this.currentSBQuestion.image_url,
-          this.$store.state.questionNumber
+          this.$store.state.ticketManager.questionNumber
         );
         this.$store.commit("addUserlessQuestion", question);
       }
@@ -247,17 +248,17 @@ export default {
       // QuestionsCreator to do the POST requests?
       let question;
 
-      if (this.$store.state.currentUser) {
+      if (this.isLoggedIn) {
         question = new HybridReflectionQuestion(
-          this.$store.state.currentTicket.id,
+          this.$store.state.ticketManager.currentTicket.id,
           this.currentReflectionQuestion,
-          this.$store.state.questionNumber
+          this.$store.state.ticketManager.questionNumber
         );
         this.$store.commit("addPendingReflectionQuestion", question);
       } else {
         question = new UserlessReflectionQuestion(
           this.currentReflectionQuestion,
-          this.$store.state.questionNumber
+          this.$store.state.ticketManager.questionNumber
         );
         this.$store.commit("addUserlessQuestion", question);
       }
@@ -267,7 +268,7 @@ export default {
     },
     setExpectations() {
       const gradeAndSubject =
-        this.$store.state.gradeLevel + this.$store.state.subjectArea;
+        this.$store.state.ticketManager.gradeLevel + this.$store.state.ticketManager.subjectArea;
       if (gradeAndSubject === "third-grademath") {
         this.currentExpectations = this.thirdGradeMath;
       } else if (gradeAndSubject === "fourth-grademath") {
@@ -280,7 +281,9 @@ export default {
     },
     async fetchQuestionsByStudentExpectation() {
       const res = await fetch(
-        `https://exit-ticket-api.herokuapp.com/standards_based_questions?student_expectation=${this.formatStudentExpectation}`
+        `localhost:3000/standards_based_questions?student_expectation=${this.formatStudentExpectation}`
+        // Change for production
+        // `https://exit-ticket-api.herokuapp.com/standards_based_questions?student_expectation=${this.formatStudentExpectation}`
       );
       const data = await res.json();
       this.contentQuestions = [...data];
@@ -310,6 +313,7 @@ export default {
         this.currentReflectionQuestion === ""
       );
     },
+    ...mapGetters(["isLoggedIn"]),
   },
   created() {
     this.setExpectations();
