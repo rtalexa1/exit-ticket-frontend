@@ -62,7 +62,7 @@ export default {
       this.$store.commit("startEditingNewTicket");
     },
     displayTicket(e) {
-      const ticket = this.$store.state.exitTickets.find(
+      const ticket = this.$store.state.ticketManager.exitTickets.find(
         (ticket) => ticket.id == e.target.value
       );
       this.$store.commit("setCurrentTicket", ticket);
