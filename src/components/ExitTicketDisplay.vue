@@ -2,10 +2,10 @@
   <div class="display-container">
     <div class="exit-ticket-display-container">
       <div class="pdf-container" id="pdf-content">
-        <h1 v-if="$store.state.userlessExitTicket">
-          {{ $store.state.userlessExitTicket.exit_ticket.title }}
+        <h1 v-if="$store.state.ticketManager.userlessExitTicket">
+          {{ $store.state.ticketManager.userlessExitTicket.exit_ticket.title }}
         </h1>
-        <h1 v-else>{{ $store.state.currentTicket.title }}</h1>
+        <h1 v-else>{{ $store.state.ticketManager.currentTicket.title }}</h1>
         <div
           class="question-container"
           v-for="question in selectQuestions"
@@ -40,7 +40,7 @@
       </button>
       <!-- <button class="blue-btn">Edit</button> -->
       <button
-        v-if="$store.state.currentUser"
+        v-if="isLoggedIn"
         @click="$store.commit('openDeleteModal')"
         class="blue-btn"
       >
@@ -55,6 +55,7 @@
 
 <script>
 import "@/store/index.js";
+import { mapGetters } from "vuex";
 import html2pdf from "html2pdf.js";
 
 export default {
@@ -76,12 +77,13 @@ export default {
   },
   computed: {
     selectQuestions: function () {
-      if (this.$store.state.userlessExitTicket) {
-        return this.$store.state.userlessQuestions;
+      if (this.$store.state.ticketManager.userlessExitTicket) {
+        return this.$store.state.ticketManager.userlessQuestions;
       } else {
-        return this.$store.state.currentTicketQuestions;
+        return this.$store.state.ticketManager.currentTicketQuestions;
       }
     },
+    ...mapGetters(["isLoggedIn"]),
   },
   async mounted() {
     await window.renderWidget();
