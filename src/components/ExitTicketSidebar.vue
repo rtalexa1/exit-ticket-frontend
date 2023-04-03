@@ -2,7 +2,7 @@
   <div class="sidebar">
     <div class="sidebar-content">
       <div class="loader" v-if="$store.state.loaderVisible"></div>
-      <div v-else-if="$store.getters.isLoggedIn && !$store.state.loaderVisible">
+      <div v-else-if="isLoggedIn && !$store.state.loaderVisible">
         <h4>Exit Tickets</h4>
         <div
           v-for="ticket in $store.state.ticketManager.exitTickets"
@@ -49,11 +49,15 @@
 
 <script>
 import "@/store/index.js";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "ExitTicketSidebar",
   methods: {
+    test() {
+      this.$store.commit("testToggle");
+      console.log(this.$store.state.ticketManager.test);
+    },
     createNewTicket() {
       this.$store.commit("startEditingNewTicket");
     },
@@ -63,9 +67,10 @@ export default {
       );
       this.$store.commit("setCurrentTicket", ticket);
       this.$store.commit("resetCurrentTicketQuestions");
-      this.$store.dispatch("fetchTicketQuestions");
+      this.fetchTicketQuestions;
       this.$store.commit("deactivateEditor");
     },
+    ...mapActions(["fetchTicketQuestions"]),
   },
   updated() {
     if (this.isLoggedIn && !this.anyExitTickets) {

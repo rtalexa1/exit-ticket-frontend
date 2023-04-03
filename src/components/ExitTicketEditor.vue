@@ -82,7 +82,7 @@
 <script>
 import "@/store/index.js";
 import QuestionsCreator from "./QuestionsCreator.vue";
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "ExitTicketEditor",
@@ -128,15 +128,15 @@ export default {
             console.error("Error:", error);
           });
       } else {
-        this.setUserlessExitTicket(newExitTicket);
+        this.$store.commit("setUserlessExitTicket", newExitTicket);
         localStorage.exitTicket = JSON.stringify(newExitTicket);
-        this.setCurrentTicket(newExitTicket);
+        this.$store.commit("setCurrentTicket", newExitTicket);
       }
 
-      this.resetCurrentTicketQuestions();
-      this.setGradeLevel(this.gradeLevel);
-      this.setSubjectArea(this.subjectArea);
-      this.setExitTicketCreated();
+      this.$store.commit("resetCurrentTicketQuestions");
+      this.$store.commit("setGradeLevel", this.gradeLevel);
+      this.$store.commit("setSubjectArea", this.subjectArea);
+      this.$store.commit("setExitTicketCreated");
       this.resetData();
     },
     resetData() {
@@ -144,7 +144,6 @@ export default {
       this.gradeLevel = "";
       this.subjectArea = "";
     },
-    ...mapActions(["setUserlessExitTicket", "setCurrentTicket", "resetCurrentTicketQuestions", "setGradeLevel", "setSubjectArea", "setExitTicketCreated"]),
   },
   computed: {
     enableButton: function () {
