@@ -23,13 +23,16 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "CancelModal",
   methods: {
     async cancelTicket() {
-      if (this.$store.state.currentUser) {
+      if (this.isLoggedIn) {
         await fetch(
-          `https://exit-ticket-api.herokuapp.com/users/${this.$store.state.currentUser.id}/exit_tickets/${this.$store.state.currentTicket.id}`,
+          `localhost:3000/exit_tickets/${this.$store.state.ticketManager.currentTicket.id}`,
+          // Edit production URL (no longer a nested route)
+          // `https://exit-ticket-api.herokuapp.com/users/${this.$store.state.currentUser.id}/exit_tickets/${this.$store.state.currentTicket.id}`,
           { method: "DELETE" }
         );
       } else {
@@ -39,6 +42,9 @@ export default {
       this.$store.commit("totalReset");
       this.$store.commit("closeCancelModal");
     },
+  },
+  computed: {
+    ...mapGetters(["isLoggedIn"]),
   },
 };
 </script>

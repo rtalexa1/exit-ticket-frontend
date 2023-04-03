@@ -46,8 +46,6 @@ export default createStore({
       state.readyToSave = false;
     },
     signOut(state) {
-      state.currentUser = null;
-      localStorage.removeItem("currentUser");
       state.currentTicket = undefined;
       state.currentTicketQuestions = [];
       state.exitTickets = [];

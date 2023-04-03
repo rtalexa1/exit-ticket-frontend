@@ -46,7 +46,7 @@
     <RegistrationModal v-if="$store.state.modalManager.registrationModalOpen" />
     <DeleteModal v-if="$store.state.modalManager.deleteModalOpen" />
     <ResetModal v-if="$store.state.modalManager.resetModalOpen" />
-    <CancelModal v-if="$store.state.cancelModalOpen" />
+    <CancelModal v-if="$store.state.modalManager.cancelModalOpen" />
     <div v-if="$store.state.editorActive" class="exit-ticket-container">
       <ExitTicketEditor />
     </div>
