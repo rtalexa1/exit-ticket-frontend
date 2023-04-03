@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import "@/store/index.js";
 import html2pdf from "html2pdf.js";
 
 export default {

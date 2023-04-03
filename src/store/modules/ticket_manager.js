@@ -19,6 +19,11 @@ const state = {
   subjectArea: "",
   readyToSave: false,
 };
+const getters = {
+  anyExitTickets(state) {
+    return state.exitTickets.length > 0;
+  },
+};
 const mutations = {
   setCurrentTicket(state, exitTicket) {
     state.currentTicket = exitTicket;
@@ -118,12 +123,12 @@ const actions = {
       commit("addCurrentTicketQuestion", question);
     });
   },
-  fetchExitTickets({ commit, state }) {
+  fetchExitTickets({ commit, rootState }) {
     // Update for production
     const BASE_URL = "http://localhost:3000/";
     const config = {
       headers: {
-        Authorization: state.sessionManager.auth_token,
+        Authorization: rootState.sessionManager.auth_token,
       },
     };
 
@@ -144,6 +149,7 @@ const actions = {
 };
 export default {
   state,
+  getters,
   mutations,
   actions,
 };

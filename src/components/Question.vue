@@ -146,6 +146,7 @@
 </template>
 
 <script>
+import "@/store/index.js";
 import HybridReflectionQuestion from "@/classes/HybridReflectionQuestion";
 import SBExitTicketQuestion from "@/classes/SBReflectionExitTicketQuestion";
 import UserlessSBQuestion from "@/classes/UserlessSBQuestion";

@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import "@/store/index.js";
 import Question from "./Question.vue";
 
 export default {

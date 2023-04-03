@@ -80,6 +80,7 @@
 </template>
 
 <script>
+import "@/store/index.js";
 import QuestionsCreator from "./QuestionsCreator.vue";
 import { mapGetters } from "vuex";
 

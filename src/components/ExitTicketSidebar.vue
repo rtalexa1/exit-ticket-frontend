@@ -4,7 +4,10 @@
       <div class="loader" v-if="$store.state.loaderVisible"></div>
       <div v-else-if="$store.getters.isLoggedIn && !$store.state.loaderVisible">
         <h4>Exit Tickets</h4>
-        <div v-for="ticket in $store.state.exitTickets" :key="ticket.id">
+        <div
+          v-for="ticket in $store.state.ticketManager.exitTickets"
+          :key="ticket.id"
+        >
           <button
             @click="displayTicket"
             class="exit-ticket-btn"

@@ -9,11 +9,6 @@ export default createStore({
     editorActive: true,
     editing: false,
   },
-  getters: {
-    anyExitTickets(state) {
-      return state.exitTickets.length > 0;
-    },
-  },
   mutations: {
     displayLoader(state) {
       state.loaderVisible = true;
