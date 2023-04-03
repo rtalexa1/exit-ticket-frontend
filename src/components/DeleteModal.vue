@@ -27,19 +27,20 @@ export default {
   name: "DeleteModal",
   methods: {
     async deleteTicket() {
-      await fetch(
-        `localhost:3000/exit_tickets/${this.$store.state.ticketManager.currentTicket.id}`,
-        // Edit production URL (no longer a nested route)
-        // `https://exit-ticket-api.herokuapp.com/users/${this.$store.state.currentUser.id}/exit_tickets/${this.$store.state.currentTicket.id}`,
-        { method: "DELETE" }
-      );
+      console.log(this.$store.state.ticketManager.currentTicket.id);
+      // await fetch(
+      //   `localhost:3000/exit_tickets/${this.$store.state.ticketManager.currentTicket.id}`,
+      //   // Edit production URL (no longer a nested route)
+      //   // `https://exit-ticket-api.herokuapp.com/users/${this.$store.state.currentUser.id}/exit_tickets/${this.$store.state.currentTicket.id}`,
+      //   { method: "DELETE" }
+      // );
 
-      this.removeCurrentExitTicketFromCollection();
-      this.resetCurrentTicket();
-      this.resetCurrentTicketQuestions();
-      this.$store.commit("closeDeleteModal");
-      this.$store.commit("disableEditing");
-      this.$store.commit("activateEditor");
+      // this.removeCurrentExitTicketFromCollection();
+      // this.resetCurrentTicket();
+      // this.resetCurrentTicketQuestions();
+      // this.$store.commit("closeDeleteModal");
+      // this.$store.commit("disableEditing");
+      // this.$store.commit("activateEditor");
     },
   },
   ...mapActions([

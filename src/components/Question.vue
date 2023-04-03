@@ -281,8 +281,9 @@ export default {
       }
     },
     async fetchQuestionsByStudentExpectation() {
+      const url = new URL("http://localhost:3000");
       const res = await fetch(
-        `localhost:3000/standards_based_questions?student_expectation=${this.formatStudentExpectation}`
+        `${url}/standards_based_questions?student_expectation=${this.formatStudentExpectation}`
         // Change for production
         // `https://exit-ticket-api.herokuapp.com/standards_based_questions?student_expectation=${this.formatStudentExpectation}`
       );
