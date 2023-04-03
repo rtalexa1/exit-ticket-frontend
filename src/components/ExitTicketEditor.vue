@@ -13,7 +13,7 @@
         />
         <label for="grade-level">Select your grade level</label>
         <select
-          :disabled="$store.state.exitTicketCreated"
+          :disabled="$store.state.ticketManager.exitTicketCreated"
           id="grade-level"
           v-model="gradeLevel"
         >
@@ -25,7 +25,7 @@
         <label for="subject-area">Select your subject area</label>
         <select
           v-if="gradeLevel === 'fifth-grade'"
-          :disabled="$store.state.exitTicketCreated"
+          :disabled="$store.state.ticketManager.exitTicketCreated"
           id="subject-area"
           v-model="subjectArea"
         >
@@ -35,7 +35,7 @@
         </select>
         <select
           v-else
-          :disabled="$store.state.exitTicketCreated"
+          :disabled="$store.state.ticketManager.exitTicketCreated"
           id="subject-area"
           v-model="subjectArea"
           style="margin-bottom: 5px"
@@ -45,7 +45,7 @@
         </select>
         <!-- Button displays once all inputs are filled out -->
         <button
-          :disabled="$store.state.exitTicketCreated"
+          :disabled="$store.state.ticketManager.exitTicketCreated"
           v-if="enableButton"
           class="blue-btn"
           @click="onSubmit"
@@ -54,10 +54,10 @@
         </button>
       </form>
       <!-- Questions creator opens once exit ticket is created -->
-      <QuestionsCreator v-if="$store.state.exitTicketCreated" />
+      <QuestionsCreator v-if="$store.state.ticketManager.exitTicketCreated" />
     </div>
     <div
-      v-else-if="!$store.state.editing && !$store.getters.anyExitTickets"
+      v-else-if="!$store.state.editing && !anyExitTickets"
       class="empty-display"
     >
       <p style="margin-bottom: 5px">
@@ -82,7 +82,7 @@
 <script>
 import "@/store/index.js";
 import QuestionsCreator from "./QuestionsCreator.vue";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "ExitTicketEditor",
@@ -112,7 +112,8 @@ export default {
 
       if (this.isLoggedIn) {
         newExitTicket.exit_ticket.user_id = this.getUserID;
-        fetch("https://exit-ticket-api.herokuapp.com/exit_tickets", {
+        // fetch("https://exit-ticket-api.herokuapp.com/exit_tickets", {
+        fetch("localhost:3000/exit_tickets", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -127,15 +128,15 @@ export default {
             console.error("Error:", error);
           });
       } else {
-        this.$store.commit("setUserlessExitTicket", newExitTicket);
+        this.setUserlessExitTicket(newExitTicket);
         localStorage.exitTicket = JSON.stringify(newExitTicket);
-        this.$store.commit("setCurrentTicket", newExitTicket);
+        this.setCurrentTicket(newExitTicket);
       }
 
-      this.$store.commit("resetCurrentTicketQuestions");
-      this.$store.commit("setGradeLevel", this.gradeLevel);
-      this.$store.commit("setSubjectArea", this.subjectArea);
-      this.$store.commit("setExitTicketCreated");
+      this.resetCurrentTicketQuestions();
+      this.setGradeLevel(this.gradeLevel);
+      this.setSubjectArea(this.subjectArea);
+      this.setExitTicketCreated();
       this.resetData();
     },
     resetData() {
@@ -143,6 +144,7 @@ export default {
       this.gradeLevel = "";
       this.subjectArea = "";
     },
+    ...mapActions(["setUserlessExitTicket", "setCurrentTicket", "resetCurrentTicketQuestions", "setGradeLevel", "setSubjectArea", "setExitTicketCreated"]),
   },
   computed: {
     enableButton: function () {
@@ -151,7 +153,7 @@ export default {
       );
     },
   },
-  ...mapGetters(["getUserID", "isLoggedIn"]),
+  ...mapGetters(["getUserID", "isLoggedIn", "anyExitTickets"]),
 };
 </script>
 
