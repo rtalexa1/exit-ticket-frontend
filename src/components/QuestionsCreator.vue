@@ -7,30 +7,33 @@
     />
     <br />
     <Question
-      v-if="$store.state.questionNumber >= 2"
+      v-if="$store.state.ticketManager.questionNumber >= 2"
       @add-question.once="incrementQuestionNumber"
       question-number="2"
     />
     <br />
     <Question
-      v-if="$store.state.questionNumber >= 3"
+      v-if="$store.state.ticketManager.questionNumber >= 3"
       @add-question.once="incrementQuestionNumber"
       question-number="3"
     />
     <br />
     <Question
-      v-if="$store.state.questionNumber >= 4"
+      v-if="$store.state.ticketManager.questionNumber >= 4"
       @add-question.once="incrementQuestionNumber"
       question-number="4"
     />
     <br />
-    <Question v-if="$store.state.questionNumber === 5" question-number="5" />
+    <Question
+      v-if="$store.state.ticketManager.questionNumber === 5"
+      question-number="5"
+    />
     <!-- This button displays once at least one question is added to the exit ticket -->
     <!-- Upon submission, we need to take all the pending questions in the store
     and make POST requests to create new exit_ticket_questions with the question_id 
     and the exit_ticket_id -->
     <button
-      v-if="$store.state.readyToSave"
+      v-if="$store.state.ticketManager.readyToSave"
       @click="assignQuestionsToExitTicket"
       class="blue-btn"
       style="margin-bottom: 5px"
@@ -48,6 +51,7 @@
 
 <script>
 import "@/store/index.js";
+import { mapGetters } from "vuex";
 import Question from "./Question.vue";
 
 export default {
@@ -63,15 +67,18 @@ export default {
       this.$store.commit("enableSave");
     },
     async assignQuestionsToExitTicket() {
-      if (this.$store.state.currentUser) {
+      if (this.isLoggedIn) {
         await this.createSBQuestions();
         await this.createReflectionQuestions();
-        this.$store.commit("addExitTicket", this.$store.state.currentTicket);
+        this.$store.commit(
+          "addExitTicket",
+          this.$store.state.ticketManager.currentTicket
+        );
         await this.$store.dispatch("fetchTicketQuestions");
       } else {
         localStorage.setItem(
           "userlessQuestions",
-          JSON.stringify(this.$store.state.userlessQuestions)
+          JSON.stringify(this.$store.state.ticketManager.userlessQuestions)
         );
       }
 
@@ -83,13 +90,15 @@ export default {
       this.$store.commit("resetQuestionNumber");
     },
     async createSBQuestions() {
-      const questions = this.$store.state.pendingSBQuestions.map((question) => {
-        return {
-          exit_ticket_id: question.exit_ticket_id,
-          sb_question_id: question.sb_question_id,
-          order: question.order,
-        };
-      });
+      const questions = this.$store.state.ticketManager.pendingSBQuestions.map(
+        (question) => {
+          return {
+            exit_ticket_id: question.exit_ticket_id,
+            sb_question_id: question.sb_question_id,
+            order: question.order,
+          };
+        }
+      );
 
       const options = {
         method: "POST",
@@ -100,7 +109,9 @@ export default {
       };
 
       const res = await fetch(
-        "https://exit-ticket-api.herokuapp.com/standards_based_exit_ticket_questions",
+        "localhost:3000/standards_based_exit_ticket_questions",
+        // Update for production
+        // "https://exit-ticket-api.herokuapp.com/standards_based_exit_ticket_questions",
         options
       );
       const data = await res.json();
@@ -108,11 +119,13 @@ export default {
     },
     async createReflectionQuestions() {
       const reflectionQuestions =
-        this.$store.state.pendingReflectionQuestions.map((question) => {
-          return {
-            text: question.text,
-          };
-        });
+        this.$store.state.ticketManager.pendingReflectionQuestions.map(
+          (question) => {
+            return {
+              text: question.text,
+            };
+          }
+        );
 
       let options = {
         method: "POST",
@@ -123,16 +136,20 @@ export default {
       };
 
       const res = await fetch(
-        "https://exit-ticket-api.herokuapp.com/reflection_questions",
+        "localhost:3000/reflection_questions",
+        // Update for production
+        // "https://exit-ticket-api.herokuapp.com/reflection_questions",
         options
       );
       const data = await res.json();
 
       const exitTicketQuestions = data.map((question, index) => {
         return {
-          exit_ticket_id: this.$store.state.currentTicket.id,
+          exit_ticket_id: this.$store.state.ticketManager.currentTicket.id,
           ref_question_id: question.id,
-          order: this.$store.state.pendingReflectionQuestions[index].order,
+          order:
+            this.$store.state.ticketManager.pendingReflectionQuestions[index]
+              .order,
         };
       });
 
@@ -145,12 +162,17 @@ export default {
       };
 
       const exitTicketRes = await fetch(
-        "https://exit-ticket-api.herokuapp.com/reflection_exit_ticket_questions",
+        "localhost:3000/reflection_exit_ticket_questions",
+        // Update for production
+        // "https://exit-ticket-api.herokuapp.com/reflection_exit_ticket_questions",
         options
       );
       const exitTicketData = await exitTicketRes.json();
       return exitTicketData;
     },
+  },
+  computed: {
+    ...mapGetters(["isLoggedIn"]),
   },
 };
 </script>

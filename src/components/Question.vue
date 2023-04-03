@@ -268,7 +268,8 @@ export default {
     },
     setExpectations() {
       const gradeAndSubject =
-        this.$store.state.ticketManager.gradeLevel + this.$store.state.ticketManager.subjectArea;
+        this.$store.state.ticketManager.gradeLevel +
+        this.$store.state.ticketManager.subjectArea;
       if (gradeAndSubject === "third-grademath") {
         this.currentExpectations = this.thirdGradeMath;
       } else if (gradeAndSubject === "fourth-grademath") {
