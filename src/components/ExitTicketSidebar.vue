@@ -49,15 +49,11 @@
 
 <script>
 import "@/store/index.js";
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "ExitTicketSidebar",
   methods: {
-    test() {
-      this.$store.commit("testToggle");
-      console.log(this.$store.state.ticketManager.test);
-    },
     createNewTicket() {
       this.$store.commit("startEditingNewTicket");
     },
@@ -65,18 +61,19 @@ export default {
       const ticket = this.$store.state.ticketManager.exitTickets.find(
         (ticket) => ticket.id == e.target.value
       );
-      this.$store.commit("setCurrentTicket", ticket);
       this.$store.commit("resetCurrentTicketQuestions");
-      this.fetchTicketQuestions;
+      this.$store.commit("setCurrentTicket", ticket);
+      console.log(this.$store.state.ticketManager.questions);
+      this.$store.commit("setCurrentTicketQuestions");
       this.$store.commit("deactivateEditor");
     },
-    ...mapActions(["fetchTicketQuestions"]),
+    // ...mapActions(["fetchTicketQuestions"]),
   },
-  // updated() {
-  //   if (this.isLoggedIn && this.anyExitTickets) {
-  //     this.$store.dispatch("fetchExitTickets");
-  //   }
-  // },
+  updated() {
+    if (this.isLoggedIn && !this.anyExitTickets) {
+      this.$store.dispatch("fetchExitTickets");
+    }
+  },
   computed: {
     ...mapGetters(["isLoggedIn", "anyExitTickets"]),
   },

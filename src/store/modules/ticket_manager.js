@@ -37,8 +37,8 @@ const mutations = {
   resetExitTicketCreated(state) {
     state.exitTicketCreated = false;
   },
-  setCurrentTicketQuestions(state, questions) {
-    questions.forEach((question) => {
+  setCurrentTicketQuestions(state) {
+    state.currentTicket.questions.forEach((question) => {
       state.currentTicketQuestions.push(question);
     });
   },
