@@ -70,11 +70,18 @@ export default {
       if (this.isLoggedIn) {
         await this.createSBQuestions();
         await this.createReflectionQuestions();
+        await this.$store.dispatch(
+          "fetchUpdatedTicket",
+          this.$store.state.ticketManager.currentTicket.id
+        );
         this.$store.commit(
           "addExitTicket",
           this.$store.state.ticketManager.currentTicket
         );
-        await this.$store.dispatch("fetchTicketQuestions");
+        this.$store.commit(
+          "setCurrentTicketQuestions",
+          this.$store.state.ticketManager.currentTicket.questions
+        );
       } else {
         localStorage.setItem(
           "userlessQuestions",
@@ -119,6 +126,7 @@ export default {
       return data;
     },
     async createReflectionQuestions() {
+      // This function starts off by creating the reflection questions
       const reflectionQuestions =
         this.$store.state.ticketManager.pendingReflectionQuestions.map(
           (question) => {
@@ -146,6 +154,7 @@ export default {
       );
       const data = await res.json();
 
+      // The function then uses the created reflection questions to create exit ticket reflection questions
       const exitTicketQuestions = data.map((question, index) => {
         return {
           exit_ticket_id: this.$store.state.ticketManager.currentTicket.id,
@@ -165,7 +174,7 @@ export default {
       };
 
       const exitTicketRes = await fetch(
-        `{url}/reflection_exit_ticket_questions`,
+        `${url}/reflection_exit_ticket_questions`,
         // Update for production
         // "https://exit-ticket-api.herokuapp.com/reflection_exit_ticket_questions",
         options

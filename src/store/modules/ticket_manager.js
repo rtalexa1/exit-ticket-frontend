@@ -37,8 +37,10 @@ const mutations = {
   resetExitTicketCreated(state) {
     state.exitTicketCreated = false;
   },
-  addCurrentTicketQuestion(state, question) {
-    state.currentTicketQuestions.push(question);
+  setCurrentTicketQuestions(state, questions) {
+    questions.forEach((question) => {
+      state.currentTicketQuestions.push(question);
+    });
   },
   resetCurrentTicketQuestions(state) {
     state.currentTicketQuestions = [];
@@ -107,22 +109,29 @@ const mutations = {
   },
 };
 const actions = {
-  async setCurrentTicket({ commit, state }, exitTicketId) {
+  async fetchUpdatedTicket({ commit }, exitTicketId) {
+    const url = new URL("http://localhost:3000");
     const res = await fetch(
-      `https://exit-ticket-api.herokuapp.com/users/${state.currentUser.id}/exit_tickets/${exitTicketId}`
+      `${url}/exit_tickets/${exitTicketId}`
+      // Update for production, and reformat url
+      // `https://exit-ticket-api.herokuapp.com/users/${state.currentUser.id}/exit_tickets/${exitTicketId}`
     );
     const data = await res.json();
     commit("setCurrentTicket", data);
   },
-  async fetchTicketQuestions({ commit, state }) {
-    const res = await fetch(
-      `https://exit-ticket-api.herokuapp.com/users/${state.currentUser.id}/exit_tickets/${state.currentTicket.id}`
-    );
-    const data = await res.json();
-    data.forEach((question) => {
-      commit("addCurrentTicketQuestion", question);
-    });
-  },
+  // async fetchTicketQuestions({ commit, state }) {
+  // const url = new URL("http://localhost:3000");
+  // const res = await fetch(
+  //   `${url}/exit_tickets/${state.currentTicket.id}`
+  // Update for production, and reformat url
+  // `https://exit-ticket-api.herokuapp.com/users/${state.currentUser.id}/exit_tickets/${state.currentTicket.id}`
+  // );
+  // const data = await res.json();
+  // console.log(state.currentTicket.questions);
+  // state.currentTicket.questions.forEach((question) => {
+  //   commit("addCurrentTicketQuestion", question);
+  // });
+  // },
   fetchExitTickets({ commit, rootState }) {
     // Update for production
     const BASE_URL = "http://localhost:3000/";

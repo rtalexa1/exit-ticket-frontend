@@ -5,7 +5,7 @@
       <form @submit.prevent class="ticket-creator-form">
         <label for="title">Give your exit ticket a title</label>
         <input
-          :disabled="$store.state.exitTicketCreated"
+          :disabled="$store.state.ticketManager.exitTicketCreated"
           id="title"
           type="text"
           name="title"
@@ -98,9 +98,7 @@ export default {
     };
   },
   methods: {
-    onSubmit(e) {
-      e.preventDefault;
-
+    onSubmit() {
       const newExitTicket = {
         exit_ticket: {
           user_id: "",
@@ -113,7 +111,8 @@ export default {
       if (this.isLoggedIn) {
         newExitTicket.exit_ticket.user_id = this.getUserID;
         // fetch("https://exit-ticket-api.herokuapp.com/exit_tickets", {
-        fetch("localhost:3000/exit_tickets", {
+        const url = new URL("http://localhost:3000");
+        fetch(`${url}/exit_tickets`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -137,7 +136,7 @@ export default {
       this.$store.commit("setGradeLevel", this.gradeLevel);
       this.$store.commit("setSubjectArea", this.subjectArea);
       this.$store.commit("setExitTicketCreated");
-      this.resetData();
+      // this.resetData();
     },
     resetData() {
       this.title = "";
@@ -151,8 +150,8 @@ export default {
         this.title !== "" && this.gradeLevel !== "" && this.subjectArea !== ""
       );
     },
+    ...mapGetters(["getUserID", "isLoggedIn", "anyExitTickets"]),
   },
-  ...mapGetters(["getUserID", "isLoggedIn", "anyExitTickets"]),
 };
 </script>
 

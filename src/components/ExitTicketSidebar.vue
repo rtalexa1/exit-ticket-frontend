@@ -3,7 +3,7 @@
     <div class="sidebar-content">
       <div class="loader" v-if="$store.state.loaderVisible"></div>
       <div v-else-if="isLoggedIn && !$store.state.loaderVisible">
-        <h4>Exit Tickets</h4>
+        <h4>Your Exit Tickets</h4>
         <div
           v-for="ticket in $store.state.ticketManager.exitTickets"
           :key="ticket.id"
@@ -72,11 +72,11 @@ export default {
     },
     ...mapActions(["fetchTicketQuestions"]),
   },
-  updated() {
-    if (this.isLoggedIn && !this.anyExitTickets) {
-      this.$store.dispatch("fetchExitTickets");
-    }
-  },
+  // updated() {
+  //   if (this.isLoggedIn && this.anyExitTickets) {
+  //     this.$store.dispatch("fetchExitTickets");
+  //   }
+  // },
   computed: {
     ...mapGetters(["isLoggedIn", "anyExitTickets"]),
   },
