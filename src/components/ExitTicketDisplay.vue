@@ -64,12 +64,15 @@ export default {
     exportToPDF() {
       const options = {
         margin: 8,
-        filename: `${this.$store.state.currentTicket.title}.pdf`,
+        filename: `${this.$store.state.ticketManager.currentTicket.title}.pdf`,
         image: { type: "jpeg", quality: 0.95 },
         html2canvas: {
           dpi: 300,
           letterRendering: true,
           useCORS: true,
+        },
+        pagebreak: {
+          mode: "avoid-all",
         },
       };
       html2pdf(document.getElementById("pdf-content"), options);
