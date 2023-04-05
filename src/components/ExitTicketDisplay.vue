@@ -28,9 +28,9 @@
           </div>
         </div>
       </div>
-      <div class="google-btn">
+      <!-- <div class="google-btn">
         <div id="widget-div"></div>
-      </div>
+      </div> -->
       <button
         @click="exportToPDF"
         class="blue-btn"

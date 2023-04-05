@@ -63,7 +63,6 @@ export default {
       );
       this.$store.commit("resetCurrentTicketQuestions");
       this.$store.commit("setCurrentTicket", ticket);
-      console.log(this.$store.state.ticketManager.questions);
       this.$store.commit("setCurrentTicketQuestions");
       this.$store.commit("deactivateEditor");
     },

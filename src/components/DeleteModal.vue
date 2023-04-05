@@ -21,33 +21,26 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-
 export default {
   name: "DeleteModal",
   methods: {
     async deleteTicket() {
-      console.log(this.$store.state.ticketManager.currentTicket.id);
-      // await fetch(
-      //   `localhost:3000/exit_tickets/${this.$store.state.ticketManager.currentTicket.id}`,
-      //   // Edit production URL (no longer a nested route)
-      //   // `https://exit-ticket-api.herokuapp.com/users/${this.$store.state.currentUser.id}/exit_tickets/${this.$store.state.currentTicket.id}`,
-      //   { method: "DELETE" }
-      // );
+      const url = new URL("http://localhost:3000");
+      await fetch(
+        `${url}/exit_tickets/${this.$store.state.ticketManager.currentTicket.id}`,
+        // Edit production URL (no longer a nested route)
+        // `https://exit-ticket-api.herokuapp.com/users/${this.$store.state.currentUser.id}/exit_tickets/${this.$store.state.currentTicket.id}`,
+        { method: "DELETE" }
+      );
 
-      // this.removeCurrentExitTicketFromCollection();
-      // this.resetCurrentTicket();
-      // this.resetCurrentTicketQuestions();
-      // this.$store.commit("closeDeleteModal");
-      // this.$store.commit("disableEditing");
-      // this.$store.commit("activateEditor");
+      this.$store.commit("removeCurrentExitTicketFromCollection");
+      this.$store.commit("resetCurrentTicket");
+      this.$store.commit("resetCurrentTicketQuestions");
+      this.$store.commit("closeDeleteModal");
+      this.$store.commit("disableEditing");
+      this.$store.commit("activateEditor");
     },
   },
-  ...mapActions([
-    "removeCurrentExitTicketFromCollection",
-    "resetCurrentTicket",
-    "resetCurrentTicketQuestions",
-  ]),
 };
 </script>
 
