@@ -298,8 +298,10 @@ export default {
       this.nextQuestionAdded = true;
     },
     enableEdit() {
+      this.questionType === "standardsBased"
+        ? this.$store.commit("removeLastPendingSBQuestion")
+        : this.$store.commit("removeLastPendingReflectionQuestion");
       this.questionStored = false;
-      this.$store.commit("removeLastPendingQuestion");
     },
   },
   computed: {

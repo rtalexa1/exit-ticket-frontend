@@ -16,7 +16,7 @@
           v-else-if="$store.getters.isLoggedIn && !$store.state.loaderVisible"
         >
           <p>Signed in as {{ $store.state.sessionManager.user.email }}</p>
-          <button class="sign-out-btn" @click="logOutUser">Logout</button>
+          <button class="sign-out-btn" @click="logOut">Logout</button>
         </div>
         <div v-else>
           <p>Not logged in</p>
@@ -84,6 +84,10 @@ export default {
     ExitTicketDisplay,
   },
   methods: {
+    logOut() {
+      this.logOutUser();
+      this.$store.commit("signOut");
+    },
     ...mapActions(["loginWithUserToken", "logOutUser"]),
   },
   async mounted() {
