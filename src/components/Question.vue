@@ -227,13 +227,13 @@ export default {
         question = new SBExitTicketQuestion(
           this.$store.state.ticketManager.currentTicket.id,
           this.currentSBQuestion.id,
-          this.$store.state.ticketManager.questionNumber
+          this.questionNumber
         );
         this.$store.commit("addPendingSBQuestion", question);
       } else {
         question = new UserlessSBQuestion(
           this.currentSBQuestion.image_url,
-          this.$store.state.ticketManager.questionNumber
+          this.questionNumber
         );
         this.$store.commit("addUserlessQuestion", question);
       }
@@ -252,13 +252,13 @@ export default {
         question = new HybridReflectionQuestion(
           this.$store.state.ticketManager.currentTicket.id,
           this.currentReflectionQuestion,
-          this.$store.state.ticketManager.questionNumber
+          this.questionNumber
         );
         this.$store.commit("addPendingReflectionQuestion", question);
       } else {
         question = new UserlessReflectionQuestion(
           this.currentReflectionQuestion,
-          this.$store.state.ticketManager.questionNumber
+          this.questionNumber
         );
         this.$store.commit("addUserlessQuestion", question);
       }
@@ -297,10 +297,17 @@ export default {
       this.$emit("add-question");
       this.nextQuestionAdded = true;
     },
+    // When editing a question, we first remove the pending question from the store
     enableEdit() {
       this.questionType === "standardsBased"
-        ? this.$store.commit("removeLastPendingSBQuestion")
-        : this.$store.commit("removeLastPendingReflectionQuestion");
+        ? this.$store.commit(
+            "removePendingSBQuestionByIndex",
+            this.questionNumber - 1
+          )
+        : this.$store.commit(
+            "removePendingReflectionQuestionByIndex",
+            this.questionNumber - 1
+          );
       this.questionStored = false;
     },
   },

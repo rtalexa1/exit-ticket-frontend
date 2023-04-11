@@ -86,8 +86,8 @@ const mutations = {
   addPendingSBQuestion(state, question) {
     state.pendingSBQuestions.push(question);
   },
-  removeLastPendingSBQuestion(state) {
-    state.pendingSBQuestions.pop();
+  removePendingSBQuestionByIndex(state, index) {
+    state.pendingSBQuestions.splice(index, 1);
   },
   resetPendingSBQuestions(state) {
     state.pendingSBQuestions = [];
@@ -95,8 +95,8 @@ const mutations = {
   addPendingReflectionQuestion(state, question) {
     state.pendingReflectionQuestions.push(question);
   },
-  removeLastPendingReflectionQuestion(state) {
-    state.pendingReflectionQuestions.pop();
+  removePendingReflectionQuestionByIndex(state, index) {
+    state.pendingReflectionQuestions.splice(index, 1);
   },
   resetPendingReflectionQuestions(state) {
     state.pendingReflectionQuestions = [];
