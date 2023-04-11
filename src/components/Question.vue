@@ -37,7 +37,7 @@
         </option>
       </select>
       <!-- Displays all question images for the selected SE -->
-      <form @submit.prevent class="question-form">
+      <form @submit.prevent @change="scrollToButton" class="question-form">
         <div
           class="question-image-container"
           v-for="question in contentQuestions"
@@ -59,6 +59,7 @@
             :disabled="currentSBQuestion === undefined"
             @click="onSubmitSBQuestion"
             class="blue-btn"
+            id="save-btn"
           >
             Save question
           </button>
@@ -117,12 +118,13 @@
           :disabled="currentReflectionQuestionReadyToSave"
           @click="onSubmitReflectionQuestion"
           class="blue-btn"
+          id="save-btn"
         >
           Save question
         </button>
       </form>
     </div>
-    <!-- Displays the saved question and provided the option to edit -->
+    <!-- Displays the saved question and provides the option to edit -->
     <div v-if="questionType === 'reflection' && questionStored">
       <h2>Question {{ questionNumber }}</h2>
       <p>{{ currentReflectionQuestion }}</p>
@@ -217,7 +219,22 @@ export default {
     };
   },
   props: ["questionNumber"],
+  emits: ["add-question"],
   methods: {
+    scrollToQuestions() {
+      const questionContainers =
+        document.getElementsByClassName("question-container");
+      const currentContainer =
+        questionContainers[questionContainers.length - 1];
+      setTimeout(
+        () => currentContainer.scrollIntoView({ behavior: "smooth" }),
+        10
+      );
+    },
+    scrollToButton() {
+      const button = document.getElementById("save-btn");
+      button.scrollIntoView({ behavior: "smooth" });
+    },
     onSubmitSBQuestion(e) {
       e.preventDefault();
 
@@ -292,6 +309,8 @@ export default {
       if (this.studentExpectation === "3.2(A)") {
         this.contentQuestions = this.contentQuestions.slice(2);
       }
+
+      this.scrollToQuestions();
     },
     addQuestion() {
       this.$emit("add-question");
