@@ -1,5 +1,6 @@
 <template>
   <div class="questions-creator-container" id="questions-container">
+    <h1>{{ $store.state.ticketManager.currentTicket.title }}</h1>
     <h3>Add up to five questions to your exit ticket</h3>
     <Question
       @add-question.once="incrementQuestionNumber"

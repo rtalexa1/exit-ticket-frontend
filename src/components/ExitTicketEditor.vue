@@ -2,7 +2,13 @@
   <div class="editor-container">
     <div v-if="$store.state.editing" class="ticket-creator-container">
       <h1>Create a Ticket</h1>
-      <form @submit.prevent class="ticket-creator-form">
+      <form
+        v-show="
+          $store.state.editing && !$store.state.ticketManager.exitTicketCreated
+        "
+        @submit.prevent
+        class="ticket-creator-form"
+      >
         <label for="title">Give your exit ticket a title</label>
         <input
           :disabled="$store.state.ticketManager.exitTicketCreated"

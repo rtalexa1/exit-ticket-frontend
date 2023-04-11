@@ -226,6 +226,7 @@ export default {
         document.getElementsByClassName("question-container");
       const currentContainer =
         questionContainers[questionContainers.length - 1];
+      // Hacky solution, is there a better way?
       setTimeout(
         () => currentContainer.scrollIntoView({ behavior: "smooth" }),
         10
