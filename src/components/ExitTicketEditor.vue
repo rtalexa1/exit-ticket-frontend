@@ -100,7 +100,7 @@ export default {
       title: "",
       gradeLevel: "",
       subjectArea: "",
-      questions: [],
+      // questions: [],
     };
   },
   methods: {
@@ -142,7 +142,7 @@ export default {
       this.$store.commit("setGradeLevel", this.gradeLevel);
       this.$store.commit("setSubjectArea", this.subjectArea);
       this.$store.commit("setExitTicketCreated");
-      // this.resetData();
+      this.resetData();
     },
     resetData() {
       this.title = "";

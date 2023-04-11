@@ -33,27 +33,28 @@ export default createStore({
       state.editing = true;
     },
     totalReset(state) {
-      state.currentTicket = undefined;
-      state.currentTicketQuestions = [];
-      state.exitTicketCreated = false;
-      state.userlessExitTicket = undefined;
-      state.userlessQuestions = [];
-      state.questionNumber = 1;
+      console.log("This is running");
+      state.ticketManager.currentTicket = undefined;
+      state.ticketManager.currentTicketQuestions = [];
+      state.ticketManager.exitTicketCreated = false;
+      state.ticketManager.userlessExitTicket = undefined;
+      state.ticketManager.userlessQuestions = [];
+      state.ticketManager.questionNumber = 1;
       state.editorActive = true;
       state.editing = false;
-      state.gradeLevel = "";
-      state.subjectArea = "";
-      state.readyToSave = false;
+      state.ticketManager.gradeLevel = "";
+      state.ticketManager.subjectArea = "";
+      state.ticketManager.readyToSave = false;
     },
     signOut(state) {
-      state.currentTicket = undefined;
-      state.currentTicketQuestions = [];
-      state.exitTickets = [];
+      state.ticketManager.currentTicket = undefined;
+      state.ticketManager.currentTicketQuestions = [];
+      state.ticketManager.exitTickets = [];
       state.editorActive = true;
       state.editing = false;
-      state.exitTicketCreated = false;
-      state.gradeLevel = "";
-      state.subjectArea = "";
+      state.ticketManager.exitTicketCreated = false;
+      state.ticketManager.gradeLevel = "";
+      state.ticketManager.subjectArea = "";
     },
   },
   modules: {
