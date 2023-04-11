@@ -329,6 +329,10 @@ export default {
   created() {
     this.setExpectations();
   },
+  mounted() {
+    const questions = document.getElementsByClassName("question-container");
+    questions[questions.length - 1].scrollIntoView({ behavior: "smooth" });
+  },
 };
 </script>
 

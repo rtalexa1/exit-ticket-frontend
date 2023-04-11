@@ -1,5 +1,5 @@
 <template>
-  <div class="questions-creator-container">
+  <div class="questions-creator-container" id="questions-container">
     <h3>Add up to five questions to your exit ticket</h3>
     <Question
       @add-question.once="incrementQuestionNumber"
@@ -185,6 +185,11 @@ export default {
   },
   computed: {
     ...mapGetters(["isLoggedIn"]),
+  },
+  mounted() {
+    document
+      .getElementById("questions-container")
+      .scrollIntoView({ behavior: "smooth" });
   },
 };
 </script>
