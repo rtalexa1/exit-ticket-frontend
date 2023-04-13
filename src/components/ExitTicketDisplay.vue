@@ -62,9 +62,13 @@ export default {
   name: "ExitTicketDisplay",
   methods: {
     exportToPDF() {
+      let name = this.isLoggedIn
+        ? this.$store.state.ticketManager.currentTicket.title
+        : this.$store.state.ticketManager.currentTicket.exit_ticket.title;
+
       const options = {
         margin: 8,
-        filename: `${this.$store.state.ticketManager.currentTicket.title}.pdf`,
+        filename: `${name}`,
         image: { type: "jpeg", quality: 0.95 },
         html2canvas: {
           dpi: 300,

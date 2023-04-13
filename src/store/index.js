@@ -33,7 +33,6 @@ export default createStore({
       state.editing = true;
     },
     totalReset(state) {
-      console.log("This is running");
       state.ticketManager.currentTicket = undefined;
       state.ticketManager.currentTicketQuestions = [];
       state.ticketManager.exitTicketCreated = false;

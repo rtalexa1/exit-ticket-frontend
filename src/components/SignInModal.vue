@@ -47,6 +47,7 @@ export default {
       };
       this.$store.dispatch("logInUser", data);
       this.resetData();
+      this.$store.commit("totalReset");
       this.$store.commit("closeSignInModal");
     },
     resetData() {

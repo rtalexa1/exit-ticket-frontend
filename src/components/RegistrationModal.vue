@@ -47,6 +47,7 @@ export default {
       };
       this.registerUser(data);
       this.resetData();
+      this.$store.commit("totalReset");
       this.$store.commit("closeRegistrationModal");
     },
     resetData() {

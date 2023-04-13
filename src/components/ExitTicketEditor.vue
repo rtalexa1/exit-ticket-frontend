@@ -149,7 +149,28 @@ export default {
       this.gradeLevel = "";
       this.subjectArea = "";
     },
+    async deleteTicket() {
+      const url = new URL("http://localhost:3000");
+      await fetch(
+        `${url}/exit_tickets/${this.$store.state.ticketManager.currentTicket.id}`,
+        // Edit production URL (no longer a nested route)
+        // `https://exit-ticket-api.herokuapp.com/users/${this.$store.state.currentUser.id}/exit_tickets/${this.$store.state.currentTicket.id}`,
+        { method: "DELETE" }
+      );
+
+      this.resetData();
+      this.$store.commit("removeCurrentExitTicketFromCollection");
+      this.$store.commit("resetCurrentTicket");
+      this.$store.commit("resetCurrentTicketQuestions");
+      this.$store.commit("disableEditing");
+      this.$store.commit("activateEditor");
+    },
   },
+  // async beforeUnmount() {
+  //   if (this.$store.state.ticketManager.currentTicketQuestions.length < 1) {
+  //     await this.deleteTicket();
+  //   }
+  // },
   computed: {
     enableButton: function () {
       return (
