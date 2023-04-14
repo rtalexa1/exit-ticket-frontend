@@ -118,11 +118,8 @@ export default {
         }),
       };
 
-      const url = new URL("http://localhost:3000");
       const res = await fetch(
-        `${url}/standards_based_exit_ticket_questions`,
-        // Update for production
-        // "https://exit-ticket-api.herokuapp.com/standards_based_exit_ticket_questions",
+        "https://exit-ticket-api.herokuapp.com/standards_based_exit_ticket_questions",
         options
       );
       const data = await res.json();
@@ -147,12 +144,8 @@ export default {
         }),
       };
 
-      const url = new URL("http://localhost:3000");
-
       const res = await fetch(
-        `${url}/reflection_questions`,
-        // Update for production
-        // "https://exit-ticket-api.herokuapp.com/reflection_questions",
+        "https://exit-ticket-api.herokuapp.com/reflection_questions",
         options
       );
       const data = await res.json();
@@ -177,9 +170,7 @@ export default {
       };
 
       const exitTicketRes = await fetch(
-        `${url}/reflection_exit_ticket_questions`,
-        // Update for production
-        // "https://exit-ticket-api.herokuapp.com/reflection_exit_ticket_questions",
+        "https://exit-ticket-api.herokuapp.com/reflection_exit_ticket_questions",
         options
       );
       const exitTicketData = await exitTicketRes.json();
