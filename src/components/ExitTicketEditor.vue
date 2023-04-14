@@ -116,9 +116,7 @@ export default {
 
       if (this.isLoggedIn) {
         newExitTicket.exit_ticket.user_id = this.getUserID;
-        // fetch("https://exit-ticket-api.herokuapp.com/exit_tickets", {
-        const url = new URL("http://localhost:3000");
-        fetch(`${url}/exit_tickets`, {
+        fetch("https://exit-ticket-api.herokuapp.com/exit_tickets", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
