@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Update url for production
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "https://exit-ticket-api.herokuapp.com/";
 
 const state = {
   auth_token: null,
