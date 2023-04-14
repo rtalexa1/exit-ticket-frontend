@@ -118,11 +118,8 @@ const mutations = {
 };
 const actions = {
   async fetchUpdatedTicket({ commit }, exitTicketId) {
-    const url = new URL("http://localhost:3000");
     const res = await fetch(
-      `${url}/exit_tickets/${exitTicketId}`
-      // Update for production, and reformat url
-      // `https://exit-ticket-api.herokuapp.com/users/${state.currentUser.id}/exit_tickets/${exitTicketId}`
+      `https://exit-ticket-api.herokuapp.com/exit_tickets/${exitTicketId}`
     );
     const data = await res.json();
     commit("setCurrentTicket", data);
@@ -142,7 +139,7 @@ const actions = {
   // },
   fetchExitTickets({ commit, rootState }) {
     // Update for production
-    const BASE_URL = "http://localhost:3000/";
+    const BASE_URL = "https://exit-ticket-api.herokuapp.com/";
     const config = {
       headers: {
         Authorization: rootState.sessionManager.auth_token,
