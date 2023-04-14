@@ -35,6 +35,8 @@ export default createStore({
     totalReset(state) {
       state.ticketManager.currentTicket = undefined;
       state.ticketManager.currentTicketQuestions = [];
+      state.ticketManager.pendingSBQuestions = [];
+      state.ticketManager.pendingReflectionQuestions = [];
       state.ticketManager.exitTicketCreated = false;
       state.ticketManager.userlessExitTicket = undefined;
       state.ticketManager.userlessQuestions = [];

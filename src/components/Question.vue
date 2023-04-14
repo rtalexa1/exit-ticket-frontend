@@ -319,15 +319,31 @@ export default {
     },
     // When editing a question, we first remove the pending question from the store
     enableEdit() {
-      this.questionType === "standardsBased"
-        ? this.$store.commit(
-            "removePendingSBQuestionByIndex",
-            this.questionNumber - 1
-          )
-        : this.$store.commit(
-            "removePendingReflectionQuestionByIndex",
-            this.questionNumber - 1
-          );
+      if (this.questionType === "standardsBased" && this.isLoggedIn) {
+        const index = this.$store.state.ticketManager.pendingSBQuestions
+          .map(function (q) {
+            return q.sb_question_id;
+          })
+          .indexOf(this.currentSBQuestion.id);
+
+        this.$store.commit("removePendingSBQuestionByIndex", index);
+      } else if (this.questionType === "reflection" && this.isLoggedIn) {
+        const index = this.$store.state.ticketManager.pendingReflectionQuestions
+          .map(function (q) {
+            return q.text;
+          })
+          .indexOf(this.currentReflectionQuestion);
+
+        this.$store.commit("removePendingReflectionQuestionByIndex", index);
+      }
+
+      // else {
+      //   this.$store.commit(
+      //     "removeUserlessQuestionByIndex",
+      //     this.questionNumber - 1
+      //   );
+      // }
+
       this.questionStored = false;
     },
   },

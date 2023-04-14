@@ -71,6 +71,9 @@ const mutations = {
   resetUserlessQuestions(state) {
     state.userlessQuestions = [];
   },
+  removeUserlessQuestionByIndex(state, index) {
+    state.userlessQuestions.splice(index, 1);
+  },
   setGradeLevel(state, gradeLevel) {
     state.gradeLevel = gradeLevel;
   },
