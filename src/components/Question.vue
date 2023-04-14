@@ -335,14 +335,12 @@ export default {
           .indexOf(this.currentReflectionQuestion);
 
         this.$store.commit("removePendingReflectionQuestionByIndex", index);
+      } else {
+        this.$store.commit(
+          "removeUserlessQuestionByIndex",
+          this.questionNumber - 1
+        );
       }
-
-      // else {
-      //   this.$store.commit(
-      //     "removeUserlessQuestionByIndex",
-      //     this.questionNumber - 1
-      //   );
-      // }
 
       this.questionStored = false;
     },

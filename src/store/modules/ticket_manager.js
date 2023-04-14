@@ -74,6 +74,11 @@ const mutations = {
   removeUserlessQuestionByIndex(state, index) {
     state.userlessQuestions.splice(index, 1);
   },
+  sortUserlessQuestions(state) {
+    state.userlessQuestions = state.userlessQuestions.sort((a, b) => {
+      return a.order - b.order;
+    });
+  },
   setGradeLevel(state, gradeLevel) {
     state.gradeLevel = gradeLevel;
   },

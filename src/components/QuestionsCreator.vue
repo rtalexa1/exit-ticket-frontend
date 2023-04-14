@@ -88,6 +88,8 @@ export default {
           "userlessQuestions",
           JSON.stringify(this.$store.state.ticketManager.userlessQuestions)
         );
+
+        this.$store.commit("sortUserlessQuestions");
       }
 
       this.$store.commit("deactivateEditor");
