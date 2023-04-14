@@ -10,7 +10,7 @@
           class="logo"
         />
       </div>
-      <div class="user-display">
+      <!-- <div class="user-display">
         <div class="loader" v-if="$store.state.loaderVisible"></div>
         <div
           v-else-if="$store.getters.isLoggedIn && !$store.state.loaderVisible"
@@ -37,11 +37,11 @@
             </button>
           </p>
         </div>
-      </div>
+      </div> -->
     </div>
   </nav>
   <div class="container">
-    <ExitTicketSidebar />
+    <!-- <ExitTicketSidebar /> -->
     <SignInModal v-if="$store.state.modalManager.signInModalOpen" />
     <RegistrationModal v-if="$store.state.modalManager.registrationModalOpen" />
     <DeleteModal v-if="$store.state.modalManager.deleteModalOpen" />
@@ -66,7 +66,7 @@ import RegistrationModal from "./components/RegistrationModal.vue";
 import DeleteModal from "./components/DeleteModal.vue";
 import ResetModal from "./components/ResetModal.vue";
 import CancelModal from "./components/CancelModal.vue";
-import ExitTicketSidebar from "./components/ExitTicketSidebar.vue";
+// import ExitTicketSidebar from "./components/ExitTicketSidebar.vue";
 import ExitTicketEditor from "./components/ExitTicketEditor.vue";
 import ExitTicketDisplay from "./components/ExitTicketDisplay.vue";
 import "@/store/index.js";
@@ -79,7 +79,7 @@ export default {
     DeleteModal,
     ResetModal,
     CancelModal,
-    ExitTicketSidebar,
+    // ExitTicketSidebar,
     ExitTicketEditor,
     ExitTicketDisplay,
   },
